@@ -1,8 +1,8 @@
-# TemplateLibraryTest
+# CharisTest
 
-[![test](https://github.com/DaphneWebFramework/TemplateLibraryTest/actions/workflows/test.yml/badge.svg)](https://github.com/DaphneWebFramework/TemplateLibraryTest/actions/workflows/test.yml)
+[![test](https://github.com/DaphneWebFramework/CharisTest/actions/workflows/test.yml/badge.svg)](https://github.com/DaphneWebFramework/CharisTest/actions/workflows/test.yml)
 
-This repository contains tests for the [TemplateLibrary](https://github.com/DaphneWebFramework/TemplateLibrary) library.
+This repository contains tests for the [Charis](https://github.com/DaphneWebFramework/Charis) library.
 
 ## License
 
