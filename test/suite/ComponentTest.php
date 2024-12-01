@@ -8,42 +8,41 @@ use \Charis\Component;
 
 use \TestToolkit\DataHelper;
 
-class TestComponent extends Component
-{
-    public function __construct(
-        string $tagName,
-        array $attributes = [],
-        string|Component|array|null $content = null,
-        bool $isSelfClosing = false)
-    {
-        parent::__construct($tagName, $attributes, $content, $isSelfClosing);
-    }
-}
-
 #[CoversClass(Component::class)]
 class ComponentTest extends TestCase
 {
+    function testToStringCallsRender()
+    {
+        $mock = $this->getMockBuilder(Component::class)
+            ->setConstructorArgs(['div'])
+            ->onlyMethods(['Render'])
+            ->getMock();
+        $mock->expects($this->once())
+            ->method('Render')
+            ->willReturn('<div></div>');
+        $this->assertSame('<div></div>', (string)$mock);
+    }
+
     #region Valid Cases --------------------------------------------------------
 
     function testRenderWithNoAttributesOrContent()
     {
-        $component = new TestComponent('div', [], null, false);
+        $component = new Component('div');
         $this->assertSame('<div></div>', $component->Render());
     }
 
     function testRenderWithEmptyAttributesButContent()
     {
-        $component = new TestComponent('p', [], 'Hello, world!', false);
+        $component = new Component('p', null, 'Hello, world!');
         $this->assertSame('<p>Hello, world!</p>', $component->Render());
     }
 
     function testRenderWithValidAttributesAndContent()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'div',
             ['id' => 'test', 'class' => 'example'],
-            'Hello World',
-            false
+            'Hello World'
         );
         $this->assertSame(
             '<div id="test" class="example">Hello World</div>',
@@ -53,7 +52,7 @@ class ComponentTest extends TestCase
 
     function testRenderWithBooleanAttributes()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'input',
             ['type' => 'checkbox', 'checked' => true, 'disabled' => false],
             null,
@@ -67,7 +66,7 @@ class ComponentTest extends TestCase
 
     function testRenderWithAttributesContainingSpecialCharacters()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'input',
             ['data-value' => 'John "Doe" & Co.'],
             null,
@@ -81,7 +80,7 @@ class ComponentTest extends TestCase
 
     function testRenderWithAttributesHavingSpecialValues()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'input',
             ['data-count' => 0, 'data-ratio' => 1.425, 'data-blank' => ''],
             null,
@@ -93,34 +92,15 @@ class ComponentTest extends TestCase
         );
     }
 
-    function testRenderWithAttributesHavingNonEnglishNames()
-    {
-        $component = new TestComponent(
-            'div',
-            ['данные' => 'значение'],
-            null,
-            false
-        );
-        $this->assertSame(
-            '<div данные="значение"></div>',
-            $component->Render()
-        );
-    }
-
     function testRenderWithAttributesHavingUnicodeValues()
     {
-        $component = new TestComponent(
-            'div',
-            ['data-emoji' => '😊', 'lang' => '中文'],
-            null,
-            false
-        );
+        $component = new Component('div', ['data-emoji' => '😊', 'lang' => '中文']);
         $this->assertSame('<div data-emoji="😊" lang="中文"></div>', $component->Render());
     }
 
     function testRenderWithSelfClosingElement()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'img',
             ['src' => 'image.jpg', 'alt' => 'A description'],
             null,
@@ -134,17 +114,16 @@ class ComponentTest extends TestCase
 
     function testRenderWithEmptySelfClosingElement()
     {
-        $component = new TestComponent('br', [], null, true);
+        $component = new Component('br', null, null, true);
         $this->assertSame('<br/>', $component->Render());
     }
 
     function testRenderWithSelfClosingElementsInsideContent()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'div',
-            [],
-            [new TestComponent('br', [], null, true), 'Text after self-closing'],
-            false
+            null,
+            [new Component('br', null, null, true), 'Text after self-closing']
         );
         $this->assertSame(
             '<div><br/>Text after self-closing</div>',
@@ -154,11 +133,10 @@ class ComponentTest extends TestCase
 
     function testRenderWithContentContainingOnlyWhitespace()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'div',
-            [],
-            ['   ', new TestComponent('span', [], 'Text', false)],
-            false
+            null,
+            ['   ', new Component('span', null, 'Text')]
         );
         $this->assertSame(
             '<div>   <span>Text</span></div>',
@@ -169,17 +147,16 @@ class ComponentTest extends TestCase
     #[DataProvider('emptyContentProvider')]
     function testRenderWithEmptyContent($emptyContent)
     {
-        $component = new TestComponent('div', [], $emptyContent, false);
+        $component = new Component('div', null, $emptyContent);
         $this->assertSame('<div></div>', $component->Render());
     }
 
     function testRenderWithContentArray()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'div',
-            [],
-            ['Part 1', new TestComponent('span', [], 'Part 2', false)],
-            false
+            null,
+            ['Part 1', new Component('span', null, 'Part 2')]
         );
         $this->assertSame(
             '<div>Part 1<span>Part 2</span></div>',
@@ -189,17 +166,16 @@ class ComponentTest extends TestCase
 
     function testRenderWithNestedComponents()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'div',
-            [],
+            null,
             [
                 'Outer Content',
-                new TestComponent('span', [], [
+                new Component('span', null, [
                     'Inner Content',
-                    new TestComponent('b', [], 'Bold Text', false)
-                ], false)
-            ],
-            false
+                    new Component('b', null, 'Bold Text')
+                ])
+            ]
         );
         $this->assertSame(
             '<div>Outer Content<span>Inner Content<b>Bold Text</b></span></div>',
@@ -211,49 +187,47 @@ class ComponentTest extends TestCase
 
     #region Invalid Cases ------------------------------------------------------
 
-    function testRenderThrowsForEmptyTagName()
+    #[DataProvider('invalidTagNameProvider')]
+    function testRenderThrowsForInvalidTagName($tagName)
     {
-        $component = new TestComponent('', [], null, false);
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Tag name cannot be empty.');
-        $component->Render();
-    }
-
-    function testRenderThrowsForInvalidTagName()
-    {
-        $component = new TestComponent('div#', [], null, false);
+        $component = new Component($tagName);
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid tag name.');
         $component->Render();
     }
 
-    #[DataProvider('invalidAttributeNameProvider')]
-    function testRenderThrowsForInvalidAttributeName($attributeName)
+    #[DataProvider('nonStringAttributeNameProvider')]
+    function testRenderThrowsForNonStringAttributeName($attributeName)
     {
-        $component = @new TestComponent(
-            'div',
-            [$attributeName => 'value'],
-            null,
-            false
-        );
+        // Suppress warnings caused by non-string keys (e.g., float key being
+        // converted to integers). This ensures the test results are not
+        // polluted with PHP warnings.
+        $component = @new Component('div', [$attributeName => 'value']);
         $this->expectException(\InvalidArgumentException::class);
-        if ($attributeName === null || $attributeName === '') {
-            $this->expectExceptionMessage('Attribute name cannot be empty.');
+        if ($attributeName === null) {
+            // PHP automatically converts null array keys to empty strings,
+            // bypassing type mismatch checks. This manual null check ensures
+            // proper validation.
+            $this->expectExceptionMessage('Invalid attribute name.');
         } else {
             $this->expectExceptionMessage('Attribute name must be a string.');
         }
         $component->Render();
     }
 
-    #[DataProvider('invalidAttributeValueProvider')]
-    function testRenderThrowsForInvalidAttributeValue($attributeValue)
+    #[DataProvider('invalidAttributeNameProvider')]
+    function testRenderThrowsForInvalidAttributeName($attributeName)
     {
-        $component = new TestComponent(
-            'div',
-            ['name' => $attributeValue],
-            null,
-            false
-        );
+        $component = new Component('div', [$attributeName => 'value']);
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid attribute name.');
+        $component->Render();
+    }
+
+    #[DataProvider('nonScalarAttributeValueProvider')]
+    function testRenderThrowsForNonScalarAttributeValue($attributeValue)
+    {
+        $component = new Component('div', ['name' => $attributeValue]);
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Attribute value must be scalar.');
         $component->Render();
@@ -262,11 +236,10 @@ class ComponentTest extends TestCase
     #[DataProviderExternal(DataHelper::class, 'NonStringProvider')]
     function testRenderThrowsForInvalidContentInArray($invalidContent)
     {
-        $component = new TestComponent(
+        $component = new Component(
             'div',
-            [],
-            ['Some Content', new TestComponent('span'), $invalidContent],
-            false
+            null,
+            ['Some Content', new Component('span'), $invalidContent]
         );
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -276,7 +249,7 @@ class ComponentTest extends TestCase
 
     function testRenderThrowsForSelfClosingComponentWithContent()
     {
-        $component = new TestComponent(
+        $component = new Component(
             'img',
             ['src' => 'image.jpg'],
             'Some Content',
@@ -301,19 +274,50 @@ class ComponentTest extends TestCase
         ];
     }
 
-    static function invalidAttributeNameProvider()
+    static function invalidTagNameProvider()
+    {
+        return [
+            'empty string' => [''],
+            'a number at start' => ['1div'],
+            'an underscore at start' => ['_div'],
+            'a space inside' => ['div tag'],
+            'a colon inside' => ['div:tag'],
+            'a period inside' => ['div.tag'],
+            'an underscore inside' => ['div_tag'],
+            'a hash symbol at end' => ['div#'],
+            'an at symbol at end' => ['div@'],
+            'a single invalid character' => ['#'],
+            'multiple invalid characters' => ['#@!'],
+        ];
+    }
+
+    static function nonStringAttributeNameProvider()
     {
         return [
             'null' => [null],
             'boolean/true' => [true],
             'boolean/false' => [false],
             'integer' => [12345],
-            'float' => [123.45],
-            'string/empty' => ['']
+            'float' => [123.45]
         ];
     }
 
-    static function invalidAttributeValueProvider()
+    static function invalidAttributeNameProvider()
+    {
+        return [
+            'empty string' => [''],
+            'a number at start' => ['1attr'],
+            'a space inside' => ['attr name'],
+            'a hash symbol inside' => ['attr#name'],
+            'an at symbol inside' => ['attr@name'],
+            'a special character at end' => ['attr$'],
+            'starts with a special character' => ['%attr'],
+            'contains invalid characters' => ['attr!name'],
+            'multiple invalid characters' => ['#@!'],
+        ];
+    }
+
+    static function nonScalarAttributeValueProvider()
     {
         return [
             'null' => [null],
