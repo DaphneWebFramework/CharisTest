@@ -26,7 +26,7 @@ class ComponentHelperTest extends TestCase
     #region MergeAttributes ----------------------------------------------------
 
     #[DataProvider('mergeAttributesDataProvider')]
-    public function testMergeAttributes($expected, $defaultAttributes,
+    function testMergeAttributes($expected, $defaultAttributes,
         $userAttributes = null, $mutuallyExclusiveClassGroups = [])
     {
         $result = ComponentHelper::MergeAttributes(
