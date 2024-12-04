@@ -8,6 +8,43 @@ use \Charis\ComponentHelper;
 #[CoversClass(ComponentHelper::class)]
 class ComponentHelperTest extends TestCase
 {
+    /**
+     * Normalizes a class list string by parsing and sorting the classes.
+     *
+     * @param string $classList
+     *   The class list string to normalize.
+     * @return string
+     *   The normalized class list string with sorted classes.
+     */
+    private function normalizeClassList(string $classList): string
+    {
+        $classes = ComponentHelper::ParseClassList($classList);
+        \sort($classes);
+        return \implode(' ', $classes);
+    }
+
+    #region MergeAttributes ----------------------------------------------------
+
+    #[DataProvider('mergeAttributesDataProvider')]
+    public function testMergeAttributes($expected, $defaultAttributes,
+        $userAttributes = null, $mutuallyExclusiveClassGroups = [])
+    {
+        $result = ComponentHelper::MergeAttributes(
+            $defaultAttributes,
+            $userAttributes,
+            $mutuallyExclusiveClassGroups
+        );
+        if (\array_key_exists('class', $expected)) {
+            $expected['class'] = $this->normalizeClassList($expected['class']);
+        }
+        if (\array_key_exists('class', $result)) {
+            $result['class'] = $this->normalizeClassList($result['class']);
+        }
+        $this->assertEquals($expected, $result);
+    }
+
+    #endregion MergeAttributes
+
     #region ResolveClasses -----------------------------------------------------
 
     #[DataProvider('resolveClassesDataProvider')]
@@ -16,18 +53,45 @@ class ComponentHelperTest extends TestCase
     {
         $result = ComponentHelper::ResolveClasses($defaultClasses, $userClasses,
             $mutuallyExclusiveClassGroups);
-        // For order-insensitive comparison, split classes into arrays and sort
-        // both arrays.
-        $expected = ComponentHelper::ParseClassList($expected);
-        $result = ComponentHelper::ParseClassList($result);
-        sort($expected);
-        sort($result);
+        $expected = $this->normalizeClassList($expected);
+        $result = $this->normalizeClassList($result);
         $this->assertSame($expected, $result);
     }
 
     #endregion ResolveClasses
 
     #region Data Providers -----------------------------------------------------
+
+    public static function mergeAttributesDataProvider()
+    {
+        return [
+            'no user attributes' => [
+                ['type' => 'button', 'class' => 'btn'],
+                ['type' => 'button', 'class' => 'btn']
+            ],
+            'user overrides' => [
+                ['type' => 'submit', 'class' => 'btn btn-primary'],
+                ['type' => 'button', 'class' => 'btn'],
+                ['type' => 'submit', 'class' => 'btn-primary']
+            ],
+            'additional attributes' => [
+                ['type' => 'button', 'class' => 'btn btn-primary', 'id' => 'testButton'],
+                ['type' => 'button', 'class' => 'btn'],
+                ['id' => 'testButton', 'class' => 'btn-primary']
+            ],
+            'no class attribute' => [
+                ['type' => 'button', 'id' => 'testButton'],
+                ['type' => 'button'],
+                ['id' => 'testButton']
+            ],
+            'mutual exclusions' => [
+                ['type' => 'button', 'class' => 'btn btn-secondary'],
+                ['type' => 'button', 'class' => 'btn btn-primary'],
+                ['class' => 'btn-secondary'],
+                ['btn-primary btn-secondary']
+            ],
+        ];
+    }
 
     public static function resolveClassesDataProvider()
     {
