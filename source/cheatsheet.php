@@ -13,7 +13,8 @@
 require 'bootstrap.php';
 
 use \Charis\{
-  Button
+  Button,
+  ButtonGroup
 };
 ?>
 <!DOCTYPE html>
@@ -32,9 +33,10 @@ use \Charis\{
       </div>
     </nav>
     <div class="container">
+
       <h2>Button</h2>
       <h3>Variants</h3>
-      <div class="cheatsheet-group">
+      <div class="cs-group">
         <?=new Button(null, 'Primary')?>
 
         <?=new Button(['class'=>'btn-secondary'], 'Secondary')?>
@@ -53,9 +55,9 @@ use \Charis\{
 
         <?=new Button(['class'=>'btn-link'], 'Link')?>
 
-      </div><!--.cheatsheet-group-->
+      </div><!--.cs-group-->
       <h3>Outline</h3>
-      <div class="cheatsheet-group">
+      <div class="cs-group">
         <?=new Button(['class'=>'btn-outline-primary'], 'Primary')?>
 
         <?=new Button(['class'=>'btn-outline-secondary'], 'Secondary')?>
@@ -72,18 +74,18 @@ use \Charis\{
 
         <?=new Button(['class'=>'btn-outline-dark'], 'Dark')?>
 
-      </div><!--.cheatsheet-group-->
+      </div><!--.cs-group-->
       <h3>Sizing</h3>
-      <div class="cheatsheet-group">
+      <div class="cs-group">
         <?=new Button(['class'=>'btn-sm'], 'Small button')?>
 
         <?=new Button(null, 'Standard button')?>
 
         <?=new Button(['class'=>'btn-lg'], 'Large button')?>
 
-      </div><!--.cheatsheet-group-->
+      </div><!--.cs-group-->
       <h3>Disabled</h3>
-      <div class="cheatsheet-group">
+      <div class="cs-group">
         <?=new Button(['disabled'=>true], 'Primary')?>
 
         <?=new Button(['class'=>'btn-secondary', 'disabled'=>true], 'Secondary')?>
@@ -94,7 +96,61 @@ use \Charis\{
 
         <?=new Button(['class'=>'btn-link', 'disabled'=>true], 'Link')?>
 
-      </div><!--.cheatsheet-group-->
+      </div><!--.cs-group-->
+
+      <h2>Button Group</h2>
+      <h3>Basic</h3>
+      <div class="cs-group">
+        <?=new ButtonGroup(['aria-label'=>'Basic button group'], [
+          new Button(null, 'Left'),
+          new Button(null, 'Middle'),
+          new Button(null, 'Right')
+        ])?>
+
+      </div><!--.cs-group-->
+      <h3>Mixed</h3>
+      <div class="cs-group">
+        <?=new ButtonGroup(['aria-label'=>'Mixed button group'], [
+          new Button(['class'=>'btn-danger'], 'Left'),
+          new Button(['class'=>'btn-warning'], 'Middle'),
+          new Button(['class'=>'btn-success'], 'Right')
+        ])?>
+
+      </div><!--.cs-group-->
+      <h3>Outlined</h3>
+      <div class="cs-group">
+        <?=new ButtonGroup(['aria-label'=>'Outlined button group'], [
+          new Button(['class'=>'btn-outline-primary'], 'Left'),
+          new Button(['class'=>'btn-outline-primary'], 'Middle'),
+          new Button(['class'=>'btn-outline-primary'], 'Right')
+        ])?>
+
+      </div><!--.cs-group-->
+      <h3>Sizing</h3>
+      <div class="cs-group">
+        <?=new ButtonGroup(['class'=>'btn-group-sm', 'aria-label'=>'Small button group'], [
+          new Button(['class'=>'btn-outline-primary'], 'Left'),
+          new Button(['class'=>'btn-outline-primary'], 'Middle'),
+          new Button(['class'=>'btn-outline-primary'], 'Right')
+        ])?>
+
+        <?=new ButtonGroup(['class'=>'btn-group-lg', 'aria-label'=>'Large button group'], [
+          new Button(['class'=>'btn-outline-primary'], 'Left'),
+          new Button(['class'=>'btn-outline-primary'], 'Middle'),
+          new Button(['class'=>'btn-outline-primary'], 'Right')
+        ])?>
+
+      </div><!--.cs-group-->
+      <h3>Vertical</h3>
+      <div class="cs-group">
+        <?=new ButtonGroup(['class'=>'btn-group-vertical', 'aria-label'=>'Vertical button group'], [
+          new Button(null, 'Left'),
+          new Button(null, 'Middle'),
+          new Button(null, 'Right')
+        ])?>
+
+      </div><!--.cs-group-->
+
     </div><!--.container-->
     <script src="bundles/bootstrap-5.3.3/js/bootstrap.bundle.js"></script>
   </body>
