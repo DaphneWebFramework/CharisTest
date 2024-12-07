@@ -14,7 +14,8 @@ require 'bootstrap.php';
 
 use \Charis\{
   Button,
-  ButtonGroup
+  ButtonGroup,
+  ButtonToolbar
 };
 ?>
 <!DOCTYPE html>
@@ -147,6 +148,27 @@ use \Charis\{
           new Button(null, 'Left'),
           new Button(null, 'Middle'),
           new Button(null, 'Right')
+        ])?>
+
+      </div><!--.cs-group-->
+
+      <h2>Button Toolbar</h2>
+      <div class="cs-group">
+        <?=new ButtonToolbar(['aria-label'=>'Button toolbar'], [
+          new ButtonGroup(['class'=>'me-2', 'aria-label'=>'First group'], [
+            new Button(null, '1'),
+            new Button(null, '2'),
+            new Button(null, '3'),
+            new Button(null, '4')
+          ]),
+          new ButtonGroup(['class'=>'me-2', 'aria-label'=>'Second group'], [
+            new Button(['class'=>'btn-secondary'], '5'),
+            new Button(['class'=>'btn-secondary'], '6'),
+            new Button(['class'=>'btn-secondary'], '7')
+          ]),
+          new ButtonGroup(['aria-label'=>'Third group'], [
+            new Button(['class'=>'btn-info'], '8')
+          ]),
         ])?>
 
       </div><!--.cs-group-->
