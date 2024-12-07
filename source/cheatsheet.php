@@ -35,8 +35,8 @@ use \Charis\{
     </nav>
     <div class="container">
 
-      <h2>Button</h2>
-      <h3>Variants</h3>
+      <h3>Button</h3>
+      <h4>Variants</h4>
       <div class="cs-group">
         <?=new Button(null, 'Primary')?>
 
@@ -57,7 +57,7 @@ use \Charis\{
         <?=new Button(['class'=>'btn-link'], 'Link')?>
 
       </div><!--.cs-group-->
-      <h3>Outline</h3>
+      <h4>Outline</h4>
       <div class="cs-group">
         <?=new Button(['class'=>'btn-outline-primary'], 'Primary')?>
 
@@ -76,7 +76,7 @@ use \Charis\{
         <?=new Button(['class'=>'btn-outline-dark'], 'Dark')?>
 
       </div><!--.cs-group-->
-      <h3>Sizing</h3>
+      <h4>Sizing</h4>
       <div class="cs-group">
         <?=new Button(['class'=>'btn-sm'], 'Small button')?>
 
@@ -85,7 +85,7 @@ use \Charis\{
         <?=new Button(['class'=>'btn-lg'], 'Large button')?>
 
       </div><!--.cs-group-->
-      <h3>Disabled</h3>
+      <h4>Disabled</h4>
       <div class="cs-group">
         <?=new Button(['disabled'=>true], 'Primary')?>
 
@@ -99,8 +99,8 @@ use \Charis\{
 
       </div><!--.cs-group-->
 
-      <h2>Button Group</h2>
-      <h3>Basic</h3>
+      <h3>Button Group</h3>
+      <h4>Basic</h4>
       <div class="cs-group">
         <?=new ButtonGroup(['aria-label'=>'Basic button group'], [
           new Button(null, 'Left'),
@@ -109,7 +109,7 @@ use \Charis\{
         ])?>
 
       </div><!--.cs-group-->
-      <h3>Mixed</h3>
+      <h4>Mixed</h4>
       <div class="cs-group">
         <?=new ButtonGroup(['aria-label'=>'Mixed button group'], [
           new Button(['class'=>'btn-danger'], 'Left'),
@@ -118,7 +118,7 @@ use \Charis\{
         ])?>
 
       </div><!--.cs-group-->
-      <h3>Outlined</h3>
+      <h4>Outlined</h4>
       <div class="cs-group">
         <?=new ButtonGroup(['aria-label'=>'Outlined button group'], [
           new Button(['class'=>'btn-outline-primary'], 'Left'),
@@ -127,7 +127,7 @@ use \Charis\{
         ])?>
 
       </div><!--.cs-group-->
-      <h3>Sizing</h3>
+      <h4>Sizing</h4>
       <div class="cs-group">
         <?=new ButtonGroup(['class'=>'btn-group-sm', 'aria-label'=>'Small button group'], [
           new Button(['class'=>'btn-outline-primary'], 'Left'),
@@ -142,7 +142,7 @@ use \Charis\{
         ])?>
 
       </div><!--.cs-group-->
-      <h3>Vertical</h3>
+      <h4>Vertical</h4>
       <div class="cs-group">
         <?=new ButtonGroup(['class'=>'btn-group-vertical', 'aria-label'=>'Vertical button group'], [
           new Button(null, 'Left'),
@@ -152,7 +152,7 @@ use \Charis\{
 
       </div><!--.cs-group-->
 
-      <h2>Button Toolbar</h2>
+      <h3>Button Toolbar</h3>
       <div class="cs-group">
         <?=new ButtonToolbar(['aria-label'=>'Button toolbar'], [
           new ButtonGroup(['class'=>'me-2', 'aria-label'=>'First group'], [
