@@ -11,7 +11,7 @@ class ButtonGroupTest extends TestCase
     function testDefaultRendering()
     {
         $buttonGroup = new ButtonGroup();
-        $this->assertEquals(
+        $this->assertSame(
             $buttonGroup->Render(),
             '<div class="btn-group" role="group" aria-label=""></div>'
         );
@@ -20,7 +20,7 @@ class ButtonGroupTest extends TestCase
     function testRenderVertical()
     {
         $buttonGroup = new ButtonGroup(['class' => 'btn-group-vertical']);
-        $this->assertEquals(
+        $this->assertSame(
             $buttonGroup->Render(),
             '<div class="btn-group-vertical" role="group" aria-label=""></div>'
         );
@@ -33,7 +33,7 @@ class ButtonGroupTest extends TestCase
           new Button(null, 'Middle'),
           new Button(null, 'Right')
         ]);
-        $this->assertEquals(
+        $this->assertSame(
             $buttonGroup->Render(),
             '<div class="btn-group" role="group" aria-label="Basic button group">'
           .   '<button type="button" class="btn btn-primary">Left</button>'

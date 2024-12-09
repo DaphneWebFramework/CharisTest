@@ -12,7 +12,7 @@ class ButtonToolbarTest extends TestCase
     function testDefaultRendering()
     {
         $buttonToolbar = new ButtonToolbar();
-        $this->assertEquals(
+        $this->assertSame(
             $buttonToolbar->Render(),
             '<div class="btn-toolbar" role="toolbar" aria-label=""></div>'
         );
@@ -36,7 +36,7 @@ class ButtonToolbarTest extends TestCase
             new Button(['class'=>'btn-info'], '8')
           ]),
         ]);
-        $this->assertEquals(
+        $this->assertSame(
             $buttonToolbar->Render(),
             '<div class="btn-toolbar" role="toolbar" aria-label="Button toolbar">'
           .   '<div class="me-2 btn-group" role="group" aria-label="First group">'
