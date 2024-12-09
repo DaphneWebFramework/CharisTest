@@ -40,7 +40,7 @@ class ComponentHelperTest extends TestCase
         if (\array_key_exists('class', $result)) {
             $result['class'] = $this->normalizeClassList($result['class']);
         }
-        $this->assertEquals($expected, $result);
+        $this->assertSame($expected, $result);
     }
 
     #endregion MergeAttributes
@@ -60,9 +60,27 @@ class ComponentHelperTest extends TestCase
 
     #endregion ResolveClasses
 
+    #region ConsumePseudoAttribute ---------------------------------------------
+
+    #[DataProvider('consumePseudoAttributeDataProvider')]
+    function testConsumePseudoAttribute($expected, $attributes, $key, $default = null)
+    {
+        $result = ComponentHelper::ConsumePseudoAttribute($attributes, $key, $default);
+        $this->assertSame($expected, $result);
+    }
+
+    function testConsumePseudoAttributeRemovesAttribute(): void
+    {
+        $attributes = [':pseudo' => 'value', 'other' => 'value2'];
+        ComponentHelper::ConsumePseudoAttribute($attributes, ':pseudo');
+        $this->assertSame(['other' => 'value2'], $attributes);
+    }
+
+    #endregion ConsumePseudoAttribute
+
     #region Data Providers -----------------------------------------------------
 
-    public static function mergeAttributesDataProvider()
+    static function mergeAttributesDataProvider()
     {
         return [
             'no user attributes' => [
@@ -93,7 +111,7 @@ class ComponentHelperTest extends TestCase
         ];
     }
 
-    public static function resolveClassesDataProvider()
+    static function resolveClassesDataProvider()
     {
         return [
         // Basic Functionality
@@ -214,6 +232,38 @@ class ComponentHelperTest extends TestCase
                 'btn btn-default',
                 'btn-primary',
                 ['btn-default Btn-primary btn-success']
+            ],
+        ];
+    }
+
+    static function consumePseudoAttributeDataProvider()
+    {
+        return [
+            'valid pseudo attribute' => [
+                'value',
+                [':pseudo' => 'value', 'other' => 'value2'],
+                ':pseudo'
+            ],
+            'pseudo attribute not found' => [
+                null,
+                ['other' => 'value2'],
+                ':nonexistent'
+            ],
+            'invalid pseudo attribute key' => [
+                null,
+                [':pseudo' => 'value', 'other' => 'value2'],
+                'invalid-key'
+            ],
+            'default value used' => [
+                'default',
+                ['other' => 'value2'],
+                ':pseudo',
+                'default'
+            ],
+            'case-sensitive match' => [
+                null,
+                [':Pseudo' => 'value'],
+                ':pseudo'
             ],
         ];
     }
