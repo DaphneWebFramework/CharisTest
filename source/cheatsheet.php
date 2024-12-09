@@ -15,7 +15,8 @@ require 'bootstrap.php';
 use \Charis\{
   Button,
   ButtonGroup,
-  ButtonToolbar
+  ButtonToolbar,
+  FormCheck
 };
 ?>
 <!DOCTYPE html>
@@ -169,6 +170,23 @@ use \Charis\{
           new ButtonGroup(['aria-label'=>'Third group'], [
             new Button(['class'=>'btn-info'], '8')
           ]),
+        ])?>
+
+      </div><!--.cs-group-->
+
+      <h3>Form Check</h3>
+      <div class="cs-group">
+        <?=new FormCheck([':label-text'=>'Default checkbox'])?>
+
+        <?=new FormCheck([':label-text'=>'Checked checkbox', ':checked'=>true])?>
+
+        <?=new FormCheck([':label-text'=>'Disabled checkbox', ':disabled'=>true])?>
+
+        <?=new FormCheck([':label-text'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true])?>
+
+        <?=new FormCheck([
+          ':label-text' => 'I agree to the terms and conditions',
+          ':help-text' => 'By selecting this checkbox, you agree to our terms of service and privacy policy.'
         ])?>
 
       </div><!--.cs-group-->
