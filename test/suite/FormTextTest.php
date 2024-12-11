@@ -11,8 +11,8 @@ class FormTextTest extends TestCase
     {
         $formText = new FormText();
         $this->assertSame(
-            $formText->Render(),
-            '<div id="" class="form-text"></div>'
+            '<div id="" class="form-text"></div>',
+            $formText->Render()
         );
     }
 
@@ -23,8 +23,8 @@ class FormTextTest extends TestCase
             'Please accept the terms and conditions.'
         );
         $this->assertSame(
-            $formText->Render(),
-            '<div id="form-text-64f1a3b9e8341" class="form-text">Please accept the terms and conditions.</div>'
+            '<div id="form-text-64f1a3b9e8341" class="form-text">Please accept the terms and conditions.</div>',
+            $formText->Render()
         );
     }
 }

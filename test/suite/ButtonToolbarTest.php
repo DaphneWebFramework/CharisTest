@@ -13,31 +13,30 @@ class ButtonToolbarTest extends TestCase
     {
         $buttonToolbar = new ButtonToolbar();
         $this->assertSame(
-            $buttonToolbar->Render(),
-            '<div class="btn-toolbar" role="toolbar" aria-label=""></div>'
+            '<div class="btn-toolbar" role="toolbar" aria-label=""></div>',
+            $buttonToolbar->Render()
         );
     }
 
     function testRenderWithButtonGroups()
     {
         $buttonToolbar = new ButtonToolbar(['aria-label'=>'Button toolbar'], [
-          new ButtonGroup(['class'=>'me-2', 'aria-label'=>'First group'], [
-            new Button(null, '1'),
-            new Button(null, '2'),
-            new Button(null, '3'),
-            new Button(null, '4')
-          ]),
-          new ButtonGroup(['class'=>'me-2', 'aria-label'=>'Second group'], [
-            new Button(['class'=>'btn-secondary'], '5'),
-            new Button(['class'=>'btn-secondary'], '6'),
-            new Button(['class'=>'btn-secondary'], '7')
-          ]),
-          new ButtonGroup(['aria-label'=>'Third group'], [
-            new Button(['class'=>'btn-info'], '8')
-          ]),
+            new ButtonGroup(['class'=>'me-2', 'aria-label'=>'First group'], [
+                new Button(null, '1'),
+                new Button(null, '2'),
+                new Button(null, '3'),
+                new Button(null, '4')
+            ]),
+            new ButtonGroup(['class'=>'me-2', 'aria-label'=>'Second group'], [
+                new Button(['class'=>'btn-secondary'], '5'),
+                new Button(['class'=>'btn-secondary'], '6'),
+                new Button(['class'=>'btn-secondary'], '7')
+            ]),
+            new ButtonGroup(['aria-label'=>'Third group'], [
+                new Button(['class'=>'btn-info'], '8')
+            ]),
         ]);
         $this->assertSame(
-            $buttonToolbar->Render(),
             '<div class="btn-toolbar" role="toolbar" aria-label="Button toolbar">'
           .   '<div class="me-2 btn-group" role="group" aria-label="First group">'
           .     '<button type="button" class="btn btn-primary">1</button>'
@@ -53,7 +52,8 @@ class ButtonToolbarTest extends TestCase
           .   '<div class="btn-group" role="group" aria-label="Third group">'
           .     '<button type="button" class="btn btn-info">8</button>'
           .   '</div>'
-          . '</div>'
+          . '</div>',
+            $buttonToolbar->Render()
         );
     }
 }

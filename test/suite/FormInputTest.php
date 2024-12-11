@@ -11,8 +11,8 @@ class FormInputTest extends TestCase
     {
         $formInput = new FormInput();
         $this->assertSame(
-            $formInput->Render(),
-            '<input class="form-control"/>'
+            '<input class="form-control"/>',
+            $formInput->Render()
         );
     }
 }

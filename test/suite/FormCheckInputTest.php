@@ -11,8 +11,8 @@ class FormCheckInputTest extends TestCase
     {
         $formCheckInput = new FormCheckInput();
         $this->assertSame(
-            $formCheckInput->Render(),
-            '<input class="form-check-input" type="checkbox"/>'
+            '<input class="form-check-input" type="checkbox"/>',
+            $formCheckInput->Render()
         );
     }
 }

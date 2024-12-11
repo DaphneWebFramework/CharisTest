@@ -11,8 +11,8 @@ class FormCheckLabelTest extends TestCase
     {
         $formCheckLabel = new FormCheckLabel();
         $this->assertSame(
-            $formCheckLabel->Render(),
-            '<label class="form-check-label" for=""></label>'
+            '<label class="form-check-label" for=""></label>',
+            $formCheckLabel->Render()
         );
     }
 }
