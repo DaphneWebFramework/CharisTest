@@ -176,7 +176,7 @@ use \Charis\{
 
       <h3>Form Check</h3>
       <div class="cs-group">
-        <?=new FormCheck([':label-text'=>'Default checkbox'])?>
+        <?=new FormCheck([':id'=>'defaultCheck', ':label-text'=>'Default checkbox'])?>
 
         <?=new FormCheck([':label-text'=>'Checked checkbox', ':checked'=>true])?>
 
@@ -184,11 +184,28 @@ use \Charis\{
 
         <?=new FormCheck([':label-text'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true])?>
 
+        <h4>Help Text</h4>
         <?=new FormCheck([
           ':label-text' => 'I agree to the terms and conditions',
           ':help-text' => 'By selecting this checkbox, you agree to our terms of service and privacy policy.'
         ])?>
 
+        <h4>Inline</h4>
+        <div>
+          <?=new FormCheck(['class'=>'form-check-inline', ':label-text'=>'1'])?>
+
+          <?=new FormCheck(['class'=>'form-check-inline', ':label-text'=>'2'])?>
+
+          <?=new FormCheck(['class'=>'form-check-inline', ':label-text'=>'3 (disabled)', ':disabled'=>true])?>
+
+        </div>
+        <h4>Reverse</h4>
+        <div class="w-25">
+          <?=new FormCheck(['class'=>'form-check-reverse', ':label-text'=>'Reverse checkbox'])?>
+
+          <?=new FormCheck(['class'=>'form-check-reverse', ':label-text'=>'Disabled reverse checkbox', ':disabled'=>true])?>
+
+        </div>
       </div><!--.cs-group-->
 
     </div><!--.container-->
