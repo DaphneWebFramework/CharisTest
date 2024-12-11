@@ -7,7 +7,7 @@ use \Charis\FormCheck;
 #[CoversClass(FormCheck::class)]
 class FormCheckTest extends TestCase
 {
-    private function assertMatchesWithUID(string $actual, string $expected): void
+    private function assertMatchesWithUID(string $expected, string $actual): void
     {
         $expected = str_replace('UID', '[a-z0-9]{13}', preg_quote($expected, '/'));
         $this->assertMatchesRegularExpression("/^{$expected}\$/", $actual);
@@ -17,10 +17,10 @@ class FormCheckTest extends TestCase
     {
         $formCheck = new FormCheck();
         $this->assertSame(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox"/>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -28,10 +28,10 @@ class FormCheckTest extends TestCase
     {
         $formCheck = new FormCheck([':id' => 'custom-id']);
         $this->assertSame(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox" id="custom-id"/>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -39,24 +39,23 @@ class FormCheckTest extends TestCase
     {
         $formCheck = new FormCheck([':label-text' => 'Label Text']);
         $this->assertMatchesWithUID(
-            $formCheck->Render(),
             '<div class="form-check">'
-          .   '<input class="form-check-input" type="checkbox" id="form-check-UID"/>'
-          .   '<label class="form-check-label" for="form-check-UID">Label Text</label>'
-          . '</div>'
+          .   '<input class="form-check-input" type="checkbox" id="form-checkable-UID"/>'
+          .   '<label class="form-check-label" for="form-checkable-UID">Label Text</label>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
-
 
     function testRenderWithIdAndLabelText()
     {
         $formCheck = new FormCheck([':id' => 'custom-id', ':label-text' => 'Label Text']);
         $this->assertSame(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox" id="custom-id"/>'
           .   '<label class="form-check-label" for="custom-id">Label Text</label>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -64,11 +63,11 @@ class FormCheckTest extends TestCase
     {
         $formCheck = new FormCheck([':help-text' => 'This is a help text.']);
         $this->assertMatchesWithUID(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox" aria-describedby="help-text-UID"/>'
           .   '<div id="help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -79,12 +78,12 @@ class FormCheckTest extends TestCase
             ':help-text' => 'This is a help text.',
         ]);
         $this->assertMatchesWithUID(
-            $formCheck->Render(),
             '<div class="form-check">'
-          .   '<input class="form-check-input" type="checkbox" id="form-check-UID" aria-describedby="help-text-UID"/>'
-          .   '<label class="form-check-label" for="form-check-UID">Label Text</label>'
+          .   '<input class="form-check-input" type="checkbox" id="form-checkable-UID" aria-describedby="help-text-UID"/>'
+          .   '<label class="form-check-label" for="form-checkable-UID">Label Text</label>'
           .   '<div id="help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -96,12 +95,12 @@ class FormCheckTest extends TestCase
             ':help-text' => 'This is a help text.',
         ]);
         $this->assertMatchesWithUID(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox" id="custom-id" aria-describedby="help-text-UID"/>'
           .   '<label class="form-check-label" for="custom-id">Label Text</label>'
           .   '<div id="help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -111,10 +110,10 @@ class FormCheckTest extends TestCase
             ':checked' => true
         ]);
         $this->assertSame(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox" checked/>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -125,10 +124,10 @@ class FormCheckTest extends TestCase
             ':disabled' => false,
         ]);
         $this->assertSame(
-            $formCheck->Render(),
             '<div class="form-check">'
-        .   '<input class="form-check-input" type="checkbox" checked/>'
-        . '</div>'
+          .   '<input class="form-check-input" type="checkbox" checked/>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -138,10 +137,10 @@ class FormCheckTest extends TestCase
             ':disabled' => true
         ]);
         $this->assertSame(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox" disabled/>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -152,10 +151,10 @@ class FormCheckTest extends TestCase
             ':disabled' => true,
         ]);
         $this->assertSame(
-            $formCheck->Render(),
             '<div class="form-check">'
-        .   '<input class="form-check-input" type="checkbox" disabled/>'
-        . '</div>'
+          .   '<input class="form-check-input" type="checkbox" disabled/>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -166,10 +165,10 @@ class FormCheckTest extends TestCase
             ':disabled' => true,
         ]);
         $this->assertSame(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox" checked disabled/>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -180,10 +179,10 @@ class FormCheckTest extends TestCase
             ':disabled' => false,
         ]);
         $this->assertSame(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox"/>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 
@@ -197,12 +196,12 @@ class FormCheckTest extends TestCase
             ':disabled' => true,
         ]);
         $this->assertMatchesWithUID(
-            $formCheck->Render(),
             '<div class="form-check">'
           .   '<input class="form-check-input" type="checkbox" id="custom-id" aria-describedby="help-text-UID" checked disabled/>'
           .   '<label class="form-check-label" for="custom-id">Label Text</label>'
           .   '<div id="help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>'
+          . '</div>',
+            $formCheck->Render()
         );
     }
 }
