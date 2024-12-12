@@ -13,11 +13,8 @@
 require 'bootstrap.php';
 
 use \Charis\{
-  Button,
-  ButtonGroup,
-  ButtonToolbar,
-  FormCheck,
-  FormRadio
+  Button, ButtonGroup, ButtonToolbar,
+  FormCheck, FormRadio, FormSwitch
 };
 ?>
 <!DOCTYPE html>
@@ -197,7 +194,7 @@ use \Charis\{
       <div class="cs-group">
         <?=new FormCheck([
           ':label-text' => 'I agree to the terms and conditions',
-          ':help-text' => 'By selecting this checkbox, you agree to our terms of service and privacy policy.'
+          ':help-text' => 'By selecting this, you agree to our terms of service and privacy policy.'
         ])?>
 
       </div><!--.cs-group-->
@@ -324,6 +321,60 @@ use \Charis\{
             'class'=>'form-check-reverse',
             ':name'=>'RadioGroup4',
             ':label-text'=>'Disabled reverse radio',
+            ':disabled'=>true
+          ])?>
+
+        </div>
+      </div><!--.cs-group-->
+
+      <h3>Form Switch</h3>
+      <div class="cs-group">
+        <div>
+          <?=new FormSwitch([':id'=>'check1', ':label-text'=>'Default switch'])?>
+
+          <?=new FormSwitch([':label-text'=>'Checked switch', ':checked'=>true])?>
+
+        </div>
+      </div><!--.cs-group-->
+      <h4>Disabled</h4>
+      <div class="cs-group">
+        <div>
+          <?=new FormSwitch([':label-text'=>'Disabled switch', ':disabled'=>true])?>
+
+          <?=new FormSwitch([':label-text'=>'Disabled checked switch', ':disabled'=>true, ':checked'=>true])?>
+
+        </div>
+      </div><!--.cs-group-->
+      <h4>Help Text</h4>
+      <div class="cs-group">
+        <?=new FormSwitch([
+          ':label-text' => 'I agree to the terms and conditions',
+          ':help-text' => 'By selecting this, you agree to our terms of service and privacy policy.'
+        ])?>
+
+      </div><!--.cs-group-->
+      <h4>Inline</h4>
+      <div class="cs-group">
+        <div>
+          <?=new FormSwitch(['class'=>'form-check-inline', ':label-text'=>'1'])?>
+
+          <?=new FormSwitch(['class'=>'form-check-inline', ':label-text'=>'2'])?>
+
+          <?=new FormSwitch(['class'=>'form-check-inline', ':label-text'=>'3 (disabled)', ':disabled'=>true])?>
+
+        </div>
+      </div><!--.cs-group-->
+      <h4>Reverse</h4>
+      <div class="cs-group w-25">
+        <div>
+          <?=new FormSwitch([
+            'class'=>'form-check-reverse',
+            ':label-text'=>'Reverse switch'
+          ])?>
+
+          <?=new FormSwitch([
+            'class'=>'form-check-reverse',
+            ':label-text'=>'Disabled reverse switch',
             ':disabled'=>true
           ])?>
 
