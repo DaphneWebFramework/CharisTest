@@ -16,7 +16,8 @@ use \Charis\{
   Button,
   ButtonGroup,
   ButtonToolbar,
-  FormCheck
+  FormCheck,
+  FormRadio
 };
 ?>
 <!DOCTYPE html>
@@ -176,21 +177,32 @@ use \Charis\{
 
       <h3>Form Check</h3>
       <div class="cs-group">
-        <?=new FormCheck([':id'=>'defaultCheck', ':label-text'=>'Default checkbox'])?>
+        <div>
+          <?=new FormCheck([':id'=>'check1', ':label-text'=>'Default checkbox'])?>
 
-        <?=new FormCheck([':label-text'=>'Checked checkbox', ':checked'=>true])?>
+          <?=new FormCheck([':label-text'=>'Checked checkbox', ':checked'=>true])?>
 
-        <?=new FormCheck([':label-text'=>'Disabled checkbox', ':disabled'=>true])?>
+        </div>
+      </div><!--.cs-group-->
+      <h4>Disabled</h4>
+      <div class="cs-group">
+        <div>
+          <?=new FormCheck([':label-text'=>'Disabled checkbox', ':disabled'=>true])?>
 
-        <?=new FormCheck([':label-text'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true])?>
+          <?=new FormCheck([':label-text'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true])?>
 
-        <h4>Help Text</h4>
+        </div>
+      </div><!--.cs-group-->
+      <h4>Help Text</h4>
+      <div class="cs-group">
         <?=new FormCheck([
           ':label-text' => 'I agree to the terms and conditions',
           ':help-text' => 'By selecting this checkbox, you agree to our terms of service and privacy policy.'
         ])?>
 
-        <h4>Inline</h4>
+      </div><!--.cs-group-->
+      <h4>Inline</h4>
+      <div class="cs-group">
         <div>
           <?=new FormCheck(['class'=>'form-check-inline', ':label-text'=>'1'])?>
 
@@ -199,11 +211,121 @@ use \Charis\{
           <?=new FormCheck(['class'=>'form-check-inline', ':label-text'=>'3 (disabled)', ':disabled'=>true])?>
 
         </div>
-        <h4>Reverse</h4>
-        <div class="w-25">
-          <?=new FormCheck(['class'=>'form-check-reverse', ':label-text'=>'Reverse checkbox'])?>
+      </div><!--.cs-group-->
+      <h4>Reverse</h4>
+      <div class="cs-group w-25">
+        <div>
+          <?=new FormCheck([
+            'class'=>'form-check-reverse',
+            ':label-text'=>'Reverse checkbox'
+          ])?>
 
-          <?=new FormCheck(['class'=>'form-check-reverse', ':label-text'=>'Disabled reverse checkbox', ':disabled'=>true])?>
+          <?=new FormCheck([
+            'class'=>'form-check-reverse',
+            ':label-text'=>'Disabled reverse checkbox',
+            ':disabled'=>true
+          ])?>
+
+        </div>
+      </div><!--.cs-group-->
+
+      <h3>Form Radio</h3>
+      <div class="cs-group">
+        <div>
+          <?=new FormRadio([
+            ':name'=>'RadioGroup1',
+            ':id'=>'radio1',
+            ':label-text'=>'Default radio'
+          ])?>
+
+          <?=new FormRadio([
+            ':name'=>'RadioGroup1',
+            ':label-text'=>'Checked radio',
+            ':checked'=>true
+          ])?>
+
+        </div>
+      </div><!--.cs-group-->
+      <h4>Disabled</h4>
+      <div class="cs-group">
+        <div>
+          <?=new FormRadio([
+            ':name'=>'RadioGroup2',
+            ':label-text'=>'Disabled radio',
+            ':disabled'=>true
+          ])?>
+
+          <?=new FormRadio([
+            ':name'=>'RadioGroup2',
+            ':label-text'=>'Disabled checked radio',
+            ':disabled'=>true,
+            ':checked'=>true
+          ])?>
+
+        </div>
+      </div><!--.cs-group-->
+      <h4>Help Text</h4>
+      <div class="cs-group">
+        <div>
+          <?=new FormRadio([
+            ':label-text' => 'Credit Card',
+            ':name' => 'payment_method',
+            ':help-text' => 'Pay securely using your credit card.',
+          ])?>
+
+          <?=new FormRadio([
+            ':label-text' => 'PayPal',
+            ':name' => 'payment_method',
+            ':help-text' => 'Use your PayPal account for a quick and secure payment.',
+          ])?>
+
+          <?=new FormRadio([
+            ':label-text' => 'Bank Transfer',
+            ':name' => 'payment_method',
+            ':help-text' => 'Transfer funds directly from your bank account.',
+          ])?>
+
+        </div>
+      </div><!--.cs-group-->
+      <h4>Inline</h4>
+      <div class="cs-group">
+        <div>
+          <?=new FormRadio([
+            'class'=>'form-check-inline',
+            ':name'=>'RadioGroup3',
+            ':label-text'=>'1'
+          ])?>
+
+          <?=new FormRadio([
+            'class'=>'form-check-inline',
+            ':name'=>'RadioGroup3',
+            ':label-text'=>'2'
+          ])?>
+
+          <?=new FormRadio([
+            'class'=>'form-check-inline',
+            ':name'=>'RadioGroup3',
+            ':label-text'=>'3 (disabled)',
+            ':disabled'=>true
+          ])?>
+
+        </div>
+      </div><!--.cs-group-->
+      <h4>Reverse</h4>
+      <div class="cs-group w-25">
+        <div>
+          <?=new FormRadio([
+            'class'=>'form-check-reverse',
+            ':name'=>'RadioGroup4',
+            ':label-text'=>'Reverse radio'
+          ])?>
+
+          <?=new FormRadio([
+            'class'=>'form-check-reverse',
+            ':name'=>'RadioGroup4',
+            ':label-text'=>'Disabled reverse radio',
+            ':disabled'=>true
+          ])?>
 
         </div>
       </div><!--.cs-group-->
