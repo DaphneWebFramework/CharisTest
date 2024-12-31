@@ -330,7 +330,7 @@ use \Charis\{
       <h3>Form Switch</h3>
       <div class="cs-group">
         <div>
-          <?=new FormSwitch([':id'=>'check1', ':label-text'=>'Default switch'])?>
+          <?=new FormSwitch([':id'=>'switch1', ':label-text'=>'Default switch'])?>
 
           <?=new FormSwitch([':label-text'=>'Checked switch', ':checked'=>true])?>
 
