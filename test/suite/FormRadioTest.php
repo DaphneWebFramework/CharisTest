@@ -51,8 +51,8 @@ class FormRadioTest extends TestCase
         $formRadio = new FormRadio([':label-text'=>'Label Text']);
         $this->assertMatchesWithUID(
             '<div class="form-check">'
-          .   '<input class="form-check-input" type="radio" name="" id="form-checkable-UID"/>'
-          .   '<label class="form-check-label" for="form-checkable-UID">Label Text</label>'
+          .   '<input class="form-check-input" type="radio" name="" id="form-input-UID"/>'
+          .   '<label class="form-check-label" for="form-input-UID">Label Text</label>'
           . '</div>',
             $formRadio->Render()
         );
@@ -75,8 +75,8 @@ class FormRadioTest extends TestCase
         $formRadio = new FormRadio([':help-text'=>'This is a help text.']);
         $this->assertMatchesWithUID(
             '<div class="form-check">'
-          .   '<input class="form-check-input" type="radio" name="" aria-describedby="help-text-UID"/>'
-          .   '<div id="help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<input class="form-check-input" type="radio" name="" aria-describedby="form-help-text-UID"/>'
+          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>',
             $formRadio->Render()
         );
@@ -90,9 +90,9 @@ class FormRadioTest extends TestCase
         ]);
         $this->assertMatchesWithUID(
             '<div class="form-check">'
-          .   '<input class="form-check-input" type="radio" name="" id="form-checkable-UID" aria-describedby="help-text-UID"/>'
-          .   '<label class="form-check-label" for="form-checkable-UID">Label Text</label>'
-          .   '<div id="help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<input class="form-check-input" type="radio" name="" id="form-input-UID" aria-describedby="form-help-text-UID"/>'
+          .   '<label class="form-check-label" for="form-input-UID">Label Text</label>'
+          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>',
             $formRadio->Render()
         );
@@ -107,9 +107,9 @@ class FormRadioTest extends TestCase
         ]);
         $this->assertMatchesWithUID(
             '<div class="form-check">'
-          .   '<input class="form-check-input" type="radio" name="" id="custom-id" aria-describedby="help-text-UID"/>'
+          .   '<input class="form-check-input" type="radio" name="" id="custom-id" aria-describedby="form-help-text-UID"/>'
           .   '<label class="form-check-label" for="custom-id">Label Text</label>'
-          .   '<div id="help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>',
             $formRadio->Render()
         );
@@ -209,9 +209,9 @@ class FormRadioTest extends TestCase
         ]);
         $this->assertMatchesWithUID(
             '<div class="form-check">'
-          .   '<input class="form-check-input" type="radio" name="Radio1" id="custom-id" aria-describedby="help-text-UID" checked disabled/>'
+          .   '<input class="form-check-input" type="radio" name="Radio1" id="custom-id" aria-describedby="form-help-text-UID" checked disabled/>'
           .   '<label class="form-check-label" for="custom-id">Label Text</label>'
-          .   '<div id="help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>',
             $formRadio->Render()
         );

@@ -14,7 +14,7 @@ require 'bootstrap.php';
 
 use \Charis\{
   Button, ButtonGroup, ButtonToolbar,
-  FormCheck, FormRadio, FormSwitch
+  FormCheck, FormRadio, FormSwitch, FormText
 };
 ?>
 <!DOCTYPE html>
@@ -379,6 +379,16 @@ use \Charis\{
           ])?>
 
         </div>
+      </div><!--.cs-group-->
+
+      <h3>Form Text</h3>
+      <div class="cs-group">
+        <?=new FormText([
+          ':label-text'=>'Username',
+          ':help-text' => 'Your username must be 3–15 characters long.',
+          ':placeholder' => 'e.g., JohnDoe'
+        ])?>
+
       </div><!--.cs-group-->
 
     </div><!--.container-->
