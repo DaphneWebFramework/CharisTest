@@ -5,6 +5,8 @@ use \PHPUnit\Framework\Attributes\DataProvider;
 
 use \Charis\ComponentHelper;
 
+use \TestToolkit\AccessHelper;
+
 #[CoversClass(ComponentHelper::class)]
 class ComponentHelperTest extends TestCase
 {
@@ -16,9 +18,13 @@ class ComponentHelperTest extends TestCase
      * @return string
      *   The normalized class list string with sorted classes.
      */
-    private function normalizeClassList(string $classList): string
+    private function normalizeClassAttribute(string $classList): string
     {
-        $classes = ComponentHelper::ParseClassList($classList);
+        $classes = AccessHelper::CallNonPublicStaticMethod(
+            ComponentHelper::class,
+            'parseClassAttribute',
+            [$classList]
+        );
         \sort($classes);
         return \implode(' ', $classes);
     }
@@ -35,30 +41,28 @@ class ComponentHelperTest extends TestCase
             $mutuallyExclusiveClassGroups
         );
         if (\array_key_exists('class', $expected)) {
-            $expected['class'] = $this->normalizeClassList($expected['class']);
+            $expected['class'] = $this->normalizeClassAttribute($expected['class']);
         }
         if (\array_key_exists('class', $result)) {
-            $result['class'] = $this->normalizeClassList($result['class']);
+            $result['class'] = $this->normalizeClassAttribute($result['class']);
         }
         $this->assertSame($expected, $result);
     }
 
     #endregion MergeAttributes
 
-    #region ResolveClasses -----------------------------------------------------
+    #region CombineClassAttributes ---------------------------------------------
 
-    #[DataProvider('resolveClassesDataProvider')]
-    function testResolveClasses($expected, $defaultClasses, $userClasses,
-        $mutuallyExclusiveClassGroups = [])
+    #[DataProvider('combineClassAttributesDataProvider')]
+    function testCombineClassAttributes($expected, $classes1, $classes2)
     {
-        $result = ComponentHelper::ResolveClasses($defaultClasses, $userClasses,
-            $mutuallyExclusiveClassGroups);
-        $expected = $this->normalizeClassList($expected);
-        $result = $this->normalizeClassList($result);
+        $result = ComponentHelper::CombineClassAttributes($classes1, $classes2);
+        $expected = $this->normalizeClassAttribute($expected);
+        $result = $this->normalizeClassAttribute($result);
         $this->assertSame($expected, $result);
     }
 
-    #endregion ResolveClasses
+    #endregion CombineClassAttributes
 
     #region ConsumePseudoAttribute ---------------------------------------------
 
@@ -77,6 +81,39 @@ class ComponentHelperTest extends TestCase
     }
 
     #endregion ConsumePseudoAttribute
+
+    #region parseClassAttribute ------------------------------------------------
+
+    #[DataProvider('parseClassAttributeDataProvider')]
+    function testParseClassAttribute($expected, $classList)
+    {
+        $result = AccessHelper::CallNonPublicStaticMethod(
+            ComponentHelper::class,
+            'parseClassAttribute',
+            [$classList]
+        );
+        $this->assertSame($expected, $result);
+    }
+
+    #endregion parseClassAttribute
+
+    #region resolveClassAttributes ---------------------------------------------
+
+    #[DataProvider('resolveClassAttributesDataProvider')]
+    function testResolveClassAttributes($expected, $defaultClasses, $userClasses,
+        $mutuallyExclusiveClassGroups = [])
+    {
+        $result = AccessHelper::CallNonPublicStaticMethod(
+            ComponentHelper::class,
+            'resolveClassAttributes',
+            [$defaultClasses, $userClasses, $mutuallyExclusiveClassGroups]
+        );
+        $expected = $this->normalizeClassAttribute($expected);
+        $result = $this->normalizeClassAttribute($result);
+        $this->assertSame($expected, $result);
+    }
+
+    #endregion resolveClassAttributes
 
     #region Data Providers -----------------------------------------------------
 
@@ -111,7 +148,87 @@ class ComponentHelperTest extends TestCase
         ];
     }
 
-    static function resolveClassesDataProvider()
+    static function combineClassAttributesDataProvider()
+    {
+        return [
+            'no duplicates' => [
+                'btn btn-primary',
+                'btn',
+                'btn-primary'
+            ],
+            'with duplicates' => [
+                'btn btn-primary',
+                'btn btn-primary',
+                'btn btn-primary'
+            ],
+            'empty strings' => [
+                '',
+                '',
+                ''
+            ],
+            'extra spaces' => [
+                'btn btn-primary',
+                '  btn  ',
+                '  btn-primary  '
+            ],
+        ];
+    }
+
+    static function consumePseudoAttributeDataProvider()
+    {
+        return [
+            'valid pseudo attribute' => [
+                'value',
+                [':pseudo' => 'value', 'other' => 'value2'],
+                ':pseudo'
+            ],
+            'pseudo attribute not found' => [
+                null,
+                ['other' => 'value2'],
+                ':nonexistent'
+            ],
+            'invalid pseudo attribute key' => [
+                null,
+                [':pseudo' => 'value', 'other' => 'value2'],
+                'invalid-key'
+            ],
+            'default value used' => [
+                'default',
+                ['other' => 'value2'],
+                ':pseudo',
+                'default'
+            ],
+            'case-sensitive match' => [
+                null,
+                [':Pseudo' => 'value'],
+                ':pseudo'
+            ],
+        ];
+    }
+
+    static function parseClassAttributeDataProvider()
+    {
+        return [
+            'simple list' => [
+                ['btn', 'btn-primary'],
+                'btn btn-primary'
+            ],
+            'extra spaces' => [
+                ['btn', 'btn-primary'],
+                '  btn   btn-primary  '
+            ],
+            'whitespace-only string' => [
+                [],
+                '     '
+            ],
+            'empty string' => [
+                [],
+                ''
+            ],
+        ];
+    }
+
+    static function resolveClassAttributesDataProvider()
     {
         return [
         // Basic Functionality
@@ -232,38 +349,6 @@ class ComponentHelperTest extends TestCase
                 'btn btn-default',
                 'btn-primary',
                 ['btn-default Btn-primary btn-success']
-            ],
-        ];
-    }
-
-    static function consumePseudoAttributeDataProvider()
-    {
-        return [
-            'valid pseudo attribute' => [
-                'value',
-                [':pseudo' => 'value', 'other' => 'value2'],
-                ':pseudo'
-            ],
-            'pseudo attribute not found' => [
-                null,
-                ['other' => 'value2'],
-                ':nonexistent'
-            ],
-            'invalid pseudo attribute key' => [
-                null,
-                [':pseudo' => 'value', 'other' => 'value2'],
-                'invalid-key'
-            ],
-            'default value used' => [
-                'default',
-                ['other' => 'value2'],
-                ':pseudo',
-                'default'
-            ],
-            'case-sensitive match' => [
-                null,
-                [':Pseudo' => 'value'],
-                ':pseudo'
             ],
         ];
     }
