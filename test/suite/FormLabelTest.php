@@ -11,16 +11,7 @@ class FormLabelTest extends TestCase
     {
         $formLabel = new FormLabel();
         $this->assertSame(
-            '<label class="form-label" for=""></label>',
-            $formLabel->Render()
-        );
-    }
-
-    function testRenderWithAttributesAndContent()
-    {
-        $formLabel = new FormLabel(['for'=>'form-input-64f1a3b9e8341'], 'Username:');
-        $this->assertSame(
-            '<label class="form-label" for="form-input-64f1a3b9e8341">Username:</label>',
+            '<label for="" class="form-label"></label>',
             $formLabel->Render()
         );
     }

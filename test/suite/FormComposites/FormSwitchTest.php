@@ -41,7 +41,7 @@ class FormSwitchTest extends TestCase
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="form-input-UID"/>'
-          .   '<label class="form-check-label" for="form-input-UID">Label Text</label>'
+          .   '<label for="form-input-UID" class="form-check-label">Label Text</label>'
           . '</div>',
             $formSwitch->Render()
         );
@@ -53,7 +53,7 @@ class FormSwitchTest extends TestCase
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id"/>'
-          .   '<label class="form-check-label" for="custom-id">Label Text</label>'
+          .   '<label for="custom-id" class="form-check-label">Label Text</label>'
           . '</div>',
             $formSwitch->Render()
         );
@@ -80,7 +80,7 @@ class FormSwitchTest extends TestCase
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="form-input-UID" aria-describedby="form-help-text-UID"/>'
-          .   '<label class="form-check-label" for="form-input-UID">Label Text</label>'
+          .   '<label for="form-input-UID" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>',
             $formSwitch->Render()
@@ -97,7 +97,7 @@ class FormSwitchTest extends TestCase
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" aria-describedby="form-help-text-UID"/>'
-          .   '<label class="form-check-label" for="custom-id">Label Text</label>'
+          .   '<label for="custom-id" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>',
             $formSwitch->Render()
@@ -198,7 +198,7 @@ class FormSwitchTest extends TestCase
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" aria-describedby="form-help-text-UID" checked disabled/>'
-          .   '<label class="form-check-label" for="custom-id">Label Text</label>'
+          .   '<label for="custom-id" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>',
             $formSwitch->Render()

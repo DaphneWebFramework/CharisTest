@@ -40,7 +40,7 @@ class FormTextTest extends TestCase
         $formText = new FormText([':label-text' => 'Label Text']);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
-          .   '<label class="form-label" for="form-input-UID">Label Text</label>'
+          .   '<label for="form-input-UID" class="form-label">Label Text</label>'
           .   '<input class="form-control" type="text" id="form-input-UID"/>'
           . '</div>'
           , $formText->Render()
@@ -52,7 +52,7 @@ class FormTextTest extends TestCase
         $formText = new FormText([':id' => 'custom-id', ':label-text' => 'Label Text']);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
-          .   '<label class="form-label" for="custom-id">Label Text</label>'
+          .   '<label for="custom-id" class="form-label">Label Text</label>'
           .   '<input class="form-control" type="text" id="custom-id"/>'
           . '</div>'
           , $formText->Render()
@@ -79,7 +79,7 @@ class FormTextTest extends TestCase
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
-          .   '<label class="form-label" for="form-input-UID">Label Text</label>'
+          .   '<label for="form-input-UID" class="form-label">Label Text</label>'
           .   '<input class="form-control" type="text" id="form-input-UID" aria-describedby="form-help-text-UID"/>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>'
@@ -96,7 +96,7 @@ class FormTextTest extends TestCase
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
-          .   '<label class="form-label" for="custom-id">Label Text</label>'
+          .   '<label for="custom-id" class="form-label">Label Text</label>'
           .   '<input class="form-control" type="text" id="custom-id" aria-describedby="form-help-text-UID"/>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>'
@@ -137,7 +137,7 @@ class FormTextTest extends TestCase
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
-          .   '<label class="form-label" for="custom-id">Label Text</label>'
+          .   '<label for="custom-id" class="form-label">Label Text</label>'
           .   '<input class="form-control" type="text" id="custom-id" aria-describedby="form-help-text-UID" placeholder="Placeholder text" disabled/>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>'
