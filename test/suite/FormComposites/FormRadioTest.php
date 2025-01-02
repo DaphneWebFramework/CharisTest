@@ -2,7 +2,7 @@
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
 
-use \Charis\FormRadio;
+use \Charis\FormComposites\FormRadio;
 
 #[CoversClass(FormRadio::class)]
 class FormRadioTest extends TestCase

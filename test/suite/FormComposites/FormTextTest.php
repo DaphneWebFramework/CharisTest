@@ -2,7 +2,7 @@
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
 
-use \Charis\FormText;
+use \Charis\FormComposites\FormText;
 
 #[CoversClass(FormText::class)]
 class FormTextTest extends TestCase

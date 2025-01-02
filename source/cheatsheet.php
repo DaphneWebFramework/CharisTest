@@ -13,8 +13,13 @@
 require 'bootstrap.php';
 
 use \Charis\{
-  Button, ButtonGroup, ButtonToolbar,
-  FormCheck, FormRadio, FormSwitch, FormText
+  Button,
+  ButtonGroup,
+  ButtonToolbar,
+  FormComposites\FormCheck,
+  FormComposites\FormRadio,
+  FormComposites\FormSwitch,
+  FormComposites\FormText
 };
 ?>
 <!DOCTYPE html>

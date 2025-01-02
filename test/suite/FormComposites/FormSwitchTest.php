@@ -2,7 +2,7 @@
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
 
-use \Charis\FormSwitch;
+use \Charis\FormComposites\FormSwitch;
 
 #[CoversClass(FormSwitch::class)]
 class FormSwitchTest extends TestCase

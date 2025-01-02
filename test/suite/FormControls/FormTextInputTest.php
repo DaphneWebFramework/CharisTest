@@ -2,7 +2,7 @@
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
 
-use \Charis\FormTextInput;
+use \Charis\FormControls\FormTextInput;
 
 #[CoversClass(FormTextInput::class)]
 class FormTextInputTest extends TestCase
