@@ -3,12 +3,12 @@ use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
 use \PHPUnit\Framework\Attributes\DataProvider;
 
-use \Charis\ComponentHelper;
+use \Charis\Helper;
 
 use \TestToolkit\AccessHelper;
 
-#[CoversClass(ComponentHelper::class)]
-class ComponentHelperTest extends TestCase
+#[CoversClass(Helper::class)]
+class HelperTest extends TestCase
 {
     /**
      * Normalizes a class list string by parsing and sorting the classes.
@@ -21,7 +21,7 @@ class ComponentHelperTest extends TestCase
     private function normalizeClassAttribute(string $classList): string
     {
         $classes = AccessHelper::CallNonPublicStaticMethod(
-            ComponentHelper::class,
+            Helper::class,
             'parseClassAttribute',
             [$classList]
         );
@@ -35,7 +35,7 @@ class ComponentHelperTest extends TestCase
     function testMergeAttributes($expected, $defaultAttributes,
         $userAttributes = null, $mutuallyExclusiveClassGroups = [])
     {
-        $result = ComponentHelper::MergeAttributes(
+        $result = Helper::MergeAttributes(
             $defaultAttributes,
             $userAttributes,
             $mutuallyExclusiveClassGroups
@@ -56,7 +56,7 @@ class ComponentHelperTest extends TestCase
     #[DataProvider('combineClassAttributesDataProvider')]
     function testCombineClassAttributes($expected, $classes1, $classes2)
     {
-        $result = ComponentHelper::CombineClassAttributes($classes1, $classes2);
+        $result = Helper::CombineClassAttributes($classes1, $classes2);
         $expected = $this->normalizeClassAttribute($expected);
         $result = $this->normalizeClassAttribute($result);
         $this->assertSame($expected, $result);
@@ -69,14 +69,14 @@ class ComponentHelperTest extends TestCase
     #[DataProvider('consumePseudoAttributeDataProvider')]
     function testConsumePseudoAttribute($expected, $attributes, $key, $default = null)
     {
-        $result = ComponentHelper::ConsumePseudoAttribute($attributes, $key, $default);
+        $result = Helper::ConsumePseudoAttribute($attributes, $key, $default);
         $this->assertSame($expected, $result);
     }
 
     function testConsumePseudoAttributeRemovesAttribute(): void
     {
         $attributes = [':pseudo' => 'value', 'other' => 'value2'];
-        ComponentHelper::ConsumePseudoAttribute($attributes, ':pseudo');
+        Helper::ConsumePseudoAttribute($attributes, ':pseudo');
         $this->assertSame(['other' => 'value2'], $attributes);
     }
 
@@ -88,7 +88,7 @@ class ComponentHelperTest extends TestCase
     function testParseClassAttribute($expected, $classList)
     {
         $result = AccessHelper::CallNonPublicStaticMethod(
-            ComponentHelper::class,
+            Helper::class,
             'parseClassAttribute',
             [$classList]
         );
@@ -104,7 +104,7 @@ class ComponentHelperTest extends TestCase
         $mutuallyExclusiveClassGroups = [])
     {
         $result = AccessHelper::CallNonPublicStaticMethod(
-            ComponentHelper::class,
+            Helper::class,
             'resolveClassAttributes',
             [$defaultClasses, $userClasses, $mutuallyExclusiveClassGroups]
         );
