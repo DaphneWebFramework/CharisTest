@@ -19,7 +19,8 @@ use \Charis\{
   FormComposites\FormCheck,
   FormComposites\FormRadio,
   FormComposites\FormSwitch,
-  FormComposites\FormText
+  FormComposites\FormText,
+  FormComposites\FormFLText,
 };
 ?>
 <!DOCTYPE html>
@@ -392,8 +393,15 @@ use \Charis\{
           ':label-text'=>'Username',
           ':help-text' => 'Your username must be 3–15 characters long.',
           ':placeholder' => 'e.g., JohnDoe'
-        ])?>
+        ]).PHP_EOL?>
+      </div><!--.cs-group-->
 
+      <h3>Form Text (Floating Label)</h3>
+      <div class="cs-group">
+        <?=new FormFLText([
+          ':label-text'=>'Username',
+          ':help-text' => 'Your username must be 3–15 characters long.'
+        ]).PHP_EOL?>
       </div><!--.cs-group-->
 
     </div><!--.container-->

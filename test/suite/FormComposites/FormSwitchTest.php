@@ -35,6 +35,17 @@ class FormSwitchTest extends TestCase
         );
     }
 
+    function testRenderWithName()
+    {
+        $formSwitch = new FormSwitch([':name' => 'Switch1']);
+        $this->assertSame(
+            '<div class="form-check form-switch">'
+          .   '<input class="form-check-input" type="checkbox" role="switch" name="Switch1"/>'
+          . '</div>',
+            $formSwitch->Render()
+        );
+    }
+
     function testRenderWithLabelText()
     {
         $formSwitch = new FormSwitch([':label-text' => 'Label Text']);
@@ -190,6 +201,7 @@ class FormSwitchTest extends TestCase
     {
         $formSwitch = new FormSwitch([
             ':id' => 'custom-id',
+            ':name' => 'Switch1',
             ':label-text' => 'Label Text',
             ':help-text' => 'This is a help text.',
             ':checked' => true,
@@ -197,7 +209,7 @@ class FormSwitchTest extends TestCase
         ]);
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
-          .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" aria-describedby="form-help-text-UID" checked disabled/>'
+          .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" name="Switch1" aria-describedby="form-help-text-UID" checked disabled/>'
           .   '<label for="custom-id" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>',

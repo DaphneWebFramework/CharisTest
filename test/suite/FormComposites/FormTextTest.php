@@ -35,6 +35,17 @@ class FormTextTest extends TestCase
         );
     }
 
+    function testRenderWithName()
+    {
+        $component = new FormText([':name' => 'Text1']);
+        $this->assertSame(
+            '<div class="mb-3">'
+          .   '<input class="form-control" type="text" name="Text1"/>'
+          . '</div>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithLabelText()
     {
         $formText = new FormText([':label-text' => 'Label Text']);
@@ -130,6 +141,7 @@ class FormTextTest extends TestCase
     {
         $formText = new FormText([
             ':id' => 'custom-id',
+            ':name' => 'Text1',
             ':label-text' => 'Label Text',
             ':help-text' => 'This is a help text.',
             ':placeholder' => 'Placeholder text',
@@ -138,7 +150,7 @@ class FormTextTest extends TestCase
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
-          .   '<input class="form-control" type="text" id="custom-id" aria-describedby="form-help-text-UID" placeholder="Placeholder text" disabled/>'
+          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-text-UID" placeholder="Placeholder text" disabled/>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $formText->Render()
