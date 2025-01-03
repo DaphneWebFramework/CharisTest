@@ -10,25 +10,27 @@ class ButtonGroupTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $buttonGroup = new ButtonGroup();
+        $component = new ButtonGroup();
         $this->assertSame(
-            '<div class="btn-group" role="group" aria-label=""></div>',
-            $buttonGroup->Render()
+            '<div class="btn-group" role="group" aria-label="">'
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderVertical()
     {
-        $buttonGroup = new ButtonGroup(['class' => 'btn-group-vertical']);
+        $component = new ButtonGroup(['class' => 'btn-group-vertical']);
         $this->assertSame(
-            '<div class="btn-group-vertical" role="group" aria-label=""></div>',
-            $buttonGroup->Render()
+            '<div class="btn-group-vertical" role="group" aria-label="">'
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithButtons()
     {
-        $buttonGroup = new ButtonGroup(['aria-label'=>'Basic button group'], [
+        $component = new ButtonGroup(['aria-label'=>'Basic button group'], [
             new Button(null, 'Left'),
             new Button(null, 'Middle'),
             new Button(null, 'Right')
@@ -38,8 +40,8 @@ class ButtonGroupTest extends TestCase
           .   '<button type="button" class="btn btn-primary">Left</button>'
           .   '<button type="button" class="btn btn-primary">Middle</button>'
           .   '<button type="button" class="btn btn-primary">Right</button>'
-          . '</div>',
-            $buttonGroup->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 }

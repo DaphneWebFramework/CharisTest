@@ -9,10 +9,10 @@ class FormCheckInputTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $formCheckInput = new FormCheckInput();
+        $component = new FormCheckInput();
         $this->assertSame(
             '<input class="form-check-input" type="checkbox"/>',
-            $formCheckInput->Render()
+            $component->Render()
         );
     }
 }

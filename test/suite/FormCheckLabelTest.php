@@ -9,10 +9,11 @@ class FormCheckLabelTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $formCheckLabel = new FormCheckLabel();
+        $component = new FormCheckLabel();
         $this->assertSame(
-            '<label for="" class="form-check-label"></label>',
-            $formCheckLabel->Render()
+            '<label for="" class="form-check-label">'
+          . '</label>'
+          , $component->Render()
         );
     }
 }

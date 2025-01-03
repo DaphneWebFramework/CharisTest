@@ -11,16 +11,17 @@ class ButtonToolbarTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $buttonToolbar = new ButtonToolbar();
+        $component = new ButtonToolbar();
         $this->assertSame(
-            '<div class="btn-toolbar" role="toolbar" aria-label=""></div>',
-            $buttonToolbar->Render()
+            '<div class="btn-toolbar" role="toolbar" aria-label="">'
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithButtonGroups()
     {
-        $buttonToolbar = new ButtonToolbar(['aria-label'=>'Button toolbar'], [
+        $component = new ButtonToolbar(['aria-label'=>'Button toolbar'], [
             new ButtonGroup(['class'=>'me-2', 'aria-label'=>'First group'], [
                 new Button(null, '1'),
                 new Button(null, '2'),
@@ -52,8 +53,8 @@ class ButtonToolbarTest extends TestCase
           .   '<div class="btn-group" role="group" aria-label="Third group">'
           .     '<button type="button" class="btn btn-info">8</button>'
           .   '</div>'
-          . '</div>',
-            $buttonToolbar->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 }

@@ -9,10 +9,11 @@ class LabelTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $label = new Label();
+        $component = new Label();
         $this->assertSame(
-            '<label for=""></label>',
-            $label->Render()
+            '<label for="">'
+          . '</label>'
+          , $component->Render()
         );
     }
 }

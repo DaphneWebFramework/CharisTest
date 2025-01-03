@@ -9,10 +9,10 @@ class FormSwitchInputTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $formSwitchInput = new FormSwitchInput();
+        $component = new FormSwitchInput();
         $this->assertSame(
             '<input class="form-check-input" type="checkbox" role="switch"/>',
-            $formSwitchInput->Render()
+            $component->Render()
         );
     }
 }

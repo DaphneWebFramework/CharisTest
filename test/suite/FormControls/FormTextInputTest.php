@@ -9,10 +9,10 @@ class FormTextInputTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $formTextInput = new FormTextInput();
+        $component = new FormTextInput();
         $this->assertSame(
             '<input class="form-control" type="text"/>',
-            $formTextInput->Render()
+            $component->Render()
         );
     }
 }

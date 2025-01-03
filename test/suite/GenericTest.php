@@ -25,32 +25,32 @@ class GenericTest extends TestCase
 
     function testRenderWithNoAttributesOrContent()
     {
-        $generic = new Generic('div');
-        $this->assertSame('<div></div>', $generic->Render());
+        $component = new Generic('div');
+        $this->assertSame('<div></div>', $component->Render());
     }
 
     function testRenderWithEmptyAttributesButContent()
     {
-        $generic = new Generic('p', null, 'Hello, world!');
-        $this->assertSame('<p>Hello, world!</p>', $generic->Render());
+        $component = new Generic('p', null, 'Hello, world!');
+        $this->assertSame('<p>Hello, world!</p>', $component->Render());
     }
 
     function testRenderWithValidAttributesAndContent()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'div',
             ['id' => 'test', 'class' => 'example'],
             'Hello World'
         );
         $this->assertSame(
             '<div id="test" class="example">Hello World</div>',
-            $generic->Render()
+            $component->Render()
         );
     }
 
     function testRenderWithBooleanAttributes()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'input',
             ['type' => 'checkbox', 'checked' => true, 'disabled' => false],
             null,
@@ -58,13 +58,13 @@ class GenericTest extends TestCase
         );
         $this->assertSame(
             '<input type="checkbox" checked/>',
-            $generic->Render()
+            $component->Render()
         );
     }
 
     function testRenderWithAttributesContainingSpecialCharacters()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'input',
             ['data-value' => 'John "Doe" & Co.'],
             null,
@@ -72,13 +72,13 @@ class GenericTest extends TestCase
         );
         $this->assertSame(
             '<input data-value="John &quot;Doe&quot; &amp; Co."/>',
-            $generic->Render()
+            $component->Render()
         );
     }
 
     function testRenderWithAttributesHavingSpecialValues()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'input',
             ['data-count' => 0, 'data-ratio' => 1.425, 'data-blank' => ''],
             null,
@@ -86,19 +86,19 @@ class GenericTest extends TestCase
         );
         $this->assertSame(
             '<input data-count="0" data-ratio="1.425" data-blank=""/>',
-            $generic->Render()
+            $component->Render()
         );
     }
 
     function testRenderWithAttributesHavingUnicodeValues()
     {
-        $generic = new Generic('div', ['data-emoji' => '😊', 'lang' => '中文']);
-        $this->assertSame('<div data-emoji="😊" lang="中文"></div>', $generic->Render());
+        $component = new Generic('div', ['data-emoji' => '😊', 'lang' => '中文']);
+        $this->assertSame('<div data-emoji="😊" lang="中文"></div>', $component->Render());
     }
 
     function testRenderWithSelfClosingElement()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'img',
             ['src' => 'image.jpg', 'alt' => 'A description'],
             null,
@@ -106,65 +106,65 @@ class GenericTest extends TestCase
         );
         $this->assertSame(
             '<img src="image.jpg" alt="A description"/>',
-            $generic->Render()
+            $component->Render()
         );
     }
 
     function testRenderWithEmptySelfClosingElement()
     {
-        $generic = new Generic('br', null, null, true);
-        $this->assertSame('<br/>', $generic->Render());
+        $component = new Generic('br', null, null, true);
+        $this->assertSame('<br/>', $component->Render());
     }
 
     function testRenderWithSelfClosingElementsInsideContent()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'div',
             null,
             [new Generic('br', null, null, true), 'Text after self-closing']
         );
         $this->assertSame(
             '<div><br/>Text after self-closing</div>',
-            $generic->Render()
+            $component->Render()
         );
     }
 
     function testRenderWithContentContainingOnlyWhitespace()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'div',
             null,
             ['   ', new Generic('span', null, 'Text')]
         );
         $this->assertSame(
             '<div>   <span>Text</span></div>',
-            $generic->Render()
+            $component->Render()
         );
     }
 
     #[DataProvider('emptyContentProvider')]
     function testRenderWithEmptyContent($emptyContent)
     {
-        $generic = new Generic('div', null, $emptyContent);
-        $this->assertSame('<div></div>', $generic->Render());
+        $component = new Generic('div', null, $emptyContent);
+        $this->assertSame('<div></div>', $component->Render());
     }
 
     function testRenderWithContentArray()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'div',
             null,
             ['Part 1', new Generic('span', null, 'Part 2')]
         );
         $this->assertSame(
             '<div>Part 1<span>Part 2</span></div>',
-            $generic->Render()
+            $component->Render()
         );
     }
 
     function testRenderWithNestedComponents()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'div',
             null,
             [
@@ -177,17 +177,17 @@ class GenericTest extends TestCase
         );
         $this->assertSame(
             '<div>Outer Content<span>Inner Content<b>Bold Text</b></span></div>',
-            $generic->Render()
+            $component->Render()
         );
     }
 
     #[DataProvider('invalidTagNameProvider')]
     function testRenderThrowsForInvalidTagName($tagName)
     {
-        $generic = new Generic($tagName);
+        $component = new Generic($tagName);
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid tag name.');
-        $generic->Render();
+        $component->Render();
     }
 
     #[DataProvider('nonStringAttributeNameProvider')]
@@ -196,7 +196,7 @@ class GenericTest extends TestCase
         // Suppress warnings caused by non-string keys (e.g., float key being
         // converted to integers). This ensures the test results are not
         // polluted with PHP warnings.
-        $generic = @new Generic('div', [$attributeName => 'value']);
+        $component = @new Generic('div', [$attributeName => 'value']);
         $this->expectException(\InvalidArgumentException::class);
         if ($attributeName === null) {
             // PHP automatically converts null array keys to empty strings,
@@ -206,31 +206,31 @@ class GenericTest extends TestCase
         } else {
             $this->expectExceptionMessage('Attribute name must be a string.');
         }
-        $generic->Render();
+        $component->Render();
     }
 
     #[DataProvider('invalidAttributeNameProvider')]
     function testRenderThrowsForInvalidAttributeName($attributeName)
     {
-        $generic = new Generic('div', [$attributeName => 'value']);
+        $component = new Generic('div', [$attributeName => 'value']);
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid attribute name.');
-        $generic->Render();
+        $component->Render();
     }
 
     #[DataProvider('nonScalarAttributeValueProvider')]
     function testRenderThrowsForNonScalarAttributeValue($attributeValue)
     {
-        $generic = new Generic('div', ['name' => $attributeValue]);
+        $component = new Generic('div', ['name' => $attributeValue]);
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Attribute value must be scalar.');
-        $generic->Render();
+        $component->Render();
     }
 
     #[DataProviderExternal(DataHelper::class, 'NonStringProvider')]
     function testRenderThrowsForInvalidContentInArray($invalidContent)
     {
-        $generic = new Generic(
+        $component = new Generic(
             'div',
             null,
             ['Some Content', new Generic('span'), $invalidContent]
@@ -238,12 +238,12 @@ class GenericTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
             'Content array must only contain strings or Component instances.');
-        $generic->Render();
+        $component->Render();
     }
 
     function testRenderThrowsForSelfClosingComponentWithContent()
     {
-        $generic = new Generic(
+        $component = new Generic(
             'img',
             ['src' => 'image.jpg'],
             'Some Content',
@@ -252,7 +252,7 @@ class GenericTest extends TestCase
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage(
             'Self-closing components cannot have content.');
-        $generic->Render();
+        $component->Render();
     }
 
     #region Data Providers -----------------------------------------------------

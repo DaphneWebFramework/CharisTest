@@ -15,76 +15,76 @@ class FormRadioTest extends TestCase
 
     function testDefaultRendering()
     {
-        $formRadio = new FormRadio();
+        $component = new FormRadio();
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name=""/>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithId()
     {
-        $formRadio = new FormRadio([':id'=>'custom-id']);
+        $component = new FormRadio([':id'=>'custom-id']);
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="" id="custom-id"/>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithName()
     {
-        $formRadio = new FormRadio([':name'=>'Radio1']);
+        $component = new FormRadio([':name'=>'Radio1']);
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="Radio1"/>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithLabelText()
     {
-        $formRadio = new FormRadio([':label-text'=>'Label Text']);
+        $component = new FormRadio([':label-text'=>'Label Text']);
         $this->assertMatchesWithUID(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="" id="form-input-UID"/>'
           .   '<label for="form-input-UID" class="form-check-label">Label Text</label>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithIdAndLabelText()
     {
-        $formRadio = new FormRadio([':id'=>'custom-id', ':label-text'=>'Label Text']);
+        $component = new FormRadio([':id'=>'custom-id', ':label-text'=>'Label Text']);
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="" id="custom-id"/>'
           .   '<label for="custom-id" class="form-check-label">Label Text</label>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithHelpText()
     {
-        $formRadio = new FormRadio([':help-text'=>'This is a help text.']);
+        $component = new FormRadio([':help-text'=>'This is a help text.']);
         $this->assertMatchesWithUID(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="" aria-describedby="form-help-text-UID"/>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithLabelTextAndHelpText()
     {
-        $formRadio = new FormRadio([
+        $component = new FormRadio([
             ':label-text'=>'Label Text',
             ':help-text'=>'This is a help text.',
         ]);
@@ -93,14 +93,14 @@ class FormRadioTest extends TestCase
           .   '<input class="form-check-input" type="radio" name="" id="form-input-UID" aria-describedby="form-help-text-UID"/>'
           .   '<label for="form-input-UID" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithIdAndLabelTextAndHelpText()
     {
-        $formRadio = new FormRadio([
+        $component = new FormRadio([
             ':id'=>'custom-id',
             ':label-text'=>'Label Text',
             ':help-text'=>'This is a help text.',
@@ -110,96 +110,96 @@ class FormRadioTest extends TestCase
           .   '<input class="form-check-input" type="radio" name="" id="custom-id" aria-describedby="form-help-text-UID"/>'
           .   '<label for="custom-id" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithChecked()
     {
-        $formRadio = new FormRadio([
+        $component = new FormRadio([
             ':checked'=>true
         ]);
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="" checked/>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithCheckedAndNotDisabled()
     {
-        $formRadio = new FormRadio([
+        $component = new FormRadio([
             ':checked'=>true,
             ':disabled'=>false,
         ]);
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="" checked/>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithDisabled()
     {
-        $formRadio = new FormRadio([
+        $component = new FormRadio([
             ':disabled'=>true
         ]);
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="" disabled/>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithNotCheckedAndDisabled()
     {
-        $formRadio = new FormRadio([
+        $component = new FormRadio([
             ':checked'=>false,
             ':disabled'=>true,
         ]);
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="" disabled/>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithCheckedAndDisabled()
     {
-        $formRadio = new FormRadio([
+        $component = new FormRadio([
             ':checked'=>true,
             ':disabled'=>true,
         ]);
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name="" checked disabled/>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithNotCheckedAndNotDisabled()
     {
-        $formRadio = new FormRadio([
+        $component = new FormRadio([
             ':checked'=>false,
             ':disabled'=>false,
         ]);
         $this->assertSame(
             '<div class="form-check">'
           .   '<input class="form-check-input" type="radio" name=""/>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithAllPseudoAttributes()
     {
-        $formRadio = new FormRadio([
+        $component = new FormRadio([
             ':id'=>'custom-id',
             ':name'=>'Radio1',
             ':label-text'=>'Label Text',
@@ -212,8 +212,8 @@ class FormRadioTest extends TestCase
           .   '<input class="form-check-input" type="radio" name="Radio1" id="custom-id" aria-describedby="form-help-text-UID" checked disabled/>'
           .   '<label for="custom-id" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>',
-            $formRadio->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 }

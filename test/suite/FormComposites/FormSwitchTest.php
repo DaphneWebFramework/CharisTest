@@ -15,76 +15,76 @@ class FormSwitchTest extends TestCase
 
     function testDefaultRendering()
     {
-        $formSwitch = new FormSwitch();
+        $component = new FormSwitch();
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch"/>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithId()
     {
-        $formSwitch = new FormSwitch([':id' => 'custom-id']);
+        $component = new FormSwitch([':id' => 'custom-id']);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id"/>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithName()
     {
-        $formSwitch = new FormSwitch([':name' => 'Switch1']);
+        $component = new FormSwitch([':name' => 'Switch1']);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" name="Switch1"/>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithLabelText()
     {
-        $formSwitch = new FormSwitch([':label-text' => 'Label Text']);
+        $component = new FormSwitch([':label-text' => 'Label Text']);
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="form-input-UID"/>'
           .   '<label for="form-input-UID" class="form-check-label">Label Text</label>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithIdAndLabelText()
     {
-        $formSwitch = new FormSwitch([':id' => 'custom-id', ':label-text' => 'Label Text']);
+        $component = new FormSwitch([':id' => 'custom-id', ':label-text' => 'Label Text']);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id"/>'
           .   '<label for="custom-id" class="form-check-label">Label Text</label>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithHelpText()
     {
-        $formSwitch = new FormSwitch([':help-text' => 'This is a help text.']);
+        $component = new FormSwitch([':help-text' => 'This is a help text.']);
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" aria-describedby="form-help-text-UID"/>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithLabelTextAndHelpText()
     {
-        $formSwitch = new FormSwitch([
+        $component = new FormSwitch([
             ':label-text' => 'Label Text',
             ':help-text' => 'This is a help text.',
         ]);
@@ -93,14 +93,14 @@ class FormSwitchTest extends TestCase
           .   '<input class="form-check-input" type="checkbox" role="switch" id="form-input-UID" aria-describedby="form-help-text-UID"/>'
           .   '<label for="form-input-UID" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithIdAndLabelTextAndHelpText()
     {
-        $formSwitch = new FormSwitch([
+        $component = new FormSwitch([
             ':id' => 'custom-id',
             ':label-text' => 'Label Text',
             ':help-text' => 'This is a help text.',
@@ -110,96 +110,96 @@ class FormSwitchTest extends TestCase
           .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" aria-describedby="form-help-text-UID"/>'
           .   '<label for="custom-id" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithChecked()
     {
-        $formSwitch = new FormSwitch([
+        $component = new FormSwitch([
             ':checked' => true
         ]);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" checked/>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithCheckedAndNotDisabled()
     {
-        $formSwitch = new FormSwitch([
+        $component = new FormSwitch([
             ':checked' => true,
             ':disabled' => false,
         ]);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" checked/>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithDisabled()
     {
-        $formSwitch = new FormSwitch([
+        $component = new FormSwitch([
             ':disabled' => true
         ]);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" disabled/>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithNotCheckedAndDisabled()
     {
-        $formSwitch = new FormSwitch([
+        $component = new FormSwitch([
             ':checked' => false,
             ':disabled' => true,
         ]);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" disabled/>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithCheckedAndDisabled()
     {
-        $formSwitch = new FormSwitch([
+        $component = new FormSwitch([
             ':checked' => true,
             ':disabled' => true,
         ]);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" checked disabled/>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithNotCheckedAndNotDisabled()
     {
-        $formSwitch = new FormSwitch([
+        $component = new FormSwitch([
             ':checked' => false,
             ':disabled' => false,
         ]);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch"/>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 
     function testRenderWithAllPseudoAttributes()
     {
-        $formSwitch = new FormSwitch([
+        $component = new FormSwitch([
             ':id' => 'custom-id',
             ':name' => 'Switch1',
             ':label-text' => 'Label Text',
@@ -212,8 +212,8 @@ class FormSwitchTest extends TestCase
           .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" name="Switch1" aria-describedby="form-help-text-UID" checked disabled/>'
           .   '<label for="custom-id" class="form-check-label">Label Text</label>'
           .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
-          . '</div>',
-            $formSwitch->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 }

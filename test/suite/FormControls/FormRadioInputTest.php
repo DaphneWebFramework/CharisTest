@@ -9,10 +9,10 @@ class FormRadioInputTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $formRadioInput = new FormRadioInput();
+        $component = new FormRadioInput();
         $this->assertSame(
             '<input class="form-check-input" type="radio" name=""/>',
-            $formRadioInput->Render()
+            $component->Render()
         );
     }
 }
