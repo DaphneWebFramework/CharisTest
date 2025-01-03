@@ -46,9 +46,9 @@ class FormSwitchTest extends TestCase
         );
     }
 
-    function testRenderWithLabelText()
+    function testRenderWithLabel()
     {
-        $component = new FormSwitch([':label-text' => 'Label Text']);
+        $component = new FormSwitch([':label' => 'Label Text']);
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="form-input-UID"/>'
@@ -58,9 +58,12 @@ class FormSwitchTest extends TestCase
         );
     }
 
-    function testRenderWithIdAndLabelText()
+    function testRenderWithIdAndLabel()
     {
-        $component = new FormSwitch([':id' => 'custom-id', ':label-text' => 'Label Text']);
+        $component = new FormSwitch([
+            ':id' => 'custom-id',
+            ':label' => 'Label Text'
+        ]);
         $this->assertSame(
             '<div class="form-check form-switch">'
           .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id"/>'
@@ -70,46 +73,46 @@ class FormSwitchTest extends TestCase
         );
     }
 
-    function testRenderWithHelpText()
+    function testRenderWithHelp()
     {
-        $component = new FormSwitch([':help-text' => 'This is a help text.']);
+        $component = new FormSwitch([':help' => 'This is a help text.']);
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
-          .   '<input class="form-check-input" type="checkbox" role="switch" aria-describedby="form-help-text-UID"/>'
-          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<input class="form-check-input" type="checkbox" role="switch" aria-describedby="form-help-UID"/>'
+          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()
         );
     }
 
-    function testRenderWithLabelTextAndHelpText()
+    function testRenderWithLabelAndHelp()
     {
         $component = new FormSwitch([
-            ':label-text' => 'Label Text',
-            ':help-text' => 'This is a help text.',
+            ':label' => 'Label Text',
+            ':help' => 'This is a help text.',
         ]);
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
-          .   '<input class="form-check-input" type="checkbox" role="switch" id="form-input-UID" aria-describedby="form-help-text-UID"/>'
+          .   '<input class="form-check-input" type="checkbox" role="switch" id="form-input-UID" aria-describedby="form-help-UID"/>'
           .   '<label for="form-input-UID" class="form-check-label">Label Text</label>'
-          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()
         );
     }
 
-    function testRenderWithIdAndLabelTextAndHelpText()
+    function testRenderWithIdAndLabelAndHelp()
     {
         $component = new FormSwitch([
             ':id' => 'custom-id',
-            ':label-text' => 'Label Text',
-            ':help-text' => 'This is a help text.',
+            ':label' => 'Label Text',
+            ':help' => 'This is a help text.',
         ]);
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
-          .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" aria-describedby="form-help-text-UID"/>'
+          .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" aria-describedby="form-help-UID"/>'
           .   '<label for="custom-id" class="form-check-label">Label Text</label>'
-          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()
         );
@@ -202,16 +205,16 @@ class FormSwitchTest extends TestCase
         $component = new FormSwitch([
             ':id' => 'custom-id',
             ':name' => 'Switch1',
-            ':label-text' => 'Label Text',
-            ':help-text' => 'This is a help text.',
+            ':label' => 'Label Text',
+            ':help' => 'This is a help text.',
             ':checked' => true,
             ':disabled' => true,
         ]);
         $this->assertMatchesWithUID(
             '<div class="form-check form-switch">'
-          .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" name="Switch1" aria-describedby="form-help-text-UID" checked disabled/>'
+          .   '<input class="form-check-input" type="checkbox" role="switch" id="custom-id" name="Switch1" aria-describedby="form-help-UID" checked disabled/>'
           .   '<label for="custom-id" class="form-check-label">Label Text</label>'
-          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()
         );

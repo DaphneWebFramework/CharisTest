@@ -46,9 +46,9 @@ class FormTextTest extends TestCase
         );
     }
 
-    function testRenderWithLabelText()
+    function testRenderWithLabel()
     {
-        $component = new FormText([':label-text' => 'Label Text']);
+        $component = new FormText([':label' => 'Label Text']);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="form-input-UID" class="form-label">Label Text</label>'
@@ -58,9 +58,12 @@ class FormTextTest extends TestCase
         );
     }
 
-    function testRenderWithIdAndLabelText()
+    function testRenderWithIdAndLabel()
     {
-        $component = new FormText([':id' => 'custom-id', ':label-text' => 'Label Text']);
+        $component = new FormText([
+          ':id' => 'custom-id',
+          ':label' => 'Label Text'
+        ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
@@ -70,46 +73,46 @@ class FormTextTest extends TestCase
         );
     }
 
-    function testRenderWithHelpText()
+    function testRenderWithHelp()
     {
-        $component = new FormText([':help-text' => 'This is a help text.']);
+        $component = new FormText([':help' => 'This is a help text.']);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
-          .   '<input class="form-control" type="text" aria-describedby="form-help-text-UID"/>'
-          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<input class="form-control" type="text" aria-describedby="form-help-UID"/>'
+          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()
         );
     }
 
-    function testRenderWithLabelTextAndHelpText()
+    function testRenderWithLabelAndHelp()
     {
         $component = new FormText([
-            ':label-text' => 'Label Text',
-            ':help-text' => 'This is a help text.',
+            ':label' => 'Label Text',
+            ':help' => 'This is a help text.',
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="form-input-UID" class="form-label">Label Text</label>'
-          .   '<input class="form-control" type="text" id="form-input-UID" aria-describedby="form-help-text-UID"/>'
-          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<input class="form-control" type="text" id="form-input-UID" aria-describedby="form-help-UID"/>'
+          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()
         );
     }
 
-    function testRenderWithIdAndLabelTextAndHelpText()
+    function testRenderWithIdAndLabelAndHelp()
     {
         $component = new FormText([
             ':id' => 'custom-id',
-            ':label-text' => 'Label Text',
-            ':help-text' => 'This is a help text.',
+            ':label' => 'Label Text',
+            ':help' => 'This is a help text.',
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
-          .   '<input class="form-control" type="text" id="custom-id" aria-describedby="form-help-text-UID"/>'
-          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<input class="form-control" type="text" id="custom-id" aria-describedby="form-help-UID"/>'
+          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()
         );
@@ -142,16 +145,16 @@ class FormTextTest extends TestCase
         $component = new FormText([
             ':id' => 'custom-id',
             ':name' => 'Text1',
-            ':label-text' => 'Label Text',
-            ':help-text' => 'This is a help text.',
+            ':label' => 'Label Text',
+            ':help' => 'This is a help text.',
             ':placeholder' => 'Placeholder text',
             ':disabled' => true,
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
-          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-text-UID" placeholder="Placeholder text" disabled/>'
-          .   '<div id="form-help-text-UID" class="form-text">This is a help text.</div>'
+          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-UID" placeholder="Placeholder text" disabled/>'
+          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()
         );

@@ -181,37 +181,37 @@ use \Charis\{
       <h3>Form Check</h3>
       <div class="cs-group">
         <div>
-          <?=new FormCheck([':id'=>'check1', ':label-text'=>'Default checkbox'])?>
+          <?=new FormCheck([':id'=>'check1', ':label'=>'Default checkbox'])?>
 
-          <?=new FormCheck([':label-text'=>'Checked checkbox', ':checked'=>true])?>
+          <?=new FormCheck([':label'=>'Checked checkbox', ':checked'=>true])?>
 
         </div>
       </div><!--.cs-group-->
       <h4>Disabled</h4>
       <div class="cs-group">
         <div>
-          <?=new FormCheck([':label-text'=>'Disabled checkbox', ':disabled'=>true])?>
+          <?=new FormCheck([':label'=>'Disabled checkbox', ':disabled'=>true])?>
 
-          <?=new FormCheck([':label-text'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true])?>
+          <?=new FormCheck([':label'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true])?>
 
         </div>
       </div><!--.cs-group-->
       <h4>Help Text</h4>
       <div class="cs-group">
         <?=new FormCheck([
-          ':label-text' => 'I agree to the terms and conditions',
-          ':help-text' => 'By selecting this, you agree to our terms of service and privacy policy.'
+          ':label' => 'I agree to the terms and conditions',
+          ':help' => 'By selecting this, you agree to our terms of service and privacy policy.'
         ])?>
 
       </div><!--.cs-group-->
       <h4>Inline</h4>
       <div class="cs-group">
         <div>
-          <?=new FormCheck(['class'=>'form-check-inline', ':label-text'=>'1'])?>
+          <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'1'])?>
 
-          <?=new FormCheck(['class'=>'form-check-inline', ':label-text'=>'2'])?>
+          <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'2'])?>
 
-          <?=new FormCheck(['class'=>'form-check-inline', ':label-text'=>'3 (disabled)', ':disabled'=>true])?>
+          <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true])?>
 
         </div>
       </div><!--.cs-group-->
@@ -220,12 +220,12 @@ use \Charis\{
         <div>
           <?=new FormCheck([
             'class'=>'form-check-reverse',
-            ':label-text'=>'Reverse checkbox'
+            ':label'=>'Reverse checkbox'
           ])?>
 
           <?=new FormCheck([
             'class'=>'form-check-reverse',
-            ':label-text'=>'Disabled reverse checkbox',
+            ':label'=>'Disabled reverse checkbox',
             ':disabled'=>true
           ])?>
 
@@ -238,12 +238,12 @@ use \Charis\{
           <?=new FormRadio([
             ':name'=>'RadioGroup1',
             ':id'=>'radio1',
-            ':label-text'=>'Default radio'
+            ':label'=>'Default radio'
           ])?>
 
           <?=new FormRadio([
             ':name'=>'RadioGroup1',
-            ':label-text'=>'Checked radio',
+            ':label'=>'Checked radio',
             ':checked'=>true
           ])?>
 
@@ -254,13 +254,13 @@ use \Charis\{
         <div>
           <?=new FormRadio([
             ':name'=>'RadioGroup2',
-            ':label-text'=>'Disabled radio',
+            ':label'=>'Disabled radio',
             ':disabled'=>true
           ])?>
 
           <?=new FormRadio([
             ':name'=>'RadioGroup2',
-            ':label-text'=>'Disabled checked radio',
+            ':label'=>'Disabled checked radio',
             ':disabled'=>true,
             ':checked'=>true
           ])?>
@@ -271,21 +271,21 @@ use \Charis\{
       <div class="cs-group">
         <div>
           <?=new FormRadio([
-            ':label-text' => 'Credit Card',
+            ':label' => 'Credit Card',
             ':name' => 'payment_method',
-            ':help-text' => 'Pay securely using your credit card.',
+            ':help' => 'Pay securely using your credit card.',
           ])?>
 
           <?=new FormRadio([
-            ':label-text' => 'PayPal',
+            ':label' => 'PayPal',
             ':name' => 'payment_method',
-            ':help-text' => 'Use your PayPal account for a quick and secure payment.',
+            ':help' => 'Use your PayPal account for a quick and secure payment.',
           ])?>
 
           <?=new FormRadio([
-            ':label-text' => 'Bank Transfer',
+            ':label' => 'Bank Transfer',
             ':name' => 'payment_method',
-            ':help-text' => 'Transfer funds directly from your bank account.',
+            ':help' => 'Transfer funds directly from your bank account.',
           ])?>
 
         </div>
@@ -296,19 +296,19 @@ use \Charis\{
           <?=new FormRadio([
             'class'=>'form-check-inline',
             ':name'=>'RadioGroup3',
-            ':label-text'=>'1'
+            ':label'=>'1'
           ])?>
 
           <?=new FormRadio([
             'class'=>'form-check-inline',
             ':name'=>'RadioGroup3',
-            ':label-text'=>'2'
+            ':label'=>'2'
           ])?>
 
           <?=new FormRadio([
             'class'=>'form-check-inline',
             ':name'=>'RadioGroup3',
-            ':label-text'=>'3 (disabled)',
+            ':label'=>'3 (disabled)',
             ':disabled'=>true
           ])?>
 
@@ -320,13 +320,13 @@ use \Charis\{
           <?=new FormRadio([
             'class'=>'form-check-reverse',
             ':name'=>'RadioGroup4',
-            ':label-text'=>'Reverse radio'
+            ':label'=>'Reverse radio'
           ])?>
 
           <?=new FormRadio([
             'class'=>'form-check-reverse',
             ':name'=>'RadioGroup4',
-            ':label-text'=>'Disabled reverse radio',
+            ':label'=>'Disabled reverse radio',
             ':disabled'=>true
           ])?>
 
@@ -336,37 +336,37 @@ use \Charis\{
       <h3>Form Switch</h3>
       <div class="cs-group">
         <div>
-          <?=new FormSwitch([':id'=>'switch1', ':label-text'=>'Default switch'])?>
+          <?=new FormSwitch([':id'=>'switch1', ':label'=>'Default switch'])?>
 
-          <?=new FormSwitch([':label-text'=>'Checked switch', ':checked'=>true])?>
+          <?=new FormSwitch([':label'=>'Checked switch', ':checked'=>true])?>
 
         </div>
       </div><!--.cs-group-->
       <h4>Disabled</h4>
       <div class="cs-group">
         <div>
-          <?=new FormSwitch([':label-text'=>'Disabled switch', ':disabled'=>true])?>
+          <?=new FormSwitch([':label'=>'Disabled switch', ':disabled'=>true])?>
 
-          <?=new FormSwitch([':label-text'=>'Disabled checked switch', ':disabled'=>true, ':checked'=>true])?>
+          <?=new FormSwitch([':label'=>'Disabled checked switch', ':disabled'=>true, ':checked'=>true])?>
 
         </div>
       </div><!--.cs-group-->
       <h4>Help Text</h4>
       <div class="cs-group">
         <?=new FormSwitch([
-          ':label-text' => 'I agree to the terms and conditions',
-          ':help-text' => 'By selecting this, you agree to our terms of service and privacy policy.'
+          ':label' => 'I agree to the terms and conditions',
+          ':help' => 'By selecting this, you agree to our terms of service and privacy policy.'
         ])?>
 
       </div><!--.cs-group-->
       <h4>Inline</h4>
       <div class="cs-group">
         <div>
-          <?=new FormSwitch(['class'=>'form-check-inline', ':label-text'=>'1'])?>
+          <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'1'])?>
 
-          <?=new FormSwitch(['class'=>'form-check-inline', ':label-text'=>'2'])?>
+          <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'2'])?>
 
-          <?=new FormSwitch(['class'=>'form-check-inline', ':label-text'=>'3 (disabled)', ':disabled'=>true])?>
+          <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true])?>
 
         </div>
       </div><!--.cs-group-->
@@ -375,12 +375,12 @@ use \Charis\{
         <div>
           <?=new FormSwitch([
             'class'=>'form-check-reverse',
-            ':label-text'=>'Reverse switch'
+            ':label'=>'Reverse switch'
           ])?>
 
           <?=new FormSwitch([
             'class'=>'form-check-reverse',
-            ':label-text'=>'Disabled reverse switch',
+            ':label'=>'Disabled reverse switch',
             ':disabled'=>true
           ])?>
 
@@ -390,8 +390,8 @@ use \Charis\{
       <h3>Form Text</h3>
       <div class="cs-group">
         <?=new FormText([
-          ':label-text'=>'Username',
-          ':help-text' => 'Your username must be 3–15 characters long.',
+          ':label'=>'Username',
+          ':help' => 'Your username must be 3–15 characters long.',
           ':placeholder' => 'e.g., JohnDoe'
         ]).PHP_EOL?>
       </div><!--.cs-group-->
@@ -399,8 +399,8 @@ use \Charis\{
       <h3>Form Text (Floating Label)</h3>
       <div class="cs-group">
         <?=new FormFLText([
-          ':label-text'=>'Username',
-          ':help-text' => 'Your username must be 3–15 characters long.'
+          ':label'=>'Username',
+          ':help' => 'Your username must be 3–15 characters long.'
         ]).PHP_EOL?>
       </div><!--.cs-group-->
 
