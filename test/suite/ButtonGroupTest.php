@@ -12,7 +12,7 @@ class ButtonGroupTest extends TestCase
     {
         $component = new ButtonGroup();
         $this->assertSame(
-            '<div class="btn-group" role="group" aria-label="">'
+            '<div class="btn-group" role="group">'
           . '</div>'
           , $component->Render()
         );
@@ -22,7 +22,7 @@ class ButtonGroupTest extends TestCase
     {
         $component = new ButtonGroup(['class' => 'btn-group-vertical']);
         $this->assertSame(
-            '<div class="btn-group-vertical" role="group" aria-label="">'
+            '<div class="btn-group-vertical" role="group">'
           . '</div>'
           , $component->Render()
         );
@@ -30,13 +30,13 @@ class ButtonGroupTest extends TestCase
 
     function testRenderWithButtons()
     {
-        $component = new ButtonGroup(['aria-label'=>'Basic button group'], [
+        $component = new ButtonGroup([], [
             new Button(null, 'Left'),
             new Button(null, 'Middle'),
             new Button(null, 'Right')
         ]);
         $this->assertSame(
-            '<div class="btn-group" role="group" aria-label="Basic button group">'
+            '<div class="btn-group" role="group">'
           .   '<button type="button" class="btn btn-primary">Left</button>'
           .   '<button type="button" class="btn btn-primary">Middle</button>'
           .   '<button type="button" class="btn btn-primary">Right</button>'
