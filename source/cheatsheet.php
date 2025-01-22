@@ -29,7 +29,7 @@ use \Charis\{
     <meta charset="utf-8">
     <title>Cheatsheet · Charis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="bundles/bootstrap-5.3.3/css/bootstrap.css">
+    <link rel="stylesheet" href="frontend/bootstrap-5.3.3/css/bootstrap.css">
     <link rel="stylesheet" href="cheatsheet.css">
   </head>
   <body>
@@ -405,6 +405,6 @@ use \Charis\{
       </div><!--.cs-group-->
 
     </div><!--.container-->
-    <script src="bundles/bootstrap-5.3.3/js/bootstrap.bundle.js"></script>
+    <script src="frontend/bootstrap-5.3.3/js/bootstrap.bundle.js"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
-[submodule "source/classes/TestToolkit"]
-	path = source/classes/TestToolkit
+[submodule "source/backend/TestToolkit"]
+	path = source/backend/TestToolkit
 	url = https://github.com/DaphneWebFramework/TestToolkit.git
-[submodule "source/classes/Charis"]
-	path = source/classes/Charis
+[submodule "source/backend/Charis"]
+	path = source/backend/Charis
 	url = https://github.com/DaphneWebFramework/Charis.git

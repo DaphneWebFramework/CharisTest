@@ -12,7 +12,7 @@
 
 \spl_autoload_register(function(string $className): void {
     $classFilePath = \rtrim(__DIR__, '/\\')
-                   . '/classes/'
+                   . '/backend/'
                    . \str_replace('\\', '/', $className)
                    . '.php';
     if (!\is_file($classFilePath)) {

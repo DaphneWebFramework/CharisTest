@@ -1,6 +1,6 @@
 # CharisTest
 
-[![test](https://github.com/DaphneWebFramework/CharisTest/actions/workflows/test.yml/badge.svg)](https://github.com/DaphneWebFramework/CharisTest/actions/workflows/test.yml)
+[![Backend Tests](https://github.com/DaphneWebFramework/CharisTest/actions/workflows/test-backend.yml/badge.svg)](https://github.com/DaphneWebFramework/CharisTest/actions/workflows/test-backend.yml)
 
 This repository contains tests for the [Charis](https://github.com/DaphneWebFramework/Charis) library.
 
