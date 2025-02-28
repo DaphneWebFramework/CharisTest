@@ -20,7 +20,7 @@ class HelperTest extends TestCase
      */
     private function normalizeClassAttribute(string $classList): string
     {
-        $classes = AccessHelper::CallNonPublicStaticMethod(
+        $classes = AccessHelper::CallStaticMethod(
             Helper::class,
             'parseClassAttribute',
             [$classList]
@@ -87,7 +87,7 @@ class HelperTest extends TestCase
     #[DataProvider('parseClassAttributeDataProvider')]
     function testParseClassAttribute($expected, $classList)
     {
-        $result = AccessHelper::CallNonPublicStaticMethod(
+        $result = AccessHelper::CallStaticMethod(
             Helper::class,
             'parseClassAttribute',
             [$classList]
@@ -103,7 +103,7 @@ class HelperTest extends TestCase
     function testResolveClassAttributes($expected, $defaultClasses, $userClasses,
         $mutuallyExclusiveClassGroups = [])
     {
-        $result = AccessHelper::CallNonPublicStaticMethod(
+        $result = AccessHelper::CallStaticMethod(
             Helper::class,
             'resolveClassAttributes',
             [$defaultClasses, $userClasses, $mutuallyExclusiveClassGroups]
