@@ -39,13 +39,13 @@ class ButtonToolbarTest extends TestCase
         ]);
         $this->assertSame(
             '<div class="btn-toolbar" role="toolbar">'
-          .   '<div class="me-2 btn-group" role="group">'
+          .   '<div class="btn-group me-2" role="group">'
           .     '<button type="button" class="btn btn-primary">1</button>'
           .     '<button type="button" class="btn btn-primary">2</button>'
           .     '<button type="button" class="btn btn-primary">3</button>'
           .     '<button type="button" class="btn btn-primary">4</button>'
           .   '</div>'
-          .   '<div class="me-2 btn-group" role="group">'
+          .   '<div class="btn-group me-2" role="group">'
           .     '<button type="button" class="btn btn-secondary">5</button>'
           .     '<button type="button" class="btn btn-secondary">6</button>'
           .     '<button type="button" class="btn btn-secondary">7</button>'

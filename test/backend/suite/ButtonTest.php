@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 use \PHPUnit\Framework\TestCase;
-use \PHPUnit\Framework\Attributes\DataProvider;
 use \PHPUnit\Framework\Attributes\CoversClass;
+use \PHPUnit\Framework\Attributes\DataProvider;
 
 use \Charis\Button;
 
@@ -124,12 +124,12 @@ class ButtonTest extends TestCase
     {
         return [
             [
-                '<button type="button" class="btn-sm btn btn-primary">Small button</button>',
+                '<button type="button" class="btn btn-primary btn-sm">Small button</button>',
                 ['class' => 'btn-sm'],
                 'Small button',
             ],
             [
-                '<button type="button" class="btn-lg btn btn-primary">Large button</button>',
+                '<button type="button" class="btn btn-primary btn-lg">Large button</button>',
                 ['class' => 'btn-lg'],
                 'Large button',
             ],
