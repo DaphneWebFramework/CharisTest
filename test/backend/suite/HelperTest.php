@@ -32,12 +32,15 @@ class HelperTest extends TestCase
     #region MergeAttributes ----------------------------------------------------
 
     #[DataProvider('mergeAttributesDataProvider')]
-    function testMergeAttributes($expected, $defaultAttributes,
-        $userAttributes = null, $mutuallyExclusiveClassGroups = [])
-    {
+    function testMergeAttributes(
+        array $expected,
+        ?array $userAttributes,
+        array $defaultAttributes,
+        array $mutuallyExclusiveClassGroups
+    ) {
         $result = Helper::MergeAttributes(
-            $defaultAttributes,
             $userAttributes,
+            $defaultAttributes,
             $mutuallyExclusiveClassGroups
         );
         if (\array_key_exists('class', $expected)) {
@@ -54,8 +57,11 @@ class HelperTest extends TestCase
     #region CombineClassAttributes ---------------------------------------------
 
     #[DataProvider('combineClassAttributesDataProvider')]
-    function testCombineClassAttributes($expected, $classes1, $classes2)
-    {
+    function testCombineClassAttributes(
+        string $expected,
+        string $classes1,
+        string $classes2
+    ) {
         $result = Helper::CombineClassAttributes($classes1, $classes2);
         $expected = $this->normalizeClassAttribute($expected);
         $result = $this->normalizeClassAttribute($result);
@@ -67,9 +73,13 @@ class HelperTest extends TestCase
     #region ConsumePseudoAttribute ---------------------------------------------
 
     #[DataProvider('consumePseudoAttributeDataProvider')]
-    function testConsumePseudoAttribute($expected, $attributes, $key, $default = null)
-    {
-        $result = Helper::ConsumePseudoAttribute($attributes, $key, $default);
+    function testConsumePseudoAttribute(
+        mixed $expected,
+        array $attributes,
+        string $key,
+        mixed $defaultValue
+    ) {
+        $result = Helper::ConsumePseudoAttribute($attributes, $key, $defaultValue);
         $this->assertSame($expected, $result);
     }
 
@@ -85,8 +95,10 @@ class HelperTest extends TestCase
     #region parseClassAttribute ------------------------------------------------
 
     #[DataProvider('parseClassAttributeDataProvider')]
-    function testParseClassAttribute($expected, $classList)
-    {
+    function testParseClassAttribute(
+        array $expected,
+        string $classList
+    ) {
         $result = AccessHelper::CallStaticMethod(
             Helper::class,
             'parseClassAttribute',
@@ -100,9 +112,12 @@ class HelperTest extends TestCase
     #region resolveClassAttributes ---------------------------------------------
 
     #[DataProvider('resolveClassAttributesDataProvider')]
-    function testResolveClassAttributes($expected, $defaultClasses, $userClasses,
-        $mutuallyExclusiveClassGroups = [])
-    {
+    function testResolveClassAttributes(
+        string $expected,
+        string $defaultClasses,
+        string $userClasses,
+        array $mutuallyExclusiveClassGroups
+    ) {
         $result = AccessHelper::CallStaticMethod(
             Helper::class,
             'resolveClassAttributes',
@@ -122,27 +137,32 @@ class HelperTest extends TestCase
         return [
             'no user attributes' => [
                 ['type' => 'button', 'class' => 'btn'],
-                ['type' => 'button', 'class' => 'btn']
+                null,
+                ['type' => 'button', 'class' => 'btn'],
+                []
             ],
             'user overrides' => [
                 ['type' => 'submit', 'class' => 'btn btn-primary'],
+                ['type' => 'submit', 'class' => 'btn-primary'],
                 ['type' => 'button', 'class' => 'btn'],
-                ['type' => 'submit', 'class' => 'btn-primary']
+                []
             ],
             'additional attributes' => [
                 ['type' => 'button', 'class' => 'btn btn-primary', 'id' => 'testButton'],
+                ['id' => 'testButton', 'class' => 'btn-primary'],
                 ['type' => 'button', 'class' => 'btn'],
-                ['id' => 'testButton', 'class' => 'btn-primary']
+                []
             ],
             'no class attribute' => [
                 ['type' => 'button', 'id' => 'testButton'],
+                ['id' => 'testButton'],
                 ['type' => 'button'],
-                ['id' => 'testButton']
+                []
             ],
             'mutual exclusions' => [
                 ['type' => 'button', 'class' => 'btn btn-secondary'],
-                ['type' => 'button', 'class' => 'btn btn-primary'],
                 ['class' => 'btn-secondary'],
+                ['type' => 'button', 'class' => 'btn btn-primary'],
                 ['btn-primary btn-secondary']
             ],
         ];
@@ -180,17 +200,20 @@ class HelperTest extends TestCase
             'valid pseudo attribute' => [
                 'value',
                 [':pseudo' => 'value', 'other' => 'value2'],
-                ':pseudo'
+                ':pseudo',
+                null
             ],
             'pseudo attribute not found' => [
                 null,
                 ['other' => 'value2'],
-                ':nonexistent'
+                ':nonexistent',
+                null
             ],
             'invalid pseudo attribute key' => [
                 null,
                 [':pseudo' => 'value', 'other' => 'value2'],
-                'invalid-key'
+                'invalid-key',
+                null
             ],
             'default value used' => [
                 'default',
@@ -201,7 +224,8 @@ class HelperTest extends TestCase
             'case-sensitive match' => [
                 null,
                 [':Pseudo' => 'value'],
-                ':pseudo'
+                ':pseudo',
+                null
             ],
         ];
     }
@@ -235,33 +259,39 @@ class HelperTest extends TestCase
             'default classes only, no user classes' => [
                 'btn btn-default',
                 'btn btn-default',
-                ''
+                '',
+                []
             ],
             'user classes only, no default classes' => [
                 'btn btn-primary',
                 '',
-                'btn btn-primary'
+                'btn btn-primary',
+                []
             ],
             'user and default classes' => [
                 'class1 class2 class3',
                 'class1',
-                'class2 class3'
+                'class2 class3',
+                []
             ],
         // Duplicate Handling
             'duplicates within default classes' => [
                 'class1 class2',
                 'class1 class2 class1',
-                ''
+                '',
+                []
             ],
             'duplicates within user classes' => [
                 'class1 class2',
                 '',
-                'class1 class2 class1'
+                'class1 class2 class1',
+                []
             ],
             'duplicates between user and default classes' => [
                 'btn btn-primary',
                 'btn btn-primary',
-                'btn btn-primary'
+                'btn btn-primary',
+                []
             ],
         // Conflict Resolution
             'user class overrides default in mutually exclusive group' => [
@@ -344,7 +374,7 @@ class HelperTest extends TestCase
                 'btn-ñ btn-ç',
                 []
             ],
-            'case sentsitive classes' => [
+            'case sensitive classes' => [
                 'btn btn-default btn-primary',
                 'btn btn-default',
                 'btn-primary',
