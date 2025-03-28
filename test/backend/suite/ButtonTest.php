@@ -38,6 +38,11 @@ class ButtonTest extends TestCase
     {
         return [
             [
+                '<button type="button" class="btn btn-primary">Primary</button>',
+                ['class' => 'btn-primary'],
+                'Primary',
+            ],
+            [
                 '<button type="button" class="btn btn-secondary">Secondary</button>',
                 ['class' => 'btn-secondary'],
                 'Secondary',

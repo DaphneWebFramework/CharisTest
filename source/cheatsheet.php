@@ -21,6 +21,9 @@ use \Charis\{
   FormComposites\FormSwitch,
   FormComposites\FormText,
   FormComposites\FormFLText,
+  Navbar,
+  NavbarBrand,
+  Container,
 };
 ?>
 <!DOCTYPE html>
@@ -33,11 +36,11 @@ use \Charis\{
     <link rel="stylesheet" href="cheatsheet.css">
   </head>
   <body>
-    <nav class="navbar navbar-expand bg-body-tertiary">
-      <div class="container">
-        <a class="navbar-brand" href="#">Charis Cheatsheet</a>
-      </div>
-    </nav>
+    <?=new Navbar(null, [
+      new Container(null, [
+          new NavbarBrand(null, 'Charis Cheatsheet')
+      ])
+    ]).PHP_EOL?>
     <div class="container">
       <!------------------------------------------------------------------------
        ! Button
