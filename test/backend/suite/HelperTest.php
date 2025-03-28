@@ -114,14 +114,14 @@ class HelperTest extends TestCase
     #[DataProvider('resolveClassAttributesDataProvider')]
     function testResolveClassAttributes(
         string $expected,
-        string $defaultClasses,
         string $userClasses,
+        string $defaultClasses,
         array $mutuallyExclusiveClassGroups
     ) {
         $result = AccessHelper::CallStaticMethod(
             Helper::class,
             'resolveClassAttributes',
-            [$defaultClasses, $userClasses, $mutuallyExclusiveClassGroups]
+            [$userClasses, $defaultClasses, $mutuallyExclusiveClassGroups]
         );
         $expected = $this->normalizeClassAttribute($expected);
         $result = $this->normalizeClassAttribute($result);
@@ -134,6 +134,10 @@ class HelperTest extends TestCase
 
     static function mergeAttributesDataProvider()
     {
+        // expected
+        // userAttributes
+        // defaultAttributes
+        // mutuallyExclusiveClassGroups
         return [
             'no user attributes' => [
                 ['type' => 'button', 'class' => 'btn'],
@@ -170,6 +174,9 @@ class HelperTest extends TestCase
 
     static function combineClassAttributesDataProvider()
     {
+        // expected
+        // classes1
+        // classes2
         return [
             'no duplicates' => [
                 'btn btn-primary',
@@ -196,6 +203,10 @@ class HelperTest extends TestCase
 
     static function consumePseudoAttributeDataProvider()
     {
+        // expected
+        // attributes
+        // key
+        // defaultValue
         return [
             'valid pseudo attribute' => [
                 'value',
@@ -232,6 +243,8 @@ class HelperTest extends TestCase
 
     static function parseClassAttributeDataProvider()
     {
+        // expected
+        // classList
         return [
             'simple list' => [
                 ['btn', 'btn-primary'],
@@ -254,37 +267,41 @@ class HelperTest extends TestCase
 
     static function resolveClassAttributesDataProvider()
     {
+        // expected
+        // userClasses
+        // defaultClasses
+        // mutuallyExclusiveClassGroups
         return [
         // Basic Functionality
             'default classes only, no user classes' => [
                 'btn btn-default',
-                'btn btn-default',
                 '',
+                'btn btn-default',
                 []
             ],
             'user classes only, no default classes' => [
                 'btn btn-primary',
-                '',
                 'btn btn-primary',
+                '',
                 []
             ],
             'user and default classes' => [
                 'class1 class2 class3',
-                'class1',
                 'class2 class3',
+                'class1',
                 []
             ],
         // Duplicate Handling
             'duplicates within default classes' => [
                 'class1 class2',
-                'class1 class2 class1',
                 '',
+                'class1 class2 class1',
                 []
             ],
             'duplicates within user classes' => [
                 'class1 class2',
-                '',
                 'class1 class2 class1',
+                '',
                 []
             ],
             'duplicates between user and default classes' => [
@@ -294,53 +311,53 @@ class HelperTest extends TestCase
                 []
             ],
         // Conflict Resolution
-            'user class overrides default in mutually exclusive group' => [
+            'user overrides default, mutually exclusive group resolves to user' => [
                 'btn btn-primary',
-                'btn btn-default',
                 'btn-primary',
+                'btn btn-default',
                 ['btn-default btn-primary btn-success']
             ],
-            'multiple conflicts across different groups resolved in favor of user classes' => [
+            'multiple conflicts exist across groups, user classes are favored' => [
                 'btn btn-primary btn-lg',
-                'btn btn-default btn-sm',
                 'btn-primary btn-lg',
+                'btn btn-default btn-sm',
                 ['btn-default btn-primary btn-success', 'btn-sm btn-lg']
             ],
-            'user and default specify multiple conflicting classes from same group' => [
+            'user and default both conflict in same group, user class is retained' => [
                 'btn btn-primary',
-                'btn btn-default btn-success',
                 'btn-primary btn-success',
+                'btn btn-default btn-success',
                 ['btn-default btn-primary btn-success']
             ],
-            'user specifies multiple conflicting classes from same group' => [
+            'user provides multiple conflicting classes, only one is retained' => [
                 'btn btn-primary',
-                'btn',
                 'btn-primary btn-success',
+                'btn',
                 ['btn-default btn-primary btn-success']
             ],
-            'default specifies multiple conflicting classes from same group' => [
+            'default provides multiple conflicting classes, only one is retained' => [
                 'btn',
-                'btn btn-default btn-success',
                 '',
+                'btn btn-default btn-success',
                 ['btn-default btn-primary btn-success']
             ],
-            'user and default specify same class from mutually exclusive group' => [
-                'btn btn-primary',
+            'user and default specify the same class, no conflict' => [
                 'btn btn-primary',
                 'btn-primary',
+                'btn btn-primary',
                 ['btn-default btn-primary btn-success']
             ],
-            'user class not in mutually exclusive group is added' => [
+            'user class is outside mutually exclusive groups, it is added' => [
                 'btn btn-default custom-class',
-                'btn btn-default',
                 'custom-class',
+                'btn btn-default',
                 ['btn-default btn-primary btn-success']
             ],
         // Empty and Whitespace
             'inputs with extra spaces and tabs' => [
                 'btn btn-primary btn-lg',
-                "  btn\tbtn-default  ",
                 "\tbtn-primary  btn-lg  ",
+                "  btn\tbtn-default  ",
                 ["  btn-default\tbtn-primary  ", "  btn-sm  btn-lg  "]
             ],
             'empty strings' => [
@@ -352,32 +369,32 @@ class HelperTest extends TestCase
         // Edge Cases
             'mutually exclusive group not present in classes' => [
                 'btn btn-default',
-                'btn btn-default',
                 '',
+                'btn btn-default',
                 ['btn-success btn-warning']
             ],
             'empty mutually exclusive groups' => [
                 'btn btn-default btn-primary',
-                'btn btn-default',
                 'btn-primary',
+                'btn btn-default',
                 ['', '   ']
             ],
             'large number of classes' => [
                 'class1 class2 class3 class4 class5 class6 class7 class8 class9 class10',
-                'class1 class2 class3 class4 class5',
                 'class6 class7 class8 class9 class10',
+                'class1 class2 class3 class4 class5',
                 []
             ],
             'classes with international characters' => [
                 'btn btn-ñ btn-ç',
-                'btn',
                 'btn-ñ btn-ç',
+                'btn',
                 []
             ],
             'case sensitive classes' => [
                 'btn btn-default btn-primary',
-                'btn btn-default',
                 'btn-primary',
+                'btn btn-default',
                 ['btn-default Btn-primary btn-success']
             ],
         ];
