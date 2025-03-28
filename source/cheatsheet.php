@@ -39,71 +39,51 @@ use \Charis\{
       </div>
     </nav>
     <div class="container">
-
+      <!------------------------------------------------------------------------
+       ! Button
+       !----------------------------------------------------------------------->
       <h3>Button</h3>
       <h4>Variants</h4>
       <div class="cs-group">
-        <?=new Button(null, 'Primary')?>
-
-        <?=new Button(['class'=>'btn-secondary'], 'Secondary')?>
-
-        <?=new Button(['class'=>'btn-success'], 'Success')?>
-
-        <?=new Button(['class'=>'btn-info'], 'Info')?>
-
-        <?=new Button(['class'=>'btn-warning'], 'Warning')?>
-
-        <?=new Button(['class'=>'btn-danger'], 'Danger')?>
-
-        <?=new Button(['class'=>'btn-light'], 'Light')?>
-
-        <?=new Button(['class'=>'btn-dark'], 'Dark')?>
-
-        <?=new Button(['class'=>'btn-link'], 'Link')?>
-
+        <?=new Button(null, 'Primary').PHP_EOL?>
+        <?=new Button(['class'=>'btn-secondary'], 'Secondary').PHP_EOL?>
+        <?=new Button(['class'=>'btn-success'], 'Success').PHP_EOL?>
+        <?=new Button(['class'=>'btn-info'], 'Info').PHP_EOL?>
+        <?=new Button(['class'=>'btn-warning'], 'Warning').PHP_EOL?>
+        <?=new Button(['class'=>'btn-danger'], 'Danger').PHP_EOL?>
+        <?=new Button(['class'=>'btn-light'], 'Light').PHP_EOL?>
+        <?=new Button(['class'=>'btn-dark'], 'Dark').PHP_EOL?>
+        <?=new Button(['class'=>'btn-link'], 'Link').PHP_EOL?>
       </div><!--.cs-group-->
       <h4>Outline</h4>
       <div class="cs-group">
-        <?=new Button(['class'=>'btn-outline-primary'], 'Primary')?>
-
-        <?=new Button(['class'=>'btn-outline-secondary'], 'Secondary')?>
-
-        <?=new Button(['class'=>'btn-outline-success'], 'Success')?>
-
-        <?=new Button(['class'=>'btn-outline-info'], 'Info')?>
-
-        <?=new Button(['class'=>'btn-outline-warning'], 'Warning')?>
-
-        <?=new Button(['class'=>'btn-outline-danger'], 'Danger')?>
-
-        <?=new Button(['class'=>'btn-outline-light'], 'Light')?>
-
-        <?=new Button(['class'=>'btn-outline-dark'], 'Dark')?>
-
+        <?=new Button(['class'=>'btn-outline-primary'], 'Primary').PHP_EOL?>
+        <?=new Button(['class'=>'btn-outline-secondary'], 'Secondary').PHP_EOL?>
+        <?=new Button(['class'=>'btn-outline-success'], 'Success').PHP_EOL?>
+        <?=new Button(['class'=>'btn-outline-info'], 'Info').PHP_EOL?>
+        <?=new Button(['class'=>'btn-outline-warning'], 'Warning').PHP_EOL?>
+        <?=new Button(['class'=>'btn-outline-danger'], 'Danger').PHP_EOL?>
+        <?=new Button(['class'=>'btn-outline-light'], 'Light').PHP_EOL?>
+        <?=new Button(['class'=>'btn-outline-dark'], 'Dark').PHP_EOL?>
       </div><!--.cs-group-->
       <h4>Sizing</h4>
       <div class="cs-group">
-        <?=new Button(['class'=>'btn-sm'], 'Small button')?>
-
-        <?=new Button(null, 'Standard button')?>
-
-        <?=new Button(['class'=>'btn-lg'], 'Large button')?>
-
+        <?=new Button(['class'=>'btn-sm'], 'Small button').PHP_EOL?>
+        <?=new Button(null, 'Standard button').PHP_EOL?>
+        <?=new Button(['class'=>'btn-lg'], 'Large button').PHP_EOL?>
       </div><!--.cs-group-->
       <h4>Disabled</h4>
       <div class="cs-group">
-        <?=new Button(['disabled'=>true], 'Primary')?>
-
-        <?=new Button(['class'=>'btn-secondary', 'disabled'=>true], 'Secondary')?>
-
-        <?=new Button(['class'=>'btn-outline-primary', 'disabled'=>true], 'Primary')?>
-
-        <?=new Button(['class'=>'btn-outline-secondary', 'disabled'=>true], 'Secondary')?>
-
-        <?=new Button(['class'=>'btn-link', 'disabled'=>true], 'Link')?>
-
+        <?=new Button(['disabled'=>true], 'Primary').PHP_EOL?>
+        <?=new Button(['class'=>'btn-secondary', 'disabled'=>true], 'Secondary').PHP_EOL?>
+        <?=new Button(['class'=>'btn-outline-primary', 'disabled'=>true], 'Primary').PHP_EOL?>
+        <?=new Button(['class'=>'btn-outline-secondary', 'disabled'=>true], 'Secondary').PHP_EOL?>
+        <?=new Button(['class'=>'btn-link', 'disabled'=>true], 'Link').PHP_EOL?>
       </div><!--.cs-group-->
 
+      <!------------------------------------------------------------------------
+       ! Button Group
+       !----------------------------------------------------------------------->
       <h3>Button Group</h3>
       <h4>Basic</h4>
       <div class="cs-group">
@@ -111,8 +91,7 @@ use \Charis\{
           new Button(null, 'Left'),
           new Button(null, 'Middle'),
           new Button(null, 'Right')
-        ])?>
-
+        ]).PHP_EOL?>
       </div><!--.cs-group-->
       <h4>Mixed</h4>
       <div class="cs-group">
@@ -120,8 +99,7 @@ use \Charis\{
           new Button(['class'=>'btn-danger'], 'Left'),
           new Button(['class'=>'btn-warning'], 'Middle'),
           new Button(['class'=>'btn-success'], 'Right')
-        ])?>
-
+        ]).PHP_EOL?>
       </div><!--.cs-group-->
       <h4>Outlined</h4>
       <div class="cs-group">
@@ -129,8 +107,7 @@ use \Charis\{
           new Button(['class'=>'btn-outline-primary'], 'Left'),
           new Button(['class'=>'btn-outline-primary'], 'Middle'),
           new Button(['class'=>'btn-outline-primary'], 'Right')
-        ])?>
-
+        ]).PHP_EOL?>
       </div><!--.cs-group-->
       <h4>Sizing</h4>
       <div class="cs-group">
@@ -138,14 +115,12 @@ use \Charis\{
           new Button(['class'=>'btn-outline-primary'], 'Left'),
           new Button(['class'=>'btn-outline-primary'], 'Middle'),
           new Button(['class'=>'btn-outline-primary'], 'Right')
-        ])?>
-
+        ]).PHP_EOL?>
         <?=new ButtonGroup(['class'=>'btn-group-lg'], [
           new Button(['class'=>'btn-outline-primary'], 'Left'),
           new Button(['class'=>'btn-outline-primary'], 'Middle'),
           new Button(['class'=>'btn-outline-primary'], 'Right')
-        ])?>
-
+        ]).PHP_EOL?>
       </div><!--.cs-group-->
       <h4>Vertical</h4>
       <div class="cs-group">
@@ -153,10 +128,12 @@ use \Charis\{
           new Button(null, 'Left'),
           new Button(null, 'Middle'),
           new Button(null, 'Right')
-        ])?>
-
+        ]).PHP_EOL?>
       </div><!--.cs-group-->
 
+      <!------------------------------------------------------------------------
+       ! Button Toolbar
+       !----------------------------------------------------------------------->
       <h3>Button Toolbar</h3>
       <div class="cs-group">
         <?=new ButtonToolbar([], [
@@ -174,26 +151,24 @@ use \Charis\{
           new ButtonGroup([], [
             new Button(['class'=>'btn-info'], '8')
           ]),
-        ])?>
-
+        ]).PHP_EOL?>
       </div><!--.cs-group-->
 
+      <!------------------------------------------------------------------------
+       ! Form Check
+       !----------------------------------------------------------------------->
       <h3>Form Check</h3>
       <div class="cs-group">
         <div>
-          <?=new FormCheck([':id'=>'check1', ':label'=>'Default checkbox'])?>
-
-          <?=new FormCheck([':label'=>'Checked checkbox', ':checked'=>true])?>
-
+          <?=new FormCheck([':id'=>'check1', ':label'=>'Default checkbox']).PHP_EOL?>
+          <?=new FormCheck([':label'=>'Checked checkbox', ':checked'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Disabled</h4>
       <div class="cs-group">
         <div>
-          <?=new FormCheck([':label'=>'Disabled checkbox', ':disabled'=>true])?>
-
-          <?=new FormCheck([':label'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true])?>
-
+          <?=new FormCheck([':label'=>'Disabled checkbox', ':disabled'=>true]).PHP_EOL?>
+          <?=new FormCheck([':label'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Help Text</h4>
@@ -201,18 +176,14 @@ use \Charis\{
         <?=new FormCheck([
           ':label' => 'I agree to the terms and conditions',
           ':help' => 'By selecting this, you agree to our terms of service and privacy policy.'
-        ])?>
-
+        ]).PHP_EOL?>
       </div><!--.cs-group-->
       <h4>Inline</h4>
       <div class="cs-group">
         <div>
-          <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'1'])?>
-
-          <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'2'])?>
-
-          <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true])?>
-
+          <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'1']).PHP_EOL?>
+          <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'2']).PHP_EOL?>
+          <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Reverse</h4>
@@ -221,17 +192,18 @@ use \Charis\{
           <?=new FormCheck([
             'class'=>'form-check-reverse',
             ':label'=>'Reverse checkbox'
-          ])?>
-
+          ]).PHP_EOL?>
           <?=new FormCheck([
             'class'=>'form-check-reverse',
             ':label'=>'Disabled reverse checkbox',
             ':disabled'=>true
-          ])?>
-
+          ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
 
+      <!------------------------------------------------------------------------
+       ! Form Radio
+       !----------------------------------------------------------------------->
       <h3>Form Radio</h3>
       <div class="cs-group">
         <div>
@@ -239,14 +211,12 @@ use \Charis\{
             ':name'=>'RadioGroup1',
             ':id'=>'radio1',
             ':label'=>'Default radio'
-          ])?>
-
+          ]).PHP_EOL?>
           <?=new FormRadio([
             ':name'=>'RadioGroup1',
             ':label'=>'Checked radio',
             ':checked'=>true
-          ])?>
-
+          ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Disabled</h4>
@@ -256,15 +226,13 @@ use \Charis\{
             ':name'=>'RadioGroup2',
             ':label'=>'Disabled radio',
             ':disabled'=>true
-          ])?>
-
+          ]).PHP_EOL?>
           <?=new FormRadio([
             ':name'=>'RadioGroup2',
             ':label'=>'Disabled checked radio',
             ':disabled'=>true,
             ':checked'=>true
-          ])?>
-
+          ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Help Text</h4>
@@ -274,20 +242,17 @@ use \Charis\{
             ':label' => 'Credit Card',
             ':name' => 'payment_method',
             ':help' => 'Pay securely using your credit card.',
-          ])?>
-
+          ]).PHP_EOL?>
           <?=new FormRadio([
             ':label' => 'PayPal',
             ':name' => 'payment_method',
             ':help' => 'Use your PayPal account for a quick and secure payment.',
-          ])?>
-
+          ]).PHP_EOL?>
           <?=new FormRadio([
             ':label' => 'Bank Transfer',
             ':name' => 'payment_method',
             ':help' => 'Transfer funds directly from your bank account.',
-          ])?>
-
+          ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Inline</h4>
@@ -297,21 +262,18 @@ use \Charis\{
             'class'=>'form-check-inline',
             ':name'=>'RadioGroup3',
             ':label'=>'1'
-          ])?>
-
+          ]).PHP_EOL?>
           <?=new FormRadio([
             'class'=>'form-check-inline',
             ':name'=>'RadioGroup3',
             ':label'=>'2'
-          ])?>
-
+          ]).PHP_EOL?>
           <?=new FormRadio([
             'class'=>'form-check-inline',
             ':name'=>'RadioGroup3',
             ':label'=>'3 (disabled)',
             ':disabled'=>true
-          ])?>
-
+          ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Reverse</h4>
@@ -321,34 +283,31 @@ use \Charis\{
             'class'=>'form-check-reverse',
             ':name'=>'RadioGroup4',
             ':label'=>'Reverse radio'
-          ])?>
-
+          ]).PHP_EOL?>
           <?=new FormRadio([
             'class'=>'form-check-reverse',
             ':name'=>'RadioGroup4',
             ':label'=>'Disabled reverse radio',
             ':disabled'=>true
-          ])?>
-
+          ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
 
+      <!------------------------------------------------------------------------
+       ! Form Switch
+       !----------------------------------------------------------------------->
       <h3>Form Switch</h3>
       <div class="cs-group">
         <div>
-          <?=new FormSwitch([':id'=>'switch1', ':label'=>'Default switch'])?>
-
-          <?=new FormSwitch([':label'=>'Checked switch', ':checked'=>true])?>
-
+          <?=new FormSwitch([':id'=>'switch1', ':label'=>'Default switch']).PHP_EOL?>
+          <?=new FormSwitch([':label'=>'Checked switch', ':checked'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Disabled</h4>
       <div class="cs-group">
         <div>
-          <?=new FormSwitch([':label'=>'Disabled switch', ':disabled'=>true])?>
-
-          <?=new FormSwitch([':label'=>'Disabled checked switch', ':disabled'=>true, ':checked'=>true])?>
-
+          <?=new FormSwitch([':label'=>'Disabled switch', ':disabled'=>true]).PHP_EOL?>
+          <?=new FormSwitch([':label'=>'Disabled checked switch', ':disabled'=>true, ':checked'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Help Text</h4>
@@ -356,18 +315,14 @@ use \Charis\{
         <?=new FormSwitch([
           ':label' => 'I agree to the terms and conditions',
           ':help' => 'By selecting this, you agree to our terms of service and privacy policy.'
-        ])?>
-
+        ]).PHP_EOL?>
       </div><!--.cs-group-->
       <h4>Inline</h4>
       <div class="cs-group">
         <div>
-          <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'1'])?>
-
-          <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'2'])?>
-
-          <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true])?>
-
+          <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'1']).PHP_EOL?>
+          <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'2']).PHP_EOL?>
+          <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
       <h4>Reverse</h4>
@@ -376,17 +331,18 @@ use \Charis\{
           <?=new FormSwitch([
             'class'=>'form-check-reverse',
             ':label'=>'Reverse switch'
-          ])?>
-
+          ]).PHP_EOL?>
           <?=new FormSwitch([
             'class'=>'form-check-reverse',
             ':label'=>'Disabled reverse switch',
             ':disabled'=>true
-          ])?>
-
+          ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
 
+      <!------------------------------------------------------------------------
+       ! Form Text
+       !----------------------------------------------------------------------->
       <h3>Form Text</h3>
       <div class="cs-group">
         <?=new FormText([
@@ -396,6 +352,9 @@ use \Charis\{
         ]).PHP_EOL?>
       </div><!--.cs-group-->
 
+      <!------------------------------------------------------------------------
+       ! Form Text (Floating Label)
+       !----------------------------------------------------------------------->
       <h3>Form Text (Floating Label)</h3>
       <div class="cs-group">
         <?=new FormFLText([
