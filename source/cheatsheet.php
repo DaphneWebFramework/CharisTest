@@ -36,7 +36,7 @@ use \Charis\{
     <link rel="stylesheet" href="cheatsheet.css">
   </head>
   <body>
-    <?=new Navbar(null, [
+    <?=new Navbar(['class'=>'bg-body-tertiary'], [
       new Container(null, [
           new NavbarBrand(null, 'Charis Cheatsheet')
       ])
