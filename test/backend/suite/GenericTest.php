@@ -62,6 +62,20 @@ class GenericTest extends TestCase
         );
     }
 
+    function testRenderWithStringableAttributeValue()
+    {
+        $stringable = new class() {
+            public function __toString() {
+                return 'Stringable Value';
+            }
+        };
+        $component = new Generic('div', ['data-value' => $stringable]);
+        $this->assertSame(
+            '<div data-value="Stringable Value"></div>',
+            $component->Render()
+        );
+    }
+
     function testRenderWithAttributesContainingSpecialCharacters()
     {
         $component = new Generic(

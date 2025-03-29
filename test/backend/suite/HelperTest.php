@@ -75,7 +75,7 @@ class HelperTest extends TestCase
     #[DataProvider('consumePseudoAttributeDataProvider')]
     function testConsumePseudoAttribute(
         mixed $expected,
-        array $attributes,
+        ?array $attributes,
         string $key,
         mixed $defaultValue
     ) {
@@ -235,6 +235,18 @@ class HelperTest extends TestCase
             'case-sensitive match' => [
                 null,
                 [':Pseudo' => 'value'],
+                ':pseudo',
+                null
+            ],
+            'empty attributes' => [
+                null,
+                [],
+                ':pseudo',
+                null
+            ],
+            'null attributes' => [
+                null,
+                null,
                 ':pseudo',
                 null
             ],
