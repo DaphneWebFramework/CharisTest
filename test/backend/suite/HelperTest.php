@@ -10,20 +10,15 @@ use \TestToolkit\AccessHelper;
 #[CoversClass(Helper::class)]
 class HelperTest extends TestCase
 {
-    /**
-     * Normalizes a class list string by parsing and sorting the classes.
-     *
-     * @param string $classList
-     *   The class list string to normalize.
-     * @return string
-     *   The normalized class list string with sorted classes.
-     */
-    private function normalizeClassAttribute(string $classList): string
+    private function sortClasses(mixed $classes): mixed
     {
+        if (!\is_string($classes)) {
+            return $classes;
+        }
         $classes = AccessHelper::CallStaticMethod(
             Helper::class,
             'parseClassAttribute',
-            [$classList]
+            [$classes]
         );
         \sort($classes);
         return \implode(' ', $classes);
@@ -44,10 +39,10 @@ class HelperTest extends TestCase
             $mutuallyExclusiveClassGroups
         );
         if (\array_key_exists('class', $expected)) {
-            $expected['class'] = $this->normalizeClassAttribute($expected['class']);
+            $expected['class'] = $this->sortClasses($expected['class']);
         }
         if (\array_key_exists('class', $result)) {
-            $result['class'] = $this->normalizeClassAttribute($result['class']);
+            $result['class'] = $this->sortClasses($result['class']);
         }
         $this->assertSame($expected, $result);
     }
@@ -63,8 +58,8 @@ class HelperTest extends TestCase
         string $classes2
     ) {
         $result = Helper::CombineClassAttributes($classes1, $classes2);
-        $expected = $this->normalizeClassAttribute($expected);
-        $result = $this->normalizeClassAttribute($result);
+        $expected = $this->sortClasses($expected);
+        $result = $this->sortClasses($result);
         $this->assertSame($expected, $result);
     }
 
@@ -97,17 +92,31 @@ class HelperTest extends TestCase
     #[DataProvider('parseClassAttributeDataProvider')]
     function testParseClassAttribute(
         array $expected,
-        string $classList
+        string $classes
     ) {
         $result = AccessHelper::CallStaticMethod(
             Helper::class,
             'parseClassAttribute',
-            [$classList]
+            [$classes]
         );
         $this->assertSame($expected, $result);
     }
 
     #endregion parseClassAttribute
+
+    #region isResolvableClassAttribute -----------------------------------------
+
+    #[DataProvider('isResolvableClassAttributeDataProvider')]
+    function testIsResolvableClassAttribute(bool $expected, mixed $value) {
+        $result = AccessHelper::CallStaticMethod(
+            Helper::class,
+            'isResolvableClassAttribute',
+            [$value]
+        );
+        $this->assertSame($expected, $result);
+    }
+
+    #endregion isResolvableClassAttribute
 
     #region resolveClassAttributes ---------------------------------------------
 
@@ -123,8 +132,8 @@ class HelperTest extends TestCase
             'resolveClassAttributes',
             [$userClasses, $defaultClasses, $mutuallyExclusiveClassGroups]
         );
-        $expected = $this->normalizeClassAttribute($expected);
-        $result = $this->normalizeClassAttribute($result);
+        $expected = $this->sortClasses($expected);
+        $result = $this->sortClasses($result);
         $this->assertSame($expected, $result);
     }
 
@@ -145,7 +154,7 @@ class HelperTest extends TestCase
                 ['type' => 'button', 'class' => 'btn'],
                 []
             ],
-            'user overrides' => [
+            'user overrides type attribute' => [
                 ['type' => 'submit', 'class' => 'btn btn-primary'],
                 ['type' => 'submit', 'class' => 'btn-primary'],
                 ['type' => 'button', 'class' => 'btn'],
@@ -168,6 +177,320 @@ class HelperTest extends TestCase
                 ['class' => 'btn-secondary'],
                 ['type' => 'button', 'class' => 'btn btn-primary'],
                 ['btn-primary btn-secondary']
+            ],
+            //-- user: string --------------------------------------------------
+            'user class is string, default class is string' => [
+                ['class' => 'cls cls-user'],
+                ['class' => 'cls-user'],
+                ['class' => 'cls'],
+                []
+            ],
+            'user class is string, default class is stringable' => [
+                ['class' => 'cls cls-user'],
+                ['class' => 'cls-user'],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls';
+                    }
+                }],
+                []
+            ],
+            'user class is string, default class is integer' => [
+                ['class' => '123 cls-user'],
+                ['class' => 'cls-user'],
+                ['class' => 123],
+                []
+            ],
+            'user class is string, default class is float' => [
+                ['class' => '123.45 cls-user'],
+                ['class' => 'cls-user'],
+                ['class' => 123.45],
+                []
+            ],
+            'user class is string, default class is true' => [
+                ['class' => 'cls-user'],
+                ['class' => 'cls-user'],
+                ['class' => true],
+                []
+            ],
+            'user class is string, default class is false' => [
+                ['class' => 'cls-user'],
+                ['class' => 'cls-user'],
+                ['class' => false],
+                []
+            ],
+
+            //-- user: stringable ----------------------------------------------
+            'user class is stringable, default class is string' => [
+                ['class' => 'cls cls-user'],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls-user';
+                    }
+                }],
+                ['class' => 'cls'],
+                []
+            ],
+            'user class is stringable, default class is stringable' => [
+                ['class' => 'cls cls-user'],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls-user';
+                    }
+                }],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls';
+                    }
+                }],
+                []
+            ],
+            'user class is stringable, default class is integer' => [
+                ['class' => '123 cls-user'],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls-user';
+                    }
+                }],
+                ['class' => 123],
+                []
+            ],
+            'user class is stringable, default class is float' => [
+                ['class' => '123.45 cls-user'],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls-user';
+                    }
+                }],
+                ['class' => 123.45],
+                []
+            ],
+            'user class is stringable, default class is true' => [
+                ['class' => 'cls-user'],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls-user';
+                    }
+                }],
+                ['class' => true],
+                []
+            ],
+            'user class is stringable, default class is false' => [
+                ['class' => 'cls-user'],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls-user';
+                    }
+                }],
+                ['class' => false],
+                []
+            ],
+            //-- user: integer -------------------------------------------------
+            'user class is integer, default class is string' => [
+                ['class' => 'cls 456'],
+                ['class' => 456],
+                ['class' => 'cls'],
+                []
+            ],
+            'user class is integer, default class is stringable' => [
+                ['class' => 'cls 456'],
+                ['class' => 456],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls';
+                    }
+                }],
+                []
+            ],
+            'user class is integer, default class is integer' => [
+                ['class' => '123 456'],
+                ['class' => 456],
+                ['class' => 123],
+                []
+            ],
+            'user class is integer, default class is float' => [
+                ['class' => '123.45 456'],
+                ['class' => 456],
+                ['class' => 123.45],
+                []
+            ],
+            'user class is integer, default class is true' => [
+                ['class' => '456'],
+                ['class' => 456],
+                ['class' => true],
+                []
+            ],
+            'user class is integer, default class is false' => [
+                ['class' => '456'],
+                ['class' => 456],
+                ['class' => false],
+                []
+            ],
+
+            //-- user: float ---------------------------------------------------
+            'user class is float, default class is string' => [
+                ['class' => 'cls 456.78'],
+                ['class' => 456.78],
+                ['class' => 'cls'],
+                []
+            ],
+            'user class is float, default class is stringable' => [
+                ['class' => 'cls 456.78'],
+                ['class' => 456.78],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls';
+                    }
+                }],
+                []
+            ],
+            'user class is float, default class is integer' => [
+                ['class' => '123 456.78'],
+                ['class' => 456.78],
+                ['class' => 123],
+                []
+            ],
+            'user class is float, default class is float' => [
+                ['class' => '123.45 456.78'],
+                ['class' => 456.78],
+                ['class' => 123.45],
+                []
+            ],
+            'user class is float, default class is true' => [
+                ['class' => '456.78'],
+                ['class' => 456.78],
+                ['class' => true],
+                []
+            ],
+            'user class is float, default class is false' => [
+                ['class' => '456.78'],
+                ['class' => 456.78],
+                ['class' => false],
+                []
+            ],
+
+            //-- user: true ----------------------------------------------------
+            'user class is true, default class is string' => [
+                ['class' => true],
+                ['class' => true],
+                ['class' => 'cls'],
+                []
+            ],
+            'user class is true, default class is stringable' => [
+                ['class' => true],
+                ['class' => true],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls';
+                    }
+                }],
+                []
+            ],
+            'user class is true, default class is integer' => [
+                ['class' => true],
+                ['class' => true],
+                ['class' => 123],
+                []
+            ],
+            'user class is true, default class is float' => [
+                ['class' => true],
+                ['class' => true],
+                ['class' => 123.45],
+                []
+            ],
+            'user class is true, default class is true' => [
+                ['class' => true],
+                ['class' => true],
+                ['class' => true],
+                []
+            ],
+            'user class is true, default class is false' => [
+                ['class' => true],
+                ['class' => true],
+                ['class' => false],
+                []
+            ],
+            //-- user: false ---------------------------------------------------
+            'user class is false, default class is string' => [
+                ['class' => false],
+                ['class' => false],
+                ['class' => 'cls'],
+                []
+            ],
+            'user class is false, default class is stringable' => [
+                ['class' => false],
+                ['class' => false],
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls';
+                    }
+                }],
+                []
+            ],
+            'user class is false, default class is integer' => [
+                ['class' => false],
+                ['class' => false],
+                ['class' => 123],
+                []
+            ],
+            'user class is false, default class is float' => [
+                ['class' => false],
+                ['class' => false],
+                ['class' => 123.45],
+                []
+            ],
+            'user class is false, default class is true' => [
+                ['class' => false],
+                ['class' => false],
+                ['class' => true],
+                []
+            ],
+            'user class is false, default class is false' => [
+                ['class' => false],
+                ['class' => false],
+                ['class' => false],
+                []
+            ],
+            //-- user: null ----------------------------------------------------
+            'no user attributes, default class is string' => [
+                ['class' => 'cls'],
+                null,
+                ['class' => 'cls'],
+                []
+            ],
+            'no user attributes, default class is stringable' => [
+                ['class' => 'cls'],
+                null,
+                ['class' => new class implements \Stringable {
+                    public function __toString(): string {
+                        return 'cls';
+                    }
+                }],
+                []
+            ],
+            'no user attributes, default class is integer' => [
+                ['class' => '123'],
+                null,
+                ['class' => 123],
+                []
+            ],
+            'no user attributes, default class is float' => [
+                ['class' => '123.45'],
+                null,
+                ['class' => 123.45],
+                []
+            ],
+            'no user attributes, default is true' => [
+                ['class' => true],
+                null,
+                ['class' => true],
+                []
+            ],
+            'no user attributes, default is false' => [
+                ['class' => false],
+                null,
+                ['class' => false],
+                []
             ],
         ];
     }
@@ -256,7 +579,7 @@ class HelperTest extends TestCase
     static function parseClassAttributeDataProvider()
     {
         // expected
-        // classList
+        // classes
         return [
             'simple list' => [
                 ['btn', 'btn-primary'],
@@ -274,6 +597,26 @@ class HelperTest extends TestCase
                 [],
                 ''
             ],
+        ];
+    }
+
+    static function isResolvableClassAttributeDataProvider()
+    {
+        return [
+            [true, 'some-class'],
+            [true, new class implements \Stringable {
+                public function __toString(): string {
+                    return 'some-class';
+                }
+            }],
+            [true, 123],
+            [true, 123.45],
+            [false, true],
+            [false, false],
+            [false, null],
+            [false, ['not', 'resolvable']],
+            [false, new \stdClass()],
+            [false, \fopen('php://memory', 'r')],
         ];
     }
 

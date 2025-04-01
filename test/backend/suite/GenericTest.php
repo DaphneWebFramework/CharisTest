@@ -29,13 +29,29 @@ class GenericTest extends TestCase
         $this->assertSame('<div></div>', $component->Render());
     }
 
-    function testRenderWithEmptyAttributesButContent()
+    function testRenderWithNoAttributesButContent()
     {
-        $component = new Generic('p', null, 'Hello, world!');
+        $component = new Generic(
+            'p',
+            null,
+            'Hello, world!'
+        );
         $this->assertSame('<p>Hello, world!</p>', $component->Render());
     }
 
-    function testRenderWithValidAttributesAndContent()
+    function testRenderWithAttributesButNoContent()
+    {
+        $component = new Generic(
+            'div',
+            ['id' => 'test', 'class' => 'example']
+        );
+        $this->assertSame(
+            '<div id="test" class="example"></div>',
+            $component->Render()
+        );
+    }
+
+    function testRenderWithAttributesAndContent()
     {
         $component = new Generic(
             'div',
@@ -62,9 +78,37 @@ class GenericTest extends TestCase
         );
     }
 
+    function testRenderWithBooleanTrueClassAttribute()
+    {
+        $component = new Generic(
+            'div',
+            ['class' => true],
+            null,
+            false
+        );
+        $this->assertSame(
+            '<div class></div>',
+            $component->Render()
+        );
+    }
+
+    function testRenderWithBooleanFalseClassAttribute()
+    {
+        $component = new Generic(
+            'div',
+            ['class' => false],
+            null,
+            false
+        );
+        $this->assertSame(
+            '<div></div>',
+            $component->Render()
+        );
+    }
+
     function testRenderWithStringableAttributeValue()
     {
-        $stringable = new class() {
+        $stringable = new class implements \Stringable {
             public function __toString() {
                 return 'Stringable Value';
             }
