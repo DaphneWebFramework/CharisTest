@@ -12,7 +12,7 @@ class NavbarTest extends TestCase
     {
         $component = new Navbar();
         $this->assertSame(
-            '<nav class="navbar">'
+            '<nav class="navbar bg-body-tertiary">'
           . '</nav>'
           , $component->Render()
         );
@@ -38,27 +38,27 @@ class NavbarTest extends TestCase
     {
         return [
             [
-                '<nav class="navbar navbar-expand"></nav>',
+                '<nav class="navbar bg-body-tertiary navbar-expand"></nav>',
                 ['class' => 'navbar-expand']
             ],
             [
-                '<nav class="navbar navbar-expand-sm"></nav>',
+                '<nav class="navbar bg-body-tertiary navbar-expand-sm"></nav>',
                 ['class' => 'navbar-expand-sm']
             ],
             [
-                '<nav class="navbar navbar-expand-md"></nav>',
+                '<nav class="navbar bg-body-tertiary navbar-expand-md"></nav>',
                 ['class' => 'navbar-expand-md']
             ],
             [
-                '<nav class="navbar navbar-expand-lg"></nav>',
+                '<nav class="navbar bg-body-tertiary navbar-expand-lg"></nav>',
                 ['class' => 'navbar-expand-lg']
             ],
             [
-                '<nav class="navbar navbar-expand-xl"></nav>',
+                '<nav class="navbar bg-body-tertiary navbar-expand-xl"></nav>',
                 ['class' => 'navbar-expand-xl']
             ],
             [
-                '<nav class="navbar navbar-expand-xxl"></nav>',
+                '<nav class="navbar bg-body-tertiary navbar-expand-xxl"></nav>',
                 ['class' => 'navbar-expand-xxl']
             ],
         ];
