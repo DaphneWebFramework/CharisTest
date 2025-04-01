@@ -118,6 +118,32 @@ class HelperTest extends TestCase
 
     #endregion isResolvableClassAttribute
 
+    #region filterNegativeClassDirectives --------------------------------------
+
+    #[DataProvider('filterNegativeClassDirectivesDataProvider')]
+    function testFilterNegativeClassDirectives(
+        string $expectedUserClasses,
+        string $expectedDefaultClasses,
+        string $userClasses,
+        string $defaultClasses
+    ) {
+        [$actualUserClasses, $actualDefaultClasses] = AccessHelper::CallStaticMethod(
+            Helper::class,
+            'filterNegativeClassDirectives',
+            [$userClasses, $defaultClasses]
+        );
+        $this->assertSame(
+            $this->sortClasses($expectedUserClasses),
+            $this->sortClasses($actualUserClasses)
+        );
+        $this->assertSame(
+            $this->sortClasses($expectedDefaultClasses),
+            $this->sortClasses($actualDefaultClasses)
+        );
+    }
+
+    #endregion filterNegativeClassDirectives
+
     #region resolveClassAttributes ---------------------------------------------
 
     #[DataProvider('resolveClassAttributesDataProvider')]
@@ -492,6 +518,19 @@ class HelperTest extends TestCase
                 ['class' => false],
                 []
             ],
+            //-- negative cases ------------------------------------------------
+            'user replaces a default context class with a different one' => [
+                ['class' => 'btn btn-orange'],
+                ['class' => 'btn-orange -btn-primary'],
+                ['class' => 'btn btn-primary'],
+                ['btn-primary btn-secondary']
+            ],
+            'user replaces all defaults with new ones' => [
+                ['class' => 'button-base shadow-md text-brand'],
+                ['class' => '-btn -btn-primary button-base shadow-md text-brand'],
+                ['class' => 'btn btn-primary'],
+                ['btn-primary btn-secondary']
+            ],
         ];
     }
 
@@ -617,6 +656,64 @@ class HelperTest extends TestCase
             [false, ['not', 'resolvable']],
             [false, new \stdClass()],
             [false, \fopen('php://memory', 'r')],
+        ];
+    }
+
+    static function filterNegativeClassDirectivesDataProvider()
+    {
+        // expectedUserClasses
+        // expectedDefaultClasses
+        // userClasses
+        // defaultClasses
+        return [
+            'no negation' => [
+                'btn-primary',
+                'btn',
+                'btn-primary',
+                'btn'
+            ],
+            'remove one' => [
+                '',
+                '',
+                '-btn',
+                'btn'
+            ],
+            'remove multiple' => [
+                '',
+                '',
+                '-btn -btn-primary',
+                'btn btn-primary'
+            ],
+            'remove multiple, different order' => [
+                '',
+                '',
+                '-btn-primary -btn',
+                'btn btn-primary'
+            ],
+            'remove one, add one' => [
+                'btn-success',
+                'btn',
+                'btn-success -btn-primary',
+                'btn btn-primary'
+            ],
+            'remove nonexistent' => [
+                '',
+                'btn btn-primary',
+                '-nonexistent',
+                'btn btn-primary'
+            ],
+            'remove with extra spaces' => [
+                '',
+                '',
+                "  -btn\t  -btn-primary ",
+                'btn btn-primary'
+            ],
+            'remove fails due to case sensitivity' => [
+                '',
+                'Btn',
+                '-btn',
+                'Btn'
+            ],
         ];
     }
 

@@ -32,55 +32,11 @@ class ButtonTest extends TestCase
         $this->assertSame($expected, $component->Render());
     }
 
-    function testRenderWithEmptyStringClassAttribute()
+    function testRenderWithNegativeClassDirective()
     {
-        $component = new Button(['class' => ''], 'Button');
+        $component = new Button(['class' => '-btn-primary btn-darkgreen'], 'Button');
         $this->assertSame(
-            '<button type="button" class="btn btn-primary">'
-          . 'Button'
-          . '</button>'
-          , $component->Render()
-        );
-    }
-
-    function testRenderWithBooleanTrueClassAttribute()
-    {
-        $component = new Button(['class' => true], 'Button');
-        $this->assertSame(
-            '<button type="button" class>'
-          . 'Button'
-          . '</button>'
-          , $component->Render()
-        );
-    }
-
-    function testRenderWithBooleanFalseClassAttribute()
-    {
-        $component = new Button(['class' => false], 'Button');
-        $this->assertSame(
-            '<button type="button">'
-          . 'Button'
-          . '</button>'
-          , $component->Render()
-        );
-    }
-
-    function testRenderWithIntegerClassAttribute()
-    {
-        $component = new Button(['class' => 123], 'Button');
-        $this->assertSame(
-            '<button type="button" class="btn btn-primary 123">'
-          . 'Button'
-          . '</button>'
-          , $component->Render()
-        );
-    }
-
-    function testRenderWithFloatClassAttribute()
-    {
-        $component = new Button(['class' => 123.45], 'Button');
-        $this->assertSame(
-            '<button type="button" class="btn btn-primary 123.45">'
+            '<button type="button" class="btn btn-darkgreen">'
           . 'Button'
           . '</button>'
           , $component->Render()
