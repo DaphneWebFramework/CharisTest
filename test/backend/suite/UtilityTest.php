@@ -1,22 +1,41 @@
 <?php declare(strict_types=1);
 use \PHPUnit\Framework\TestCase;
-use \PHPUnit\Framework\Attributes\CoversClass;
 use \PHPUnit\Framework\Attributes\DataProvider;
 
-use \Charis\Helper;
+use \Charis\Utility;
 
 use \TestToolkit\AccessHelper;
 
-#[CoversClass(Helper::class)]
-class HelperTest extends TestCase
+class UtilityHost { use Utility; }
+
+class UtilityTest extends TestCase
 {
-    private function sortClasses(mixed $classes): mixed
+    private ?UtilityHost $sut = null;
+
+    protected function setUp(): void
+    {
+        $this->sut = new UtilityHost();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->sut = null;
+    }
+
+    // private function systemUnderTest(string ...$mockedMethods): UtilityHost
+    // {
+    //     return $this->getMockBuilder(UtilityHost::class)
+    //         ->onlyMethods($mockedMethods)
+    //         ->getMock();
+    // }
+
+    private function sortClasses(string $classes): string
     {
         if (!\is_string($classes)) {
             return $classes;
         }
-        $classes = AccessHelper::CallStaticMethod(
-            Helper::class,
+        $classes = AccessHelper::CallMethod(
+            $this->sut,
             'parseClassAttribute',
             [$classes]
         );
@@ -24,7 +43,7 @@ class HelperTest extends TestCase
         return \implode(' ', $classes);
     }
 
-    #region MergeAttributes ----------------------------------------------------
+    #region mergeAttributes ----------------------------------------------------
 
     #[DataProvider('mergeAttributesDataProvider')]
     function testMergeAttributes(
@@ -33,23 +52,27 @@ class HelperTest extends TestCase
         array $defaultAttributes,
         array $mutuallyExclusiveClassGroups
     ) {
-        $result = Helper::MergeAttributes(
-            $userAttributes,
-            $defaultAttributes,
-            $mutuallyExclusiveClassGroups
+        $result = AccessHelper::CallMethod(
+            $this->sut,
+            'mergeAttributes',
+            [$userAttributes, $defaultAttributes, $mutuallyExclusiveClassGroups]
         );
         if (\array_key_exists('class', $expected)) {
-            $expected['class'] = $this->sortClasses($expected['class']);
+            if (\is_string($expected['class'])) {
+                $expected['class'] = $this->sortClasses($expected['class']);
+            }
         }
         if (\array_key_exists('class', $result)) {
-            $result['class'] = $this->sortClasses($result['class']);
+            if (\is_string($result['class'])) {
+                $result['class'] = $this->sortClasses($result['class']);
+            }
         }
         $this->assertSame($expected, $result);
     }
 
-    #endregion MergeAttributes
+    #endregion mergeAttributes
 
-    #region CombineClassAttributes ---------------------------------------------
+    #region combineClassAttributes ---------------------------------------------
 
     #[DataProvider('combineClassAttributesDataProvider')]
     function testCombineClassAttributes(
@@ -57,15 +80,20 @@ class HelperTest extends TestCase
         string $classes1,
         string $classes2
     ) {
-        $result = Helper::CombineClassAttributes($classes1, $classes2);
-        $expected = $this->sortClasses($expected);
-        $result = $this->sortClasses($result);
-        $this->assertSame($expected, $result);
+        $result = AccessHelper::CallMethod(
+            $this->sut,
+            'combineClassAttributes',
+            [$classes1, $classes2]
+        );
+        $this->assertSame(
+            $this->sortClasses($expected),
+            $this->sortClasses($result)
+        );
     }
 
-    #endregion CombineClassAttributes
+    #endregion combineClassAttributes
 
-    #region ConsumePseudoAttribute ---------------------------------------------
+    #region consumePseudoAttribute ---------------------------------------------
 
     #[DataProvider('consumePseudoAttributeDataProvider')]
     function testConsumePseudoAttribute(
@@ -74,46 +102,42 @@ class HelperTest extends TestCase
         string $key,
         mixed $defaultValue
     ) {
-        $result = Helper::ConsumePseudoAttribute($attributes, $key, $defaultValue);
-        $this->assertSame($expected, $result);
+        $this->assertSame(
+            $expected,
+            AccessHelper::CallMethod(
+                $this->sut,
+                'consumePseudoAttribute',
+                [&$attributes, $key, $defaultValue]
+            )
+        );
     }
 
     function testConsumePseudoAttributeRemovesAttribute(): void
     {
         $attributes = [':pseudo' => 'value', 'other' => 'value2'];
-        Helper::ConsumePseudoAttribute($attributes, ':pseudo');
+        AccessHelper::CallMethod(
+            $this->sut,
+            'consumePseudoAttribute',
+            [&$attributes, ':pseudo']
+        );
         $this->assertSame(['other' => 'value2'], $attributes);
     }
 
-    #endregion ConsumePseudoAttribute
-
-    #region parseClassAttribute ------------------------------------------------
-
-    #[DataProvider('parseClassAttributeDataProvider')]
-    function testParseClassAttribute(
-        array $expected,
-        string $classes
-    ) {
-        $result = AccessHelper::CallStaticMethod(
-            Helper::class,
-            'parseClassAttribute',
-            [$classes]
-        );
-        $this->assertSame($expected, $result);
-    }
-
-    #endregion parseClassAttribute
+    #endregion consumePseudoAttribute
 
     #region isResolvableClassAttribute -----------------------------------------
 
     #[DataProvider('isResolvableClassAttributeDataProvider')]
-    function testIsResolvableClassAttribute(bool $expected, mixed $value) {
-        $result = AccessHelper::CallStaticMethod(
-            Helper::class,
-            'isResolvableClassAttribute',
-            [$value]
+    function testIsResolvableClassAttribute(bool $expected, mixed $value)
+    {
+        $this->assertSame(
+            $expected,
+            AccessHelper::CallMethod(
+                $this->sut,
+                'isResolvableClassAttribute',
+                [$value]
+            )
         );
-        $this->assertSame($expected, $result);
     }
 
     #endregion isResolvableClassAttribute
@@ -127,8 +151,8 @@ class HelperTest extends TestCase
         string $userClasses,
         string $defaultClasses
     ) {
-        [$actualUserClasses, $actualDefaultClasses] = AccessHelper::CallStaticMethod(
-            Helper::class,
+        [$actualUserClasses, $actualDefaultClasses] = AccessHelper::CallMethod(
+            $this->sut,
             'filterNegativeClassDirectives',
             [$userClasses, $defaultClasses]
         );
@@ -153,17 +177,37 @@ class HelperTest extends TestCase
         string $defaultClasses,
         array $mutuallyExclusiveClassGroups
     ) {
-        $result = AccessHelper::CallStaticMethod(
-            Helper::class,
+        $result = AccessHelper::CallMethod(
+            $this->sut,
             'resolveClassAttributes',
             [$userClasses, $defaultClasses, $mutuallyExclusiveClassGroups]
         );
-        $expected = $this->sortClasses($expected);
-        $result = $this->sortClasses($result);
-        $this->assertSame($expected, $result);
+        $this->assertSame(
+            $this->sortClasses($expected),
+            $this->sortClasses($result)
+        );
     }
 
     #endregion resolveClassAttributes
+
+    #region parseClassAttribute ------------------------------------------------
+
+    #[DataProvider('parseClassAttributeDataProvider')]
+    function testParseClassAttribute(
+        array $expected,
+        string $classes
+    ) {
+        $this->assertSame(
+            $expected,
+            AccessHelper::CallMethod(
+                $this->sut,
+                'parseClassAttribute',
+                [$classes]
+            )
+        );
+    }
+
+    #endregion parseClassAttribute
 
     #region Data Providers -----------------------------------------------------
 
@@ -540,6 +584,16 @@ class HelperTest extends TestCase
         // classes1
         // classes2
         return [
+            'empty strings' => [
+                '',
+                '',
+                ''
+            ],
+            'whitespace-only strings' => [
+                '',
+                '     ',
+                '     '
+            ],
             'no duplicates' => [
                 'btn btn-primary',
                 'btn',
@@ -549,11 +603,6 @@ class HelperTest extends TestCase
                 'btn btn-primary',
                 'btn btn-primary',
                 'btn btn-primary'
-            ],
-            'empty strings' => [
-                '',
-                '',
-                ''
             ],
             'extra spaces' => [
                 'btn btn-primary',
@@ -615,32 +664,10 @@ class HelperTest extends TestCase
         ];
     }
 
-    static function parseClassAttributeDataProvider()
-    {
-        // expected
-        // classes
-        return [
-            'simple list' => [
-                ['btn', 'btn-primary'],
-                'btn btn-primary'
-            ],
-            'extra spaces' => [
-                ['btn', 'btn-primary'],
-                '  btn   btn-primary  '
-            ],
-            'whitespace-only string' => [
-                [],
-                '     '
-            ],
-            'empty string' => [
-                [],
-                ''
-            ],
-        ];
-    }
-
     static function isResolvableClassAttributeDataProvider()
     {
+        // expected
+        // value
         return [
             [true, 'some-class'],
             [true, new class implements \Stringable {
@@ -848,6 +875,38 @@ class HelperTest extends TestCase
                 'btn-primary',
                 'btn btn-default',
                 ['btn-default Btn-primary btn-success']
+            ],
+        ];
+    }
+
+    static function parseClassAttributeDataProvider()
+    {
+        // expected
+        // classes
+        return [
+            'empty string' => [
+                [],
+                ''
+            ],
+            'whitespace-only string' => [
+                [],
+                '     '
+            ],
+            'single class' => [
+                ['btn'],
+                'btn'
+            ],
+            'single class with whitespace' => [
+                ['btn'],
+                '  btn  '
+            ],
+            'multiple classes' => [
+                ['btn', 'btn-primary'],
+                'btn btn-primary'
+            ],
+            'multiple classes with whitespace' => [
+                ['btn', 'btn-primary'],
+                '  btn   btn-primary  '
             ],
         ];
     }
