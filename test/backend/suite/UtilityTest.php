@@ -22,12 +22,16 @@ class UtilityTest extends TestCase
         $this->sut = null;
     }
 
-    // private function systemUnderTest(string ...$mockedMethods): UtilityHost
-    // {
-    //     return $this->getMockBuilder(UtilityHost::class)
-    //         ->onlyMethods($mockedMethods)
-    //         ->getMock();
-    // }
+    /**
+     * Alternative method for constructing the system under test, allowing for
+     * mocking of specific methods.
+     */
+    private function systemUnderTest(string ...$mockedMethods): UtilityHost
+    {
+        return $this->getMockBuilder(UtilityHost::class)
+            ->onlyMethods($mockedMethods)
+            ->getMock();
+    }
 
     private function sortClasses(string $classes): string
     {
@@ -68,6 +72,383 @@ class UtilityTest extends TestCase
             }
         }
         $this->assertSame($expected, $result);
+    }
+
+    function testMergeAttributesWithMutuallyExclusiveGroups()
+    {
+        $sut = $this->systemUnderTest(
+            'isResolvableClassAttribute',
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->exactly(2))
+            ->method('isResolvableClassAttribute')
+            ->willReturnMap([
+                ['btn-primary', true],
+                ['btn-secondary', true]
+            ]);
+        $sut->expects($this->once())
+            ->method('filterNegativeClassDirectives')
+            ->with('btn-primary', 'btn-secondary')
+            ->willReturn(['btn-primary', 'btn-secondary']);
+        $sut->expects($this->once())
+            ->method('resolveClassAttributes')
+            ->with('btn-primary',
+                   'btn-secondary',
+                   ['btn-primary btn-secondary btn-success'])
+            ->willReturn('btn-primary');
+
+        $this->assertSame(
+            ['class' => 'btn-primary'],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    ['class' => 'btn-primary'],
+                    ['class' => 'btn-secondary'],
+                    ['btn-primary btn-secondary btn-success']
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithClassFalseSkipsResolution()
+    {
+        $sut = $this->systemUnderTest(
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->never())
+            ->method('filterNegativeClassDirectives');
+        $sut->expects($this->never())
+            ->method('resolveClassAttributes');
+
+        $this->assertSame(
+            ['class' => false],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    ['class' => false],
+                    ['class' => 'btn'],
+                    []
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithClassTruePreservesValue()
+    {
+        $sut = $this->systemUnderTest(
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->never())
+            ->method('filterNegativeClassDirectives');
+        $sut->expects($this->never())
+            ->method('resolveClassAttributes');
+
+        $this->assertSame(
+            ['class' => true],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    ['class' => true],
+                    ['class' => 'btn'],
+                    []
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithOnlyDefaultClassResolvable()
+    {
+        $sut = $this->systemUnderTest(
+            'isResolvableClassAttribute',
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->exactly(2))
+            ->method('isResolvableClassAttribute')
+            ->willReturnMap([
+                [null, false],
+                ['btn', true]
+            ]);
+        $sut->expects($this->once())
+            ->method('filterNegativeClassDirectives')
+            ->with('', 'btn')
+            ->willReturn(['', 'btn']);
+        $sut->expects($this->once())
+            ->method('resolveClassAttributes')
+            ->with('', 'btn', [])
+            ->willReturn('btn');
+
+        $this->assertSame(
+            ['class' => 'btn'],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    [],
+                    ['class' => 'btn'],
+                    []
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithNullUserAttributes()
+    {
+        $sut = $this->systemUnderTest(
+            'isResolvableClassAttribute',
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->exactly(2))
+            ->method('isResolvableClassAttribute')
+            ->willReturnMap([
+                [null, false],
+                ['btn', true]
+            ]);
+        $sut->expects($this->once())
+            ->method('filterNegativeClassDirectives')
+            ->with('', 'btn')
+            ->willReturn(['', 'btn']);
+        $sut->expects($this->once())
+            ->method('resolveClassAttributes')
+            ->with('', 'btn', [])
+            ->willReturn('btn');
+
+        $this->assertSame(
+            ['class' => 'btn'],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    null,
+                    ['class' => 'btn'],
+                    []
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithUnresolvableUserClass()
+    {
+        $sut = $this->systemUnderTest(
+            'isResolvableClassAttribute',
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->exactly(2))
+            ->method('isResolvableClassAttribute')
+            ->willReturnMap([
+                [[], false],
+                ['btn', true]
+            ]);
+        $sut->expects($this->once())
+            ->method('filterNegativeClassDirectives')
+            ->with('', 'btn')
+            ->willReturn(['', 'btn']);
+        $sut->expects($this->once())
+            ->method('resolveClassAttributes')
+            ->with('', 'btn', [])
+            ->willReturn('btn');
+
+        $this->assertSame(
+            ['class' => 'btn'],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    ['class' => []],
+                    ['class' => 'btn'],
+                    []
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithBothClassesUnresolvable()
+    {
+        $sut = $this->systemUnderTest(
+            'isResolvableClassAttribute',
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->exactly(2))
+            ->method('isResolvableClassAttribute')
+            ->willReturnMap([
+                [[], false],
+                [null, false]
+            ]);
+        $sut->expects($this->never())
+            ->method('filterNegativeClassDirectives');
+        $sut->expects($this->never())
+            ->method('resolveClassAttributes');
+
+        $this->assertSame(
+            ['class' => []],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    ['class' => []],
+                    ['class' => null],
+                    []
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithNegativeClassDirective()
+    {
+        $sut = $this->systemUnderTest(
+            'isResolvableClassAttribute',
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->exactly(2))
+            ->method('isResolvableClassAttribute')
+            ->with($this->anything())
+            ->willReturnMap([
+                ['-btn-large btn-small', true],
+                ['btn-large', true]
+            ]);
+        $sut->expects($this->once())
+            ->method('filterNegativeClassDirectives')
+            ->with('-btn-large btn-small', 'btn-large')
+            ->willReturn(['btn-small', '']);
+        $sut->expects($this->once())
+            ->method('resolveClassAttributes')
+            ->with('btn-small', '', [])
+            ->willReturn('btn-small');
+
+        $this->assertSame(
+            ['class' => 'btn-small'],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    ['class' => '-btn-large btn-small'],
+                    ['class' => 'btn-large'],
+                    []
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithIdenticalClass()
+    {
+        $sut = $this->systemUnderTest(
+            'isResolvableClassAttribute',
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->exactly(2))
+            ->method('isResolvableClassAttribute')
+            ->with($this->anything())
+            ->willReturnMap([
+                ['btn', true],
+                ['btn', true]
+            ]);
+        $sut->expects($this->once())
+            ->method('filterNegativeClassDirectives')
+            ->with('btn', 'btn')
+            ->willReturn(['btn', 'btn']);
+        $sut->expects($this->once())
+            ->method('resolveClassAttributes')
+            ->with('btn', 'btn', [])
+            ->willReturn('btn');
+
+        $this->assertSame(
+            ['class' => 'btn'],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    ['class' => 'btn'],
+                    ['class' => 'btn'],
+                    []
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithEmptyUserClass()
+    {
+        $sut = $this->systemUnderTest(
+            'isResolvableClassAttribute',
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->exactly(2))
+            ->method('isResolvableClassAttribute')
+            ->willReturnMap([
+                ['', true],
+                ['btn', true]
+            ]);
+        $sut->expects($this->once())
+            ->method('filterNegativeClassDirectives')
+            ->with('', 'btn')
+            ->willReturn(['', 'btn']);
+        $sut->expects($this->once())
+            ->method('resolveClassAttributes')
+            ->with('', 'btn', [])
+            ->willReturn('btn');
+
+        $this->assertSame(
+            ['class' => 'btn'],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    ['class' => ''],
+                    ['class' => 'btn'],
+                    []
+                ]
+            )
+        );
+    }
+
+    function testMergeAttributesWithNonClassAttributes()
+    {
+        $sut = $this->systemUnderTest(
+            'isResolvableClassAttribute',
+            'filterNegativeClassDirectives',
+            'resolveClassAttributes'
+        );
+
+        $sut->expects($this->never())
+            ->method('isResolvableClassAttribute');
+        $sut->expects($this->never())
+            ->method('filterNegativeClassDirectives');
+        $sut->expects($this->never())
+            ->method('resolveClassAttributes');
+
+        $this->assertSame(
+            ['style' => 'color:red', 'id' => 'myId'],
+            AccessHelper::CallMethod(
+                $sut,
+                'mergeAttributes',
+                [
+                    ['id' => 'myId'],
+                    ['style' => 'color:red'],
+                    []
+                ]
+            )
+        );
     }
 
     #endregion mergeAttributes
@@ -112,7 +493,7 @@ class UtilityTest extends TestCase
         );
     }
 
-    function testConsumePseudoAttributeRemovesAttribute(): void
+    function testConsumePseudoAttributeRemovesAttribute()
     {
         $attributes = [':pseudo' => 'value', 'other' => 'value2'];
         AccessHelper::CallMethod(
@@ -218,362 +599,59 @@ class UtilityTest extends TestCase
         // defaultAttributes
         // mutuallyExclusiveClassGroups
         return [
-            'no user attributes' => [
-                ['type' => 'button', 'class' => 'btn'],
+            'no user attributes, default class retained' => [
+                ['class' => 'btn'],
                 null,
-                ['type' => 'button', 'class' => 'btn'],
+                ['class' => 'btn'],
                 []
             ],
-            'user overrides type attribute' => [
-                ['type' => 'submit', 'class' => 'btn btn-primary'],
-                ['type' => 'submit', 'class' => 'btn-primary'],
-                ['type' => 'button', 'class' => 'btn'],
+            'user class is true, default class removed' => [
+                ['class' => true],
+                ['class' => true],
+                ['class' => 'btn'],
                 []
             ],
-            'additional attributes' => [
-                ['type' => 'button', 'class' => 'btn btn-primary', 'id' => 'testButton'],
-                ['id' => 'testButton', 'class' => 'btn-primary'],
-                ['type' => 'button', 'class' => 'btn'],
+            'user class is false, default class removed' => [
+                ['class' => false],
+                ['class' => false],
+                ['class' => 'btn'],
                 []
             ],
-            'no class attribute' => [
-                ['type' => 'button', 'id' => 'testButton'],
-                ['id' => 'testButton'],
-                ['type' => 'button'],
+            'basic class merge, no exclusivity' => [
+                ['class' => 'btn btn-primary'],
+                ['class' => 'btn-primary'],
+                ['class' => 'btn'],
                 []
             ],
-            'mutual exclusions' => [
-                ['type' => 'button', 'class' => 'btn btn-secondary'],
+            'class resolved by mutually exclusive group' => [
+                ['class' => 'btn btn-secondary'],
                 ['class' => 'btn-secondary'],
-                ['type' => 'button', 'class' => 'btn btn-primary'],
-                ['btn-primary btn-secondary']
-            ],
-            //-- user: string --------------------------------------------------
-            'user class is string, default class is string' => [
-                ['class' => 'cls cls-user'],
-                ['class' => 'cls-user'],
-                ['class' => 'cls'],
-                []
-            ],
-            'user class is string, default class is stringable' => [
-                ['class' => 'cls cls-user'],
-                ['class' => 'cls-user'],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls';
-                    }
-                }],
-                []
-            ],
-            'user class is string, default class is integer' => [
-                ['class' => '123 cls-user'],
-                ['class' => 'cls-user'],
-                ['class' => 123],
-                []
-            ],
-            'user class is string, default class is float' => [
-                ['class' => '123.45 cls-user'],
-                ['class' => 'cls-user'],
-                ['class' => 123.45],
-                []
-            ],
-            'user class is string, default class is true' => [
-                ['class' => 'cls-user'],
-                ['class' => 'cls-user'],
-                ['class' => true],
-                []
-            ],
-            'user class is string, default class is false' => [
-                ['class' => 'cls-user'],
-                ['class' => 'cls-user'],
-                ['class' => false],
-                []
-            ],
-
-            //-- user: stringable ----------------------------------------------
-            'user class is stringable, default class is string' => [
-                ['class' => 'cls cls-user'],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls-user';
-                    }
-                }],
-                ['class' => 'cls'],
-                []
-            ],
-            'user class is stringable, default class is stringable' => [
-                ['class' => 'cls cls-user'],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls-user';
-                    }
-                }],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls';
-                    }
-                }],
-                []
-            ],
-            'user class is stringable, default class is integer' => [
-                ['class' => '123 cls-user'],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls-user';
-                    }
-                }],
-                ['class' => 123],
-                []
-            ],
-            'user class is stringable, default class is float' => [
-                ['class' => '123.45 cls-user'],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls-user';
-                    }
-                }],
-                ['class' => 123.45],
-                []
-            ],
-            'user class is stringable, default class is true' => [
-                ['class' => 'cls-user'],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls-user';
-                    }
-                }],
-                ['class' => true],
-                []
-            ],
-            'user class is stringable, default class is false' => [
-                ['class' => 'cls-user'],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls-user';
-                    }
-                }],
-                ['class' => false],
-                []
-            ],
-            //-- user: integer -------------------------------------------------
-            'user class is integer, default class is string' => [
-                ['class' => 'cls 456'],
-                ['class' => 456],
-                ['class' => 'cls'],
-                []
-            ],
-            'user class is integer, default class is stringable' => [
-                ['class' => 'cls 456'],
-                ['class' => 456],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls';
-                    }
-                }],
-                []
-            ],
-            'user class is integer, default class is integer' => [
-                ['class' => '123 456'],
-                ['class' => 456],
-                ['class' => 123],
-                []
-            ],
-            'user class is integer, default class is float' => [
-                ['class' => '123.45 456'],
-                ['class' => 456],
-                ['class' => 123.45],
-                []
-            ],
-            'user class is integer, default class is true' => [
-                ['class' => '456'],
-                ['class' => 456],
-                ['class' => true],
-                []
-            ],
-            'user class is integer, default class is false' => [
-                ['class' => '456'],
-                ['class' => 456],
-                ['class' => false],
-                []
-            ],
-
-            //-- user: float ---------------------------------------------------
-            'user class is float, default class is string' => [
-                ['class' => 'cls 456.78'],
-                ['class' => 456.78],
-                ['class' => 'cls'],
-                []
-            ],
-            'user class is float, default class is stringable' => [
-                ['class' => 'cls 456.78'],
-                ['class' => 456.78],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls';
-                    }
-                }],
-                []
-            ],
-            'user class is float, default class is integer' => [
-                ['class' => '123 456.78'],
-                ['class' => 456.78],
-                ['class' => 123],
-                []
-            ],
-            'user class is float, default class is float' => [
-                ['class' => '123.45 456.78'],
-                ['class' => 456.78],
-                ['class' => 123.45],
-                []
-            ],
-            'user class is float, default class is true' => [
-                ['class' => '456.78'],
-                ['class' => 456.78],
-                ['class' => true],
-                []
-            ],
-            'user class is float, default class is false' => [
-                ['class' => '456.78'],
-                ['class' => 456.78],
-                ['class' => false],
-                []
-            ],
-
-            //-- user: true ----------------------------------------------------
-            'user class is true, default class is string' => [
-                ['class' => true],
-                ['class' => true],
-                ['class' => 'cls'],
-                []
-            ],
-            'user class is true, default class is stringable' => [
-                ['class' => true],
-                ['class' => true],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls';
-                    }
-                }],
-                []
-            ],
-            'user class is true, default class is integer' => [
-                ['class' => true],
-                ['class' => true],
-                ['class' => 123],
-                []
-            ],
-            'user class is true, default class is float' => [
-                ['class' => true],
-                ['class' => true],
-                ['class' => 123.45],
-                []
-            ],
-            'user class is true, default class is true' => [
-                ['class' => true],
-                ['class' => true],
-                ['class' => true],
-                []
-            ],
-            'user class is true, default class is false' => [
-                ['class' => true],
-                ['class' => true],
-                ['class' => false],
-                []
-            ],
-            //-- user: false ---------------------------------------------------
-            'user class is false, default class is string' => [
-                ['class' => false],
-                ['class' => false],
-                ['class' => 'cls'],
-                []
-            ],
-            'user class is false, default class is stringable' => [
-                ['class' => false],
-                ['class' => false],
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls';
-                    }
-                }],
-                []
-            ],
-            'user class is false, default class is integer' => [
-                ['class' => false],
-                ['class' => false],
-                ['class' => 123],
-                []
-            ],
-            'user class is false, default class is float' => [
-                ['class' => false],
-                ['class' => false],
-                ['class' => 123.45],
-                []
-            ],
-            'user class is false, default class is true' => [
-                ['class' => false],
-                ['class' => false],
-                ['class' => true],
-                []
-            ],
-            'user class is false, default class is false' => [
-                ['class' => false],
-                ['class' => false],
-                ['class' => false],
-                []
-            ],
-            //-- user: null ----------------------------------------------------
-            'no user attributes, default class is string' => [
-                ['class' => 'cls'],
-                null,
-                ['class' => 'cls'],
-                []
-            ],
-            'no user attributes, default class is stringable' => [
-                ['class' => 'cls'],
-                null,
-                ['class' => new class implements \Stringable {
-                    public function __toString(): string {
-                        return 'cls';
-                    }
-                }],
-                []
-            ],
-            'no user attributes, default class is integer' => [
-                ['class' => '123'],
-                null,
-                ['class' => 123],
-                []
-            ],
-            'no user attributes, default class is float' => [
-                ['class' => '123.45'],
-                null,
-                ['class' => 123.45],
-                []
-            ],
-            'no user attributes, default is true' => [
-                ['class' => true],
-                null,
-                ['class' => true],
-                []
-            ],
-            'no user attributes, default is false' => [
-                ['class' => false],
-                null,
-                ['class' => false],
-                []
-            ],
-            //-- negative cases ------------------------------------------------
-            'user replaces a default context class with a different one' => [
-                ['class' => 'btn btn-orange'],
-                ['class' => 'btn-orange -btn-primary'],
                 ['class' => 'btn btn-primary'],
                 ['btn-primary btn-secondary']
             ],
-            'user replaces all defaults with new ones' => [
+            'negative directive removes one default class' => [
+                ['class' => 'btn btn-orange'],
+                ['class' => 'btn-orange -btn-primary'],
+                ['class' => 'btn btn-primary'],
+                []
+            ],
+            'negative directives remove all defaults' => [
                 ['class' => 'button-base shadow-md text-brand'],
                 ['class' => '-btn -btn-primary button-base shadow-md text-brand'],
                 ['class' => 'btn btn-primary'],
                 ['btn-primary btn-secondary']
+            ],
+            'non-class attributes are merged' => [
+                ['style' => 'color:red', 'id' => 'myId'],
+                ['id' => 'myId'],
+                ['style' => 'color:red'],
+                []
+            ],
+            'class and non-class attributes merged together' => [
+                ['class' => 'btn btn-sm', 'data-action' => 'submit', 'id' => 'submitBtn'],
+                ['class' => 'btn-sm', 'id' => 'submitBtn'],
+                ['class' => 'btn btn-lg', 'data-action' => 'submit'],
+                ['btn-sm btn-lg']
             ],
         ];
     }
@@ -671,7 +749,7 @@ class UtilityTest extends TestCase
         return [
             [true, 'some-class'],
             [true, new class implements \Stringable {
-                public function __toString(): string {
+                function __toString(): string {
                     return 'some-class';
                 }
             }],
