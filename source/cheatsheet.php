@@ -23,6 +23,8 @@ use \Charis\{
   FormComposites\FormFLText,
   FormComposites\FormEmail,
   FormComposites\FormFLEmail,
+  FormComposites\FormPassword,
+  FormComposites\FormFLPassword,
   Navbar,
   NavbarBrand,
   Container,
@@ -380,6 +382,24 @@ use \Charis\{
         <?=new FormFLEmail([
           ':label'=>'Email address',
           ':help' => "We'll never share your email with anyone else."
+        ]).PHP_EOL?>
+      </div><!--.cs-group-->
+
+      <!------------------------------------------------------------------------
+       ! Form Password
+       !----------------------------------------------------------------------->
+      <h3>Form Password</h3>
+      <div class="cs-group">
+        <?=new FormPassword([
+          ':label'=>'Password',
+          ':help' => 'Your password must be 8-20 characters long.'
+        ]).PHP_EOL?>
+      </div><!--.cs-group-->
+      <h5>Floating Label</h5>
+      <div class="cs-group">
+        <?=new FormFLPassword([
+          ':label'=>'Password',
+          ':help' => 'Your password must be 8-20 characters long.'
         ]).PHP_EOL?>
       </div><!--.cs-group-->
 
