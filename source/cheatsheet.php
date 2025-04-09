@@ -21,6 +21,8 @@ use \Charis\{
   FormComposites\FormSwitch,
   FormComposites\FormText,
   FormComposites\FormFLText,
+  FormComposites\FormEmail,
+  FormComposites\FormFLEmail,
   Navbar,
   NavbarBrand,
   Container,
@@ -46,7 +48,7 @@ use \Charis\{
        ! Button
        !----------------------------------------------------------------------->
       <h3>Button</h3>
-      <h4>Variants</h4>
+      <h5>Variants</h5>
       <div class="cs-group">
         <?=new Button(null, 'Primary').PHP_EOL?>
         <?=new Button(['class'=>'btn-secondary'], 'Secondary').PHP_EOL?>
@@ -58,7 +60,7 @@ use \Charis\{
         <?=new Button(['class'=>'btn-dark'], 'Dark').PHP_EOL?>
         <?=new Button(['class'=>'btn-link'], 'Link').PHP_EOL?>
       </div><!--.cs-group-->
-      <h4>Outline</h4>
+      <h5>Outline</h5>
       <div class="cs-group">
         <?=new Button(['class'=>'btn-outline-primary'], 'Primary').PHP_EOL?>
         <?=new Button(['class'=>'btn-outline-secondary'], 'Secondary').PHP_EOL?>
@@ -69,13 +71,13 @@ use \Charis\{
         <?=new Button(['class'=>'btn-outline-light'], 'Light').PHP_EOL?>
         <?=new Button(['class'=>'btn-outline-dark'], 'Dark').PHP_EOL?>
       </div><!--.cs-group-->
-      <h4>Sizing</h4>
+      <h5>Sizing</h5>
       <div class="cs-group">
         <?=new Button(['class'=>'btn-sm'], 'Small button').PHP_EOL?>
         <?=new Button(null, 'Standard button').PHP_EOL?>
         <?=new Button(['class'=>'btn-lg'], 'Large button').PHP_EOL?>
       </div><!--.cs-group-->
-      <h4>Disabled</h4>
+      <h5>Disabled</h5>
       <div class="cs-group">
         <?=new Button(['disabled'=>true], 'Primary').PHP_EOL?>
         <?=new Button(['class'=>'btn-secondary', 'disabled'=>true], 'Secondary').PHP_EOL?>
@@ -88,7 +90,7 @@ use \Charis\{
        ! Button Group
        !----------------------------------------------------------------------->
       <h3>Button Group</h3>
-      <h4>Basic</h4>
+      <h5>Basic</h5>
       <div class="cs-group">
         <?=new ButtonGroup([], [
           new Button(null, 'Left'),
@@ -96,7 +98,7 @@ use \Charis\{
           new Button(null, 'Right')
         ]).PHP_EOL?>
       </div><!--.cs-group-->
-      <h4>Mixed</h4>
+      <h5>Mixed</h5>
       <div class="cs-group">
         <?=new ButtonGroup([], [
           new Button(['class'=>'btn-danger'], 'Left'),
@@ -104,7 +106,7 @@ use \Charis\{
           new Button(['class'=>'btn-success'], 'Right')
         ]).PHP_EOL?>
       </div><!--.cs-group-->
-      <h4>Outlined</h4>
+      <h5>Outlined</h5>
       <div class="cs-group">
         <?=new ButtonGroup([], [
           new Button(['class'=>'btn-outline-primary'], 'Left'),
@@ -112,7 +114,7 @@ use \Charis\{
           new Button(['class'=>'btn-outline-primary'], 'Right')
         ]).PHP_EOL?>
       </div><!--.cs-group-->
-      <h4>Sizing</h4>
+      <h5>Sizing</h5>
       <div class="cs-group">
         <?=new ButtonGroup(['class'=>'btn-group-sm'], [
           new Button(['class'=>'btn-outline-primary'], 'Left'),
@@ -125,7 +127,7 @@ use \Charis\{
           new Button(['class'=>'btn-outline-primary'], 'Right')
         ]).PHP_EOL?>
       </div><!--.cs-group-->
-      <h4>Vertical</h4>
+      <h5>Vertical</h5>
       <div class="cs-group">
         <?=new ButtonGroup(['class'=>'btn-group-vertical'], [
           new Button(null, 'Left'),
@@ -167,21 +169,21 @@ use \Charis\{
           <?=new FormCheck([':label'=>'Checked checkbox', ':checked'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Disabled</h4>
+      <h5>Disabled</h5>
       <div class="cs-group">
         <div>
           <?=new FormCheck([':label'=>'Disabled checkbox', ':disabled'=>true]).PHP_EOL?>
           <?=new FormCheck([':label'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Help Text</h4>
+      <h5>Help Text</h5>
       <div class="cs-group">
         <?=new FormCheck([
           ':label' => 'I agree to the terms and conditions',
           ':help' => 'By selecting this, you agree to our terms of service and privacy policy.'
         ]).PHP_EOL?>
       </div><!--.cs-group-->
-      <h4>Inline</h4>
+      <h5>Inline</h5>
       <div class="cs-group">
         <div>
           <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'1']).PHP_EOL?>
@@ -189,7 +191,7 @@ use \Charis\{
           <?=new FormCheck(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Reverse</h4>
+      <h5>Reverse</h5>
       <div class="cs-group w-25">
         <div>
           <?=new FormCheck([
@@ -222,7 +224,7 @@ use \Charis\{
           ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Disabled</h4>
+      <h5>Disabled</h5>
       <div class="cs-group">
         <div>
           <?=new FormRadio([
@@ -238,7 +240,7 @@ use \Charis\{
           ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Help Text</h4>
+      <h5>Help Text</h5>
       <div class="cs-group">
         <div>
           <?=new FormRadio([
@@ -258,7 +260,7 @@ use \Charis\{
           ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Inline</h4>
+      <h5>Inline</h5>
       <div class="cs-group">
         <div>
           <?=new FormRadio([
@@ -279,7 +281,7 @@ use \Charis\{
           ]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Reverse</h4>
+      <h5>Reverse</h5>
       <div class="cs-group w-25">
         <div>
           <?=new FormRadio([
@@ -306,21 +308,21 @@ use \Charis\{
           <?=new FormSwitch([':label'=>'Checked switch', ':checked'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Disabled</h4>
+      <h5>Disabled</h5>
       <div class="cs-group">
         <div>
           <?=new FormSwitch([':label'=>'Disabled switch', ':disabled'=>true]).PHP_EOL?>
           <?=new FormSwitch([':label'=>'Disabled checked switch', ':disabled'=>true, ':checked'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Help Text</h4>
+      <h5>Help Text</h5>
       <div class="cs-group">
         <?=new FormSwitch([
           ':label' => 'I agree to the terms and conditions',
           ':help' => 'By selecting this, you agree to our terms of service and privacy policy.'
         ]).PHP_EOL?>
       </div><!--.cs-group-->
-      <h4>Inline</h4>
+      <h5>Inline</h5>
       <div class="cs-group">
         <div>
           <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'1']).PHP_EOL?>
@@ -328,7 +330,7 @@ use \Charis\{
           <?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true]).PHP_EOL?>
         </div>
       </div><!--.cs-group-->
-      <h4>Reverse</h4>
+      <h5>Reverse</h5>
       <div class="cs-group w-25">
         <div>
           <?=new FormSwitch([
@@ -354,15 +356,30 @@ use \Charis\{
           ':placeholder' => 'e.g., JohnDoe'
         ]).PHP_EOL?>
       </div><!--.cs-group-->
-
-      <!------------------------------------------------------------------------
-       ! Form Text (Floating Label)
-       !----------------------------------------------------------------------->
-      <h3>Form Text (Floating Label)</h3>
+      <h5>Floating Label</h5>
       <div class="cs-group">
         <?=new FormFLText([
           ':label'=>'Username',
           ':help' => 'Your username must be 3–15 characters long.'
+        ]).PHP_EOL?>
+      </div><!--.cs-group-->
+
+      <!------------------------------------------------------------------------
+       ! Form Email
+       !----------------------------------------------------------------------->
+      <h3>Form Email</h3>
+      <div class="cs-group">
+        <?=new FormEmail([
+          ':label'=>'Email address',
+          ':help' => "We'll never share your email with anyone else.",
+          ':placeholder' => 'e.g., username@example.com'
+        ]).PHP_EOL?>
+      </div><!--.cs-group-->
+      <h5>Floating Label</h5>
+      <div class="cs-group">
+        <?=new FormFLEmail([
+          ':label'=>'Email address',
+          ':help' => "We'll never share your email with anyone else."
         ]).PHP_EOL?>
       </div><!--.cs-group-->
 
