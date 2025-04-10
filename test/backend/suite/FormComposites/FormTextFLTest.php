@@ -2,10 +2,10 @@
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
 
-use \Charis\FormComposites\FormFLText;
+use \Charis\FormComposites\FormTextFL;
 
-#[CoversClass(FormFLText::class)]
-class FormFLTextTest extends TestCase
+#[CoversClass(FormTextFL::class)]
+class FormTextFLTest extends TestCase
 {
     private function assertMatchesWithUID(string $expected, string $actual): void
     {
@@ -15,7 +15,7 @@ class FormFLTextTest extends TestCase
 
     function testDefaultRendering()
     {
-        $component = new FormFLText();
+        $component = new FormTextFL();
         $this->assertSame(
             '<div class="form-floating mb-3">'
           .   '<input class="form-control" type="text" placeholder=""/>'
@@ -26,7 +26,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderWithId()
     {
-        $component = new FormFLText([':id' => 'custom-id']);
+        $component = new FormTextFL([':id' => 'custom-id']);
         $this->assertSame(
             '<div class="form-floating mb-3">'
           .   '<input class="form-control" type="text" id="custom-id" placeholder=""/>'
@@ -37,7 +37,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderWithName()
     {
-        $component = new FormFLText([':name' => 'Text1']);
+        $component = new FormTextFL([':name' => 'Text1']);
         $this->assertSame(
             '<div class="form-floating mb-3">'
           .   '<input class="form-control" type="text" name="Text1" placeholder=""/>'
@@ -48,7 +48,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderWithLabel()
     {
-        $component = new FormFLText([':label' => 'Label Text']);
+        $component = new FormTextFL([':label' => 'Label Text']);
         $this->assertMatchesWithUID(
             '<div class="form-floating mb-3">'
           .   '<input class="form-control" type="text" id="form-input-UID" placeholder=""/>'
@@ -60,7 +60,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderWithIdAndLabel()
     {
-        $component = new FormFLText([
+        $component = new FormTextFL([
             ':id' => 'custom-id',
             ':label' => 'Label Text'
         ]);
@@ -75,7 +75,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderWithHelp()
     {
-        $component = new FormFLText([':help' => 'This is a help text.']);
+        $component = new FormTextFL([':help' => 'This is a help text.']);
         $this->assertMatchesWithUID(
             '<div class="form-floating mb-3">'
           .   '<input class="form-control" type="text" aria-describedby="form-help-UID" placeholder=""/>'
@@ -87,7 +87,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderWithLabelAndHelp()
     {
-        $component = new FormFLText([
+        $component = new FormTextFL([
             ':label' => 'Label Text',
             ':help' => 'This is a help text.',
         ]);
@@ -103,7 +103,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderWithIdAndLabelAndHelp()
     {
-        $component = new FormFLText([
+        $component = new FormTextFL([
             ':id' => 'custom-id',
             ':label' => 'Label Text',
             ':help' => 'This is a help text.',
@@ -120,7 +120,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderThrowsWithPlaceholder()
     {
-        $component = new FormFLText([':placeholder' => 'Placeholder text']);
+        $component = new FormTextFL([':placeholder' => 'Placeholder text']);
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid attribute name.');
         $component->Render();
@@ -128,7 +128,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderWithDisabled()
     {
-        $component = new FormFLText([':disabled' => true]);
+        $component = new FormTextFL([':disabled' => true]);
         $this->assertSame(
             '<div class="form-floating mb-3">'
           .   '<input class="form-control" type="text" placeholder="" disabled/>'
@@ -139,7 +139,7 @@ class FormFLTextTest extends TestCase
 
     function testRenderWithAllPseudoAttributes()
     {
-        $component = new FormFLText([
+        $component = new FormTextFL([
             ':id' => 'custom-id',
             ':name' => 'Text1',
             ':label' => 'Label Text',

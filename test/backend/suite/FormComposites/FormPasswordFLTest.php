@@ -2,17 +2,17 @@
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
 
-use \Charis\FormComposites\FormFLEmail;
+use \Charis\FormComposites\FormPasswordFL;
 
-#[CoversClass(FormFLEmail::class)]
-class FormFLEmailTest extends TestCase
+#[CoversClass(FormPasswordFL::class)]
+class FormPasswordFLTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $component = new FormFLEmail();
+        $component = new FormPasswordFL();
         $this->assertSame(
             '<div class="form-floating mb-3">'
-          .   '<input class="form-control" type="email" placeholder=""/>'
+          .   '<input class="form-control" type="password" minlength="8" maxlength="72" placeholder=""/>'
           . '</div>'
           , $component->Render()
         );
