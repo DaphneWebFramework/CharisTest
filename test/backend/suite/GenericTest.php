@@ -20,7 +20,7 @@ class GenericTest extends TestCase
         $mock->expects($this->once())
             ->method('Render')
             ->willReturn('<div></div>');
-        $this->assertSame('<div></div>', (string)$mock);
+        $this->assertSame('<div></div>' . PHP_EOL, (string)$mock);
     }
 
     function testRenderWithNoAttributesOrContent()
