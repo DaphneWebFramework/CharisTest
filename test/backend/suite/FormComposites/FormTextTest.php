@@ -149,11 +149,12 @@ class FormTextTest extends TestCase
             ':help' => 'This is a help text.',
             ':placeholder' => 'Placeholder text',
             ':disabled' => true,
+            ':required' => true,
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
-          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-UID" placeholder="Placeholder text" disabled/>'
+          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-UID" placeholder="Placeholder text" disabled required/>'
           .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()
