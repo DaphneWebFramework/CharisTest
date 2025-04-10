@@ -11,7 +11,7 @@ class FormPasswordInputTest extends TestCase
     {
         $component = new FormPasswordInput();
         $this->assertSame(
-            '<input class="form-control" type="password"/>',
+            '<input class="form-control" type="password" minlength="8" maxlength="72"/>',
             $component->Render()
         );
     }

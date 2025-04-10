@@ -12,7 +12,7 @@ class FormFLPasswordTest extends TestCase
         $component = new FormFLPassword();
         $this->assertSame(
             '<div class="form-floating mb-3">'
-          .   '<input class="form-control" type="password" placeholder=""/>'
+          .   '<input class="form-control" type="password" minlength="8" maxlength="72" placeholder=""/>'
           . '</div>'
           , $component->Render()
         );
