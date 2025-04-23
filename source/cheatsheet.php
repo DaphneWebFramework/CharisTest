@@ -13,6 +13,12 @@
 require 'autoload.php';
 
 use \Charis\{
+	Container,
+	Navbar,
+	NavbarBrand,
+	NavbarToggler,
+	NavbarCollapse,
+	Collapse,
 	Button,
 	ButtonGroup,
 	ButtonToolbar,
@@ -25,9 +31,6 @@ use \Charis\{
 	FormComposites\FormEmailFL,
 	FormComposites\FormPassword,
 	FormComposites\FormPasswordFL,
-	Navbar,
-	NavbarBrand,
-	Container,
 };
 ?>
 <!DOCTYPE html>
@@ -42,10 +45,43 @@ use \Charis\{
 <body>
 	<?=new Navbar(null, [
 		new Container(null, [
-				new NavbarBrand(null, 'Charis Cheatsheet')
+			new NavbarBrand(null, 'Charis Cheatsheet')
 		])
 	])?>
 	<div class="container">
+		<!----------------------------------------------------------------------
+		 ! Navbar
+		 !--------------------------------------------------------------------->
+		<h3>Navbar</h3>
+		<div class="cs-group">
+			<?=new Navbar(['class' => 'navbar-expand'], [
+				new Container(null, [
+					new NavbarBrand(null, 'Brand'),
+					new NavbarToggler([
+						'data-bs-target'=>'#navbarCollapse',
+						'aria-controls'=>'navbarCollapse'
+					]),
+					new NavbarCollapse(['id'=>'navbarCollapse'], [
+						// ...
+					])
+				])
+			])?>
+		</div><!--.cs-group-->
+
+		<!----------------------------------------------------------------------
+		 ! Collapse
+		 !--------------------------------------------------------------------->
+		<h3>Collapse</h3>
+		<div class="cs-group">
+			<?=new Button([
+				'data-bs-toggle'=>'collapse',
+				'data-bs-target'=>'#collapseExample',
+				'aria-expanded'=>false,
+				'aria-controls'=>'collapseExample'
+			], 'Toggle collapse')?>
+			<?=new Collapse(['id'=>'collapseExample'], 'This is a collapse.')?>
+		</div><!--.cs-group-->
+
 		<!----------------------------------------------------------------------
 		 ! Button
 		 !--------------------------------------------------------------------->
