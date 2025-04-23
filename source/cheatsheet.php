@@ -18,6 +18,8 @@ use \Charis\{
 	NavbarBrand,
 	NavbarToggler,
 	NavbarCollapse,
+	NavbarNav,
+	NavbarItem,
 	Collapse,
 	Button,
 	ButtonGroup,
@@ -54,7 +56,7 @@ use \Charis\{
 		 !--------------------------------------------------------------------->
 		<h3>Navbar</h3>
 		<div class="cs-group">
-			<?=new Navbar(['class' => 'navbar-expand'], [
+			<?=new Navbar(['class' => 'navbar-expand-sm'], [
 				new Container(null, [
 					new NavbarBrand(null, 'Brand'),
 					new NavbarToggler([
@@ -62,7 +64,10 @@ use \Charis\{
 						'aria-controls'=>'navbarCollapse'
 					]),
 					new NavbarCollapse(['id'=>'navbarCollapse'], [
-						// ...
+						new NavbarNav(['class' => 'ms-auto'], [
+							new NavbarItem([':label' => 'Register']),
+							new NavbarItem([':label' => 'Login'])
+						])
 					])
 				])
 			])?>
