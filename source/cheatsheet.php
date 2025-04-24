@@ -20,6 +20,9 @@ use \Charis\{
 	NavbarCollapse,
 	NavbarNav,
 	NavbarItem,
+	NavbarDropdown,
+	NavbarDropdownItem,
+	NavbarDropdownDivider,
 	Collapse,
 	Button,
 	ButtonGroup,
@@ -65,8 +68,16 @@ use \Charis\{
 					]),
 					new NavbarCollapse(['id'=>'navbarCollapse'], [
 						new NavbarNav(['class' => 'ms-auto'], [
+							new NavbarItem([':label' => 'Home', ':active'=>true]),
+							new NavbarItem([':label' => 'Tools', ':disabled'=>true]),
 							new NavbarItem([':label' => 'Register']),
-							new NavbarItem([':label' => 'Login'])
+							new NavbarItem([':label' => 'Login']),
+							new NavbarDropdown([':label' => 'Settings'], [
+								new NavbarDropdownItem([':label' => 'Profile']),
+								new NavbarDropdownItem([':label' => 'Security']),
+								new NavbarDropdownDivider(),
+								new NavbarDropdownItem([':label' => 'Help'])
+							])
 						])
 					])
 				])
