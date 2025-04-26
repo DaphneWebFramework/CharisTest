@@ -44,6 +44,18 @@ class NavbarDropdownItemTest extends TestCase
         );
     }
 
+    function testRenderWithId()
+    {
+        $component = new NavbarDropdownItem([':id' => 'profileLink']);
+        $this->assertSame(
+            '<li>'
+          .   '<a class="dropdown-item" href="#" id="profileLink">'
+          .   '</a>'
+          . '</li>',
+            $component->Render()
+        );
+    }
+
     function testRenderWithDisabled()
     {
         $component = new NavbarDropdownItem([':disabled' => true]);
@@ -61,11 +73,12 @@ class NavbarDropdownItemTest extends TestCase
         $component = new NavbarDropdownItem([
             ':label' => 'Profile',
             ':href' => '/profile',
+            ':id' => 'profileLink',
             ':disabled' => true
         ]);
         $this->assertSame(
             '<li>'
-          .   '<a class="dropdown-item disabled" href="/profile" aria-disabled="true">'
+          .   '<a class="dropdown-item disabled" href="/profile" id="profileLink" aria-disabled="true">'
           .     'Profile'
           .   '</a>'
           . '</li>',

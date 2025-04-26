@@ -44,6 +44,18 @@ class NavbarItemTest extends TestCase
         );
     }
 
+    function testRenderWithId()
+    {
+        $component = new NavbarItem([':id'=>'homeLink']);
+        $this->assertSame(
+            '<li class="nav-item">'
+          .   '<a class="nav-link" href="#" id="homeLink">'
+          .   '</a>'
+          . '</li>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithActive()
     {
         $component = new NavbarItem([':active'=>true]);
@@ -73,12 +85,13 @@ class NavbarItemTest extends TestCase
         $component = new NavbarItem([
             ':label'=>'Home',
             ':href'=>'/home',
+            ':id'=>'homeLink',
             ':active'=>true,
             ':disabled'=>true
         ]);
         $this->assertSame(
             '<li class="nav-item">'
-          .   '<a class="nav-link active disabled" href="/home" aria-current="page" aria-disabled="true">'
+          .   '<a class="nav-link active disabled" href="/home" id="homeLink" aria-current="page" aria-disabled="true">'
           .       'Home'
           .   '</a>'
           . '</li>'
