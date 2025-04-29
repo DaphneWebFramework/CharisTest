@@ -129,6 +129,17 @@ class FormTextTest extends TestCase
         );
     }
 
+    function testRenderWithAutocomplete()
+    {
+        $component = new FormText([':autocomplete' => 'on']);
+        $this->assertSame(
+            '<div class="mb-3">'
+          .   '<input class="form-control" type="text" autocomplete="on"/>'
+          . '</div>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithDisabled()
     {
         $component = new FormText([':disabled' => true]);
@@ -148,13 +159,14 @@ class FormTextTest extends TestCase
             ':label' => 'Label Text',
             ':help' => 'This is a help text.',
             ':placeholder' => 'Placeholder text',
+            ':autocomplete' => 'on',
             ':disabled' => true,
             ':required' => true,
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
-          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-UID" placeholder="Placeholder text" disabled required/>'
+          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-UID" placeholder="Placeholder text" autocomplete="on" disabled required/>'
           .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()

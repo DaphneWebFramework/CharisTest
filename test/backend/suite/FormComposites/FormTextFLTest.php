@@ -126,6 +126,17 @@ class FormTextFLTest extends TestCase
         $component->Render();
     }
 
+    function testRenderWithAutocomplete()
+    {
+        $component = new FormTextFL([':autocomplete' => 'on']);
+        $this->assertSame(
+            '<div class="form-floating mb-3">'
+          .   '<input class="form-control" type="text" placeholder="" autocomplete="on"/>'
+          . '</div>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithDisabled()
     {
         $component = new FormTextFL([':disabled' => true]);
@@ -144,11 +155,12 @@ class FormTextFLTest extends TestCase
             ':name' => 'Text1',
             ':label' => 'Label Text',
             ':help' => 'This is a help text.',
+            ':autocomplete' => 'on',
             ':disabled' => true,
         ]);
         $this->assertMatchesWithUID(
             '<div class="form-floating mb-3">'
-          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-UID" placeholder="" disabled/>'
+          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-UID" placeholder="" autocomplete="on" disabled/>'
           .   '<label for="custom-id">Label Text</label>'
           .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
