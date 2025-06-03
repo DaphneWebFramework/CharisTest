@@ -50,18 +50,33 @@ class NavbarDropdownTest extends TestCase
         );
     }
 
+    function testRenderWithAlignRight()
+    {
+        $component = new NavbarDropdown([':alignRight' => true]);
+        $this->assertSame(
+            '<li class="nav-item dropdown">'
+          .   '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">'
+          .   '</a>'
+          .   '<ul class="dropdown-menu dropdown-menu-end">'
+          .   '</ul>'
+          . '</li>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithAllPseudoAttributes()
     {
         $component = new NavbarDropdown([
             ':label' => 'Settings',
-            ':disabled' => true
+            ':disabled' => true,
+            ':alignRight' => true
         ]);
         $this->assertSame(
             '<li class="nav-item dropdown">'
           .   '<a class="nav-link dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-disabled="true">'
           .       'Settings'
           .   '</a>'
-          .   '<ul class="dropdown-menu">'
+          .   '<ul class="dropdown-menu dropdown-menu-end">'
           .   '</ul>'
           . '</li>'
           , $component->Render()
