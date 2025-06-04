@@ -23,6 +23,11 @@ use \Charis\{
 	NavbarDropdown,
 	NavbarDropdownItem,
 	NavbarDropdownDivider,
+	VerticalPillTabNavigation,
+	VerticalPillTabs,
+	PillTab,
+	TabPanes,
+	TabPane,
 	Collapse,
 	Button,
 	ButtonGroup,
@@ -80,6 +85,29 @@ use \Charis\{
 							])
 						])
 					])
+				])
+			])?>
+		</div><!--.cs-group-->
+
+		<!----------------------------------------------------------------------
+		 ! Vertical PillTab Navigation
+		 !---------------------------------------------------------------------->
+		<h3>Vertical PillTab Navigation</h3>
+		<div class="cs-group">
+			<?=new VerticalPillTabNavigation([], [
+				new VerticalPillTabs([], [
+					new PillTab([':key' => 'home', ':active' => true], 'Home'),
+					new PillTab([':key' => 'profile'], 'Profile'),
+					new PillTab([':key' => 'disabled', 'disabled' => true], 'Disabled'),
+					new PillTab([':key' => 'messages'], 'Messages'),
+					new PillTab([':key' => 'settings'], 'Settings'),
+				]),
+				new TabPanes([], [
+					new TabPane([':key' => 'home', ':active' => true], 'Welcome to the home section.'),
+					new TabPane([':key' => 'profile'], 'Edit your profile information here.'),
+					new TabPane([':key' => 'disabled'], 'This section is currently disabled.'),
+					new TabPane([':key' => 'messages'], 'Your recent messages will appear here.'),
+					new TabPane([':key' => 'settings'], 'Manage your settings and preferences.')
 				])
 			])?>
 		</div><!--.cs-group-->
