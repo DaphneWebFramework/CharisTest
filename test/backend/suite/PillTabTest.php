@@ -10,21 +10,24 @@ class PillTabTest extends TestCase
     function testDefaultRendering()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The ":key" attribute must be a non-empty string.');
+        $this->expectExceptionMessage(
+            'The ":key" attribute must be a non-empty string.');
         $component = new PillTab();
     }
 
     function testThrowsWhenKeyIsNotAString()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The ":key" attribute must be a non-empty string.');
+        $this->expectExceptionMessage(
+            'The ":key" attribute must be a non-empty string.');
         $component = new PillTab([':key' => 123]);
     }
 
     function testThrowsWhenKeyIsEmptyString()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The ":key" attribute must be a non-empty string.');
+        $this->expectExceptionMessage(
+            'The ":key" attribute must be a non-empty string.');
         $component = new PillTab([':key' => '']);
     }
 
@@ -192,7 +195,7 @@ class PillTabTest extends TestCase
         );
     }
 
-    function testRenderWithUserDefinedOverrides()
+    function testRenderWithUserDefinedIds()
     {
         $component = new PillTab([
             ':key' => 'settings',
