@@ -2,14 +2,14 @@
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
 
-use \Charis\VerticalPillTabLayout;
+use \Charis\VerticalPillTabNavigation;
 
-#[CoversClass(VerticalPillTabLayout::class)]
-class VerticalPillTabLayoutTest extends TestCase
+#[CoversClass(VerticalPillTabNavigation::class)]
+class VerticalPillTabNavigationTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $component = new VerticalPillTabLayout();
+        $component = new VerticalPillTabNavigation();
         $this->assertSame(
             '<div class="d-flex align-items-start">'
           . '</div>'
