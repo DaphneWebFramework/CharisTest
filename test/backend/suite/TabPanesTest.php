@@ -2,14 +2,14 @@
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
 
-use \Charis\TabContent;
+use \Charis\TabPanes;
 
-#[CoversClass(TabContent::class)]
-class TabContentTest extends TestCase
+#[CoversClass(TabPanes::class)]
+class TabPanesTest extends TestCase
 {
     function testDefaultRendering()
     {
-        $component = new TabContent();
+        $component = new TabPanes();
         $this->assertSame(
             '<div class="tab-content">'
           . '</div>'
