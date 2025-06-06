@@ -46,6 +46,17 @@ class FormTextTest extends TestCase
         );
     }
 
+    function testRenderWithValue()
+    {
+        $component = new FormText([':value' => 'Sample Text']);
+        $this->assertSame(
+            '<div class="mb-3">'
+          .   '<input class="form-control" type="text" value="Sample Text"/>'
+          . '</div>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithLabel()
     {
         $component = new FormText([':label' => 'Label Text']);
@@ -151,11 +162,23 @@ class FormTextTest extends TestCase
         );
     }
 
+    function testRenderWithRequired()
+    {
+        $component = new FormText([':required' => true]);
+        $this->assertSame(
+            '<div class="mb-3">'
+          .   '<input class="form-control" type="text" required/>'
+          . '</div>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithAllPseudoAttributes()
     {
         $component = new FormText([
             ':id' => 'custom-id',
             ':name' => 'Text1',
+            ':value' => 'Sample Text',
             ':label' => 'Label Text',
             ':help' => 'This is a help text.',
             ':placeholder' => 'Placeholder text',
@@ -166,7 +189,16 @@ class FormTextTest extends TestCase
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
-          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-UID" placeholder="Placeholder text" autocomplete="on" disabled required/>'
+          .   '<input class="form-control" '
+                   . 'type="text" '
+                   . 'id="custom-id" '
+                   . 'name="Text1" '
+                   . 'value="Sample Text" '
+                   . 'aria-describedby="form-help-UID" '
+                   . 'placeholder="Placeholder text" '
+                   . 'autocomplete="on" '
+                   . 'disabled '
+                   . 'required/>'
           .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
           , $component->Render()

@@ -46,6 +46,17 @@ class FormTextFLTest extends TestCase
         );
     }
 
+    function testRenderWithValue()
+    {
+        $component = new FormTextFL([':value' => 'Sample Text']);
+        $this->assertSame(
+            '<div class="form-floating mb-3">'
+          .   '<input class="form-control" type="text" value="Sample Text" placeholder=""/>'
+          . '</div>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithLabel()
     {
         $component = new FormTextFL([':label' => 'Label Text']);
@@ -148,19 +159,41 @@ class FormTextFLTest extends TestCase
         );
     }
 
+    function testRenderWithRequired()
+    {
+        $component = new FormTextFL([':required' => true]);
+        $this->assertSame(
+            '<div class="form-floating mb-3">'
+          .   '<input class="form-control" type="text" placeholder="" required/>'
+          . '</div>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithAllPseudoAttributes()
     {
         $component = new FormTextFL([
             ':id' => 'custom-id',
             ':name' => 'Text1',
+            ':value' => 'Sample Text',
             ':label' => 'Label Text',
             ':help' => 'This is a help text.',
             ':autocomplete' => 'on',
             ':disabled' => true,
+            ':required' => true,
         ]);
         $this->assertMatchesWithUID(
             '<div class="form-floating mb-3">'
-          .   '<input class="form-control" type="text" id="custom-id" name="Text1" aria-describedby="form-help-UID" placeholder="" autocomplete="on" disabled/>'
+          .   '<input class="form-control" '
+                   . 'type="text" '
+                   . 'id="custom-id" '
+                   . 'name="Text1" '
+                   . 'value="Sample Text" '
+                   . 'aria-describedby="form-help-UID" '
+                   . 'placeholder="" '
+                   . 'autocomplete="on" '
+                   . 'disabled '
+                   . 'required/>'
           .   '<label for="custom-id">Label Text</label>'
           .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
           . '</div>'
