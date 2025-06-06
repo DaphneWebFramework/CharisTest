@@ -36,6 +36,20 @@ class NavbarDropdownTest extends TestCase
         );
     }
 
+    function testRenderWithLabelId()
+    {
+        $component = new NavbarDropdown([':labelId' => 'settingsDropdown']);
+        $this->assertSame(
+            '<li class="nav-item dropdown">'
+          .   '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="settingsDropdown">'
+          .   '</a>'
+          .   '<ul class="dropdown-menu">'
+          .   '</ul>'
+          . '</li>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithDisabled()
     {
         $component = new NavbarDropdown([':disabled' => true]);
@@ -68,12 +82,13 @@ class NavbarDropdownTest extends TestCase
     {
         $component = new NavbarDropdown([
             ':label' => 'Settings',
+            ':labelId' => 'settingsDropdown',
             ':disabled' => true,
             ':alignRight' => true
         ]);
         $this->assertSame(
             '<li class="nav-item dropdown">'
-          .   '<a class="nav-link dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-disabled="true">'
+          .   '<a class="nav-link dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="settingsDropdown" aria-disabled="true">'
           .       'Settings'
           .   '</a>'
           .   '<ul class="dropdown-menu dropdown-menu-end">'
