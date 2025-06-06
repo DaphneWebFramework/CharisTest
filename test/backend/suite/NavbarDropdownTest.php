@@ -36,9 +36,9 @@ class NavbarDropdownTest extends TestCase
         );
     }
 
-    function testRenderWithLabelId()
+    function testRenderWithId()
     {
-        $component = new NavbarDropdown([':labelId' => 'settingsDropdown']);
+        $component = new NavbarDropdown([':id' => 'settingsDropdown']);
         $this->assertSame(
             '<li class="nav-item dropdown">'
           .   '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="settingsDropdown">'
@@ -82,7 +82,7 @@ class NavbarDropdownTest extends TestCase
     {
         $component = new NavbarDropdown([
             ':label' => 'Settings',
-            ':labelId' => 'settingsDropdown',
+            ':id' => 'settingsDropdown',
             ':disabled' => true,
             ':alignRight' => true
         ]);
