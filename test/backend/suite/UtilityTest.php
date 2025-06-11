@@ -6,15 +6,15 @@ use \Charis\Utility;
 
 use \TestToolkit\AccessHelper;
 
-class UtilityHost { use Utility; }
+class _Utility { use Utility; }
 
 class UtilityTest extends TestCase
 {
-    private ?UtilityHost $sut = null;
+    private ?_Utility $sut = null;
 
     protected function setUp(): void
     {
-        $this->sut = new UtilityHost();
+        $this->sut = new _Utility();
     }
 
     protected function tearDown(): void
@@ -26,9 +26,9 @@ class UtilityTest extends TestCase
      * Alternative method for constructing the system under test, allowing for
      * mocking of specific methods.
      */
-    private function systemUnderTest(string ...$mockedMethods): UtilityHost
+    private function systemUnderTest(string ...$mockedMethods): _Utility
     {
-        return $this->getMockBuilder(UtilityHost::class)
+        return $this->getMockBuilder(_Utility::class)
             ->onlyMethods($mockedMethods)
             ->getMock();
     }
@@ -506,6 +506,26 @@ class UtilityTest extends TestCase
 
     #endregion consumePseudoAttribute
 
+    #region consumeScopedPseudoAttributes --------------------------------------
+
+    #[DataProvider('consumeScopedPseudoAttributesDataProvider')]
+    function testConsumeScopedPseudoAttributes(
+        ?array $attributes,
+        string $scope,
+        array $expectedResult,
+        ?array $expectedRemaining
+    ) {
+        $result = AccessHelper::CallMethod(
+            $this->sut,
+            'consumeScopedPseudoAttributes',
+            [&$attributes, $scope]
+        );
+        $this->assertSame($expectedResult, $result);
+        $this->assertSame($expectedRemaining, $attributes);
+    }
+
+    #endregion consumeScopedPseudoAttributes
+
     #region isResolvableClassAttribute -----------------------------------------
 
     #[DataProvider('isResolvableClassAttributeDataProvider')]
@@ -738,6 +758,64 @@ class UtilityTest extends TestCase
                 null,
                 ':pseudo',
                 null
+            ],
+        ];
+    }
+
+    static function consumeScopedPseudoAttributesDataProvider()
+    {
+        // attributes
+        // scope
+        // expectedResult
+        // expectedRemaining
+        return [
+            'null attributes' => [
+                null,
+                'link',
+                [],
+                null
+            ],
+            'empty attributes' => [
+                [],
+                'link',
+                [],
+                []
+            ],
+            'non-matching scope' => [
+                [':menu:id' => 'x'],
+                'link',
+                [],
+                [':menu:id' => 'x']
+            ],
+            'ignored empty suffix' => [
+                [':link:' => 'value', ':link:id' => 'ok'],
+                'link',
+                ['id' => 'ok'],
+                [':link:' => 'value']
+            ],
+            'case-sensitive scope' => [
+                [':Link:id' => 'wrong', ':link:id' => 'ok'],
+                'link',
+                ['id' => 'ok'],
+                [':Link:id' => 'wrong']
+            ],
+            'matching scoped attributes' => [
+                [':link:id' => 'myId', ':link:data-role' => 'nav'],
+                'link',
+                ['id' => 'myId', 'data-role' => 'nav'],
+                []
+            ],
+            'dashed and numeric attribute names' => [
+                [':link:data-x' => 'value', ':link:role123' => 'presentation'],
+                'link',
+                ['data-x' => 'value', 'role123' => 'presentation'],
+                []
+            ],
+            'negative class directive' => [
+                [':link:class' => '-dropdown-item btn-alt'],
+                'link',
+                ['class' => '-dropdown-item btn-alt'],
+                []
             ],
         ];
     }
