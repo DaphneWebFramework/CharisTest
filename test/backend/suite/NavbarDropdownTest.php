@@ -36,20 +36,6 @@ class NavbarDropdownTest extends TestCase
         );
     }
 
-    function testRenderWithId()
-    {
-        $component = new NavbarDropdown([':id' => 'settingsDropdown']);
-        $this->assertSame(
-            '<li class="nav-item dropdown">'
-          .   '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="settingsDropdown">'
-          .   '</a>'
-          .   '<ul class="dropdown-menu">'
-          .   '</ul>'
-          . '</li>'
-          , $component->Render()
-        );
-    }
-
     function testRenderWithDisabled()
     {
         $component = new NavbarDropdown([':disabled' => true]);
@@ -64,34 +50,31 @@ class NavbarDropdownTest extends TestCase
         );
     }
 
-    function testRenderWithAlignRight()
+    function testRenderWithAttributesForWrapper()
     {
-        $component = new NavbarDropdown([':alignRight' => true]);
+        $component = new NavbarDropdown(['class' => 'custom-class']);
         $this->assertSame(
-            '<li class="nav-item dropdown">'
+            '<li class="nav-item dropdown custom-class">'
           .   '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">'
           .   '</a>'
-          .   '<ul class="dropdown-menu dropdown-menu-end">'
+          .   '<ul class="dropdown-menu">'
           .   '</ul>'
           . '</li>'
           , $component->Render()
         );
     }
 
-    function testRenderWithAllPseudoAttributes()
+    function testRenderWithScopedPseudoAttributes()
     {
         $component = new NavbarDropdown([
-            ':label' => 'Settings',
-            ':id' => 'settingsDropdown',
-            ':disabled' => true,
-            ':alignRight' => true
+            ':link:role' => false, // Deletes `role="button"` attribute
+            ':menu:class' => 'custom-class'
         ]);
         $this->assertSame(
             '<li class="nav-item dropdown">'
-          .   '<a class="nav-link dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="settingsDropdown" aria-disabled="true">'
-          .       'Settings'
+          .   '<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">'
           .   '</a>'
-          .   '<ul class="dropdown-menu dropdown-menu-end">'
+          .   '<ul class="dropdown-menu custom-class">'
           .   '</ul>'
           . '</li>'
           , $component->Render()

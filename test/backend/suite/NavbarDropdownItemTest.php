@@ -14,8 +14,8 @@ class NavbarDropdownItemTest extends TestCase
             '<li>'
           .   '<a class="dropdown-item" href="#">'
           .   '</a>'
-          . '</li>',
-            $component->Render()
+          . '</li>'
+          , $component->Render()
         );
     }
 
@@ -27,8 +27,8 @@ class NavbarDropdownItemTest extends TestCase
           .   '<a class="dropdown-item" href="#">'
           .     'Profile'
           .   '</a>'
-          . '</li>',
-            $component->Render()
+          . '</li>'
+          , $component->Render()
         );
     }
 
@@ -39,20 +39,8 @@ class NavbarDropdownItemTest extends TestCase
             '<li>'
           .   '<a class="dropdown-item" href="/profile">'
           .   '</a>'
-          . '</li>',
-            $component->Render()
-        );
-    }
-
-    function testRenderWithId()
-    {
-        $component = new NavbarDropdownItem([':id' => 'profileLink']);
-        $this->assertSame(
-            '<li>'
-          .   '<a class="dropdown-item" href="#" id="profileLink">'
-          .   '</a>'
-          . '</li>',
-            $component->Render()
+          . '</li>'
+          , $component->Render()
         );
     }
 
@@ -63,26 +51,38 @@ class NavbarDropdownItemTest extends TestCase
             '<li>'
           .   '<a class="dropdown-item disabled" href="#" aria-disabled="true">'
           .   '</a>'
-          . '</li>',
-            $component->Render()
+          . '</li>'
+          , $component->Render()
         );
     }
 
-    function testRenderWithAllPseudoAttributes()
+    function testRenderWithAttributesForWrapper()
+    {
+        $component = new NavbarDropdownItem(['class' => 'custom-class']);
+        $this->assertSame(
+            '<li class="custom-class">'
+          .   '<a class="dropdown-item" href="#">'
+          .   '</a>'
+          . '</li>'
+          , $component->Render()
+        );
+    }
+
+    function testRenderWithScopedPseudoAttributes()
     {
         $component = new NavbarDropdownItem([
             ':label' => 'Profile',
             ':href' => '/profile',
-            ':id' => 'profileLink',
-            ':disabled' => true
+            ':link:id' => 'profileLink',
+            ':link:target' => '_blank'
         ]);
         $this->assertSame(
             '<li>'
-          .   '<a class="dropdown-item disabled" href="/profile" id="profileLink" aria-disabled="true">'
+          .   '<a class="dropdown-item" href="/profile" id="profileLink" target="_blank">'
           .     'Profile'
           .   '</a>'
-          . '</li>',
-            $component->Render()
+          . '</li>'
+          , $component->Render()
         );
     }
 }

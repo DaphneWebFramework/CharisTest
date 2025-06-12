@@ -21,11 +21,11 @@ class NavbarItemTest extends TestCase
 
     function testRenderWithLabel()
     {
-        $component = new NavbarItem([':label'=>'Home']);
+        $component = new NavbarItem([':label' => 'Home']);
         $this->assertSame(
             '<li class="nav-item">'
           .   '<a class="nav-link" href="#">'
-          .       'Home'
+          .     'Home'
           .   '</a>'
           . '</li>'
           , $component->Render()
@@ -34,7 +34,7 @@ class NavbarItemTest extends TestCase
 
     function testRenderWithHref()
     {
-        $component = new NavbarItem([':href'=>'/home']);
+        $component = new NavbarItem([':href' => '/home']);
         $this->assertSame(
             '<li class="nav-item">'
           .   '<a class="nav-link" href="/home">'
@@ -44,21 +44,9 @@ class NavbarItemTest extends TestCase
         );
     }
 
-    function testRenderWithId()
-    {
-        $component = new NavbarItem([':id'=>'homeLink']);
-        $this->assertSame(
-            '<li class="nav-item">'
-          .   '<a class="nav-link" href="#" id="homeLink">'
-          .   '</a>'
-          . '</li>'
-          , $component->Render()
-        );
-    }
-
     function testRenderWithActive()
     {
-        $component = new NavbarItem([':active'=>true]);
+        $component = new NavbarItem([':active' => true]);
         $this->assertSame(
             '<li class="nav-item">'
           .   '<a class="nav-link active" href="#" aria-current="page">'
@@ -70,7 +58,7 @@ class NavbarItemTest extends TestCase
 
     function testRenderWithDisabled()
     {
-        $component = new NavbarItem([':disabled'=>true]);
+        $component = new NavbarItem([':disabled' => true]);
         $this->assertSame(
             '<li class="nav-item">'
           .   '<a class="nav-link disabled" href="#" aria-disabled="true">'
@@ -80,19 +68,26 @@ class NavbarItemTest extends TestCase
         );
     }
 
-    function testRenderWithAllPseudoAttributes()
+    function testRenderWithAttributesForWrapper()
+    {
+        $component = new NavbarItem(['class' => 'custom-class']);
+        $this->assertSame(
+            '<li class="nav-item custom-class">'
+          .   '<a class="nav-link" href="#">'
+          .   '</a>'
+          . '</li>'
+          , $component->Render()
+        );
+    }
+
+    function testRenderWithScopedPseudoAttributes()
     {
         $component = new NavbarItem([
-            ':label'=>'Home',
-            ':href'=>'/home',
-            ':id'=>'homeLink',
-            ':active'=>true,
-            ':disabled'=>true
+            ':link:class' => '-nav-link custom-class'
         ]);
         $this->assertSame(
             '<li class="nav-item">'
-          .   '<a class="nav-link active disabled" href="/home" id="homeLink" aria-current="page" aria-disabled="true">'
-          .       'Home'
+          .   '<a class="custom-class" href="#">'
           .   '</a>'
           . '</li>'
           , $component->Render()
