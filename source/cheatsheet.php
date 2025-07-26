@@ -41,6 +41,7 @@ use \Charis\{
 	FormComposites\FormEmailFL,
 	FormComposites\FormPassword,
 	FormComposites\FormPasswordFL,
+	Spinner,
 };
 ?>
 <!DOCTYPE html>
@@ -58,7 +59,7 @@ use \Charis\{
 			new NavbarBrand(null, 'Charis Cheatsheet')
 		])
 	])?>
-	<div class="container">
+	<div class="container mb-5">
 		<!----------------------------------------------------------------------
 		 ! Navbar
 		 !--------------------------------------------------------------------->
@@ -481,6 +482,40 @@ use \Charis\{
 				':label'=>'Password',
 				':help' => 'Your password must be 8-20 characters long.'
 			])?>
+		</div><!--.cs-group-->
+		<!----------------------------------------------------------------------
+		 ! Spinner
+		 !--------------------------------------------------------------------->
+		<h3>Spinner</h3>
+		<div class="cs-group">
+			<?=new Spinner()?>
+			<?=new Spinner([':type' => 'grow'])?>
+		</div><!--.cs-group-->
+		<h5>Colors</h5>
+		<div class="cs-group">
+			<?=new Spinner(['class' => 'text-primary'])?>
+			<?=new Spinner(['class' => 'text-secondary'])?>
+			<?=new Spinner(['class' => 'text-success'])?>
+			<?=new Spinner(['class' => 'text-info'])?>
+			<?=new Spinner(['class' => 'text-warning'])?>
+			<?=new Spinner(['class' => 'text-danger'])?>
+			<?=new Spinner(['class' => 'text-light'])?>
+			<?=new Spinner(['class' => 'text-dark'])?>
+		</div><!--.cs-group-->
+		<div class="cs-group">
+			<?=new Spinner([':type' => 'grow', 'class' => 'text-primary'])?>
+			<?=new Spinner([':type' => 'grow', 'class' => 'text-secondary'])?>
+			<?=new Spinner([':type' => 'grow', 'class' => 'text-success'])?>
+			<?=new Spinner([':type' => 'grow', 'class' => 'text-info'])?>
+			<?=new Spinner([':type' => 'grow', 'class' => 'text-warning'])?>
+			<?=new Spinner([':type' => 'grow', 'class' => 'text-danger'])?>
+			<?=new Spinner([':type' => 'grow', 'class' => 'text-light'])?>
+			<?=new Spinner([':type' => 'grow', 'class' => 'text-dark'])?>
+		</div><!--.cs-group-->
+		<h5>Size</h5>
+		<div class="cs-group">
+			<?=new Spinner([':size' => 'sm'])?>
+			<?=new Spinner([':type' => 'grow', ':size' => 'sm'])?>
 		</div><!--.cs-group-->
 
 	</div><!--.container-->
