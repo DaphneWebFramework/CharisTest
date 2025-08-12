@@ -9,18 +9,18 @@
  * see <http://creativecommons.org/licenses/by/4.0/>.
  */
 
-h3 {
+h3.cs-heading {
   margin-top: 2rem;
   display: flex;
 }
-h3:after {
+h3.cs-heading:after {
   content: "";
   flex: 1 1;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin: auto;
   margin-left: 0.5rem;
 }
-h5 {
+h5.cs-subheading {
   margin-left: 1rem;
   margin-top: 1rem;
 }

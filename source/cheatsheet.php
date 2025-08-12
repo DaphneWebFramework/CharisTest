@@ -42,6 +42,7 @@ use \Charis\{
 	FormComposites\FormPassword,
 	FormComposites\FormPasswordFL,
 	Spinner,
+	Modal
 };
 ?>
 <!DOCTYPE html>
@@ -63,7 +64,7 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Navbar
 		 !--------------------------------------------------------------------->
-		<h3>Navbar</h3>
+		<h3 class="cs-heading">Navbar</h3>
 		<div class="cs-group">
 			<?=new Navbar(['class' => 'navbar-expand-sm'], [
 				new Container(null, [
@@ -93,7 +94,7 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Vertical PillTab Navigation
 		 !---------------------------------------------------------------------->
-		<h3>Vertical PillTab Navigation</h3>
+		<h3 class="cs-heading">Vertical PillTab Navigation</h3>
 		<div class="cs-group">
 			<?=new VerticalPillTabNavigation([], [
 				new VerticalPillTabs([], [
@@ -116,7 +117,7 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Collapse
 		 !--------------------------------------------------------------------->
-		<h3>Collapse</h3>
+		<h3 class="cs-heading">Collapse</h3>
 		<div class="cs-group">
 			<?=new Button([
 				'data-bs-toggle'=>'collapse',
@@ -130,8 +131,8 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Button
 		 !--------------------------------------------------------------------->
-		<h3>Button</h3>
-		<h5>Variants</h5>
+		<h3 class="cs-heading">Button</h3>
+		<h5 class="cs-subheading">Variants</h5>
 		<div class="cs-group">
 			<?=new Button(null, 'Primary')?>
 			<?=new Button(['class'=>'btn-secondary'], 'Secondary')?>
@@ -143,7 +144,7 @@ use \Charis\{
 			<?=new Button(['class'=>'btn-dark'], 'Dark')?>
 			<?=new Button(['class'=>'btn-link'], 'Link')?>
 		</div><!--.cs-group-->
-		<h5>Outline</h5>
+		<h5 class="cs-subheading">Outline</h5>
 		<div class="cs-group">
 			<?=new Button(['class'=>'btn-outline-primary'], 'Primary')?>
 			<?=new Button(['class'=>'btn-outline-secondary'], 'Secondary')?>
@@ -154,13 +155,13 @@ use \Charis\{
 			<?=new Button(['class'=>'btn-outline-light'], 'Light')?>
 			<?=new Button(['class'=>'btn-outline-dark'], 'Dark')?>
 		</div><!--.cs-group-->
-		<h5>Sizing</h5>
+		<h5 class="cs-subheading">Sizing</h5>
 		<div class="cs-group">
 			<?=new Button(['class'=>'btn-sm'], 'Small button')?>
 			<?=new Button(null, 'Standard button')?>
 			<?=new Button(['class'=>'btn-lg'], 'Large button')?>
 		</div><!--.cs-group-->
-		<h5>Disabled</h5>
+		<h5 class="cs-subheading">Disabled</h5>
 		<div class="cs-group">
 			<?=new Button(['disabled'=>true], 'Primary')?>
 			<?=new Button(['class'=>'btn-secondary', 'disabled'=>true], 'Secondary')?>
@@ -172,8 +173,8 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Button Group
 		 !--------------------------------------------------------------------->
-		<h3>Button Group</h3>
-		<h5>Basic</h5>
+		<h3 class="cs-heading">Button Group</h3>
+		<h5 class="cs-subheading">Basic</h5>
 		<div class="cs-group">
 			<?=new ButtonGroup([], [
 				new Button(null, 'Left'),
@@ -181,7 +182,7 @@ use \Charis\{
 				new Button(null, 'Right')
 			])?>
 		</div><!--.cs-group-->
-		<h5>Mixed</h5>
+		<h5 class="cs-subheading">Mixed</h5>
 		<div class="cs-group">
 			<?=new ButtonGroup([], [
 				new Button(['class'=>'btn-danger'], 'Left'),
@@ -189,7 +190,7 @@ use \Charis\{
 				new Button(['class'=>'btn-success'], 'Right')
 			])?>
 		</div><!--.cs-group-->
-		<h5>Outlined</h5>
+		<h5 class="cs-subheading">Outlined</h5>
 		<div class="cs-group">
 			<?=new ButtonGroup([], [
 				new Button(['class'=>'btn-outline-primary'], 'Left'),
@@ -197,7 +198,7 @@ use \Charis\{
 				new Button(['class'=>'btn-outline-primary'], 'Right')
 			])?>
 		</div><!--.cs-group-->
-		<h5>Sizing</h5>
+		<h5 class="cs-subheading">Sizing</h5>
 		<div class="cs-group">
 			<?=new ButtonGroup(['class'=>'btn-group-sm'], [
 				new Button(['class'=>'btn-outline-primary'], 'Left'),
@@ -210,7 +211,7 @@ use \Charis\{
 				new Button(['class'=>'btn-outline-primary'], 'Right')
 			])?>
 		</div><!--.cs-group-->
-		<h5>Vertical</h5>
+		<h5 class="cs-subheading">Vertical</h5>
 		<div class="cs-group">
 			<?=new ButtonGroup(['class'=>'btn-group-vertical'], [
 				new Button(null, 'Left'),
@@ -222,7 +223,7 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Button Toolbar
 		 !--------------------------------------------------------------------->
-		<h3>Button Toolbar</h3>
+		<h3 class="cs-heading">Button Toolbar</h3>
 		<div class="cs-group">
 			<?=new ButtonToolbar([], [
 				new ButtonGroup(['class'=>'me-2'], [
@@ -245,28 +246,28 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Form Check
 		 !--------------------------------------------------------------------->
-		<h3>Form Check</h3>
+		<h3 class="cs-heading">Form Check</h3>
 		<div class="cs-group">
 			<div>
 				<?=new FormCheck([':id'=>'check1', ':label'=>'Default checkbox'])?>
 				<?=new FormCheck([':label'=>'Checked checkbox', ':checked'=>true])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Disabled</h5>
+		<h5 class="cs-subheading">Disabled</h5>
 		<div class="cs-group">
 			<div>
 				<?=new FormCheck([':label'=>'Disabled checkbox', ':disabled'=>true])?>
 				<?=new FormCheck([':label'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Help Text</h5>
+		<h5 class="cs-subheading">Help Text</h5>
 		<div class="cs-group">
 			<?=new FormCheck([
 				':label' => 'I agree to the terms and conditions',
 				':help' => 'By selecting this, you agree to our terms of service and privacy policy.'
 			])?>
 		</div><!--.cs-group-->
-		<h5>Inline</h5>
+		<h5 class="cs-subheading">Inline</h5>
 		<div class="cs-group">
 			<div>
 				<?=new FormCheck(['class'=>'form-check-inline', ':label'=>'1'])?>
@@ -274,7 +275,7 @@ use \Charis\{
 				<?=new FormCheck(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Reverse</h5>
+		<h5 class="cs-subheading">Reverse</h5>
 		<div class="cs-group w-25">
 			<div>
 				<?=new FormCheck([
@@ -292,7 +293,7 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Form Radio
 		 !--------------------------------------------------------------------->
-		<h3>Form Radio</h3>
+		<h3 class="cs-heading">Form Radio</h3>
 		<div class="cs-group">
 			<div>
 				<?=new FormRadio([
@@ -307,7 +308,7 @@ use \Charis\{
 				])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Disabled</h5>
+		<h5 class="cs-subheading">Disabled</h5>
 		<div class="cs-group">
 			<div>
 				<?=new FormRadio([
@@ -323,7 +324,7 @@ use \Charis\{
 				])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Help Text</h5>
+		<h5 class="cs-subheading">Help Text</h5>
 		<div class="cs-group">
 			<div>
 				<?=new FormRadio([
@@ -343,7 +344,7 @@ use \Charis\{
 				])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Inline</h5>
+		<h5 class="cs-subheading">Inline</h5>
 		<div class="cs-group">
 			<div>
 				<?=new FormRadio([
@@ -364,7 +365,7 @@ use \Charis\{
 				])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Reverse</h5>
+		<h5 class="cs-subheading">Reverse</h5>
 		<div class="cs-group w-25">
 			<div>
 				<?=new FormRadio([
@@ -384,28 +385,28 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Form Switch
 		 !--------------------------------------------------------------------->
-		<h3>Form Switch</h3>
+		<h3 class="cs-heading">Form Switch</h3>
 		<div class="cs-group">
 			<div>
 				<?=new FormSwitch([':id'=>'switch1', ':label'=>'Default switch'])?>
 				<?=new FormSwitch([':label'=>'Checked switch', ':checked'=>true])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Disabled</h5>
+		<h5 class="cs-subheading">Disabled</h5>
 		<div class="cs-group">
 			<div>
 				<?=new FormSwitch([':label'=>'Disabled switch', ':disabled'=>true])?>
 				<?=new FormSwitch([':label'=>'Disabled checked switch', ':disabled'=>true, ':checked'=>true])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Help Text</h5>
+		<h5 class="cs-subheading">Help Text</h5>
 		<div class="cs-group">
 			<?=new FormSwitch([
 				':label' => 'I agree to the terms and conditions',
 				':help' => 'By selecting this, you agree to our terms of service and privacy policy.'
 			])?>
 		</div><!--.cs-group-->
-		<h5>Inline</h5>
+		<h5 class="cs-subheading">Inline</h5>
 		<div class="cs-group">
 			<div>
 				<?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'1'])?>
@@ -413,7 +414,7 @@ use \Charis\{
 				<?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true])?>
 			</div>
 		</div><!--.cs-group-->
-		<h5>Reverse</h5>
+		<h5 class="cs-subheading">Reverse</h5>
 		<div class="cs-group w-25">
 			<div>
 				<?=new FormSwitch([
@@ -431,7 +432,7 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Form Text
 		 !--------------------------------------------------------------------->
-		<h3>Form Text</h3>
+		<h3 class="cs-heading">Form Text</h3>
 		<div class="cs-group">
 			<?=new FormText([
 				':label'=>'Username',
@@ -439,7 +440,7 @@ use \Charis\{
 				':placeholder' => 'e.g., JohnDoe'
 			])?>
 		</div><!--.cs-group-->
-		<h5>Floating Label</h5>
+		<h5 class="cs-subheading">Floating Label</h5>
 		<div class="cs-group">
 			<?=new FormTextFL([
 				':label'=>'Username',
@@ -450,7 +451,7 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Form Email
 		 !--------------------------------------------------------------------->
-		<h3>Form Email</h3>
+		<h3 class="cs-heading">Form Email</h3>
 		<div class="cs-group">
 			<?=new FormEmail([
 				':label'=>'Email address',
@@ -458,7 +459,7 @@ use \Charis\{
 				':placeholder' => 'e.g., username@example.com'
 			])?>
 		</div><!--.cs-group-->
-		<h5>Floating Label</h5>
+		<h5 class="cs-subheading">Floating Label</h5>
 		<div class="cs-group">
 			<?=new FormEmailFL([
 				':label'=>'Email address',
@@ -469,29 +470,30 @@ use \Charis\{
 		<!----------------------------------------------------------------------
 		 ! Form Password
 		 !--------------------------------------------------------------------->
-		<h3>Form Password</h3>
+		<h3 class="cs-heading">Form Password</h3>
 		<div class="cs-group">
 			<?=new FormPassword([
 				':label'=>'Password',
 				':help' => 'Your password must be 8-20 characters long.'
 			])?>
 		</div><!--.cs-group-->
-		<h5>Floating Label</h5>
+		<h5 class="cs-subheading">Floating Label</h5>
 		<div class="cs-group">
 			<?=new FormPasswordFL([
 				':label'=>'Password',
 				':help' => 'Your password must be 8-20 characters long.'
 			])?>
 		</div><!--.cs-group-->
+
 		<!----------------------------------------------------------------------
 		 ! Spinner
 		 !--------------------------------------------------------------------->
-		<h3>Spinner</h3>
+		<h3 class="cs-heading">Spinner</h3>
 		<div class="cs-group">
 			<?=new Spinner()?>
 			<?=new Spinner([':type' => 'grow'])?>
 		</div><!--.cs-group-->
-		<h5>Colors</h5>
+		<h5 class="cs-subheading">Colors</h5>
 		<div class="cs-group">
 			<?=new Spinner(['class' => 'text-primary'])?>
 			<?=new Spinner(['class' => 'text-secondary'])?>
@@ -512,10 +514,28 @@ use \Charis\{
 			<?=new Spinner([':type' => 'grow', 'class' => 'text-light'])?>
 			<?=new Spinner([':type' => 'grow', 'class' => 'text-dark'])?>
 		</div><!--.cs-group-->
-		<h5>Size</h5>
+		<h5 class="cs-subheading">Size</h5>
 		<div class="cs-group">
 			<?=new Spinner([':size' => 'sm'])?>
 			<?=new Spinner([':type' => 'grow', ':size' => 'sm'])?>
+		</div><!--.cs-group-->
+
+		<!----------------------------------------------------------------------
+		 ! Modal
+		 !--------------------------------------------------------------------->
+		<h3 class="cs-heading">Modal</h3>
+		<div class="cs-group">
+			<?=new Button([
+				'data-bs-toggle' => 'modal',
+				'data-bs-target' => '#exampleModal'
+			], 'Launch modal')?>
+			<?=new Modal([
+				'id' => 'exampleModal',
+				'class' => 'fade',
+				':dialog:class' => 'modal-dialog-centered',
+				':title' => 'Modal title',
+				':body' => 'Modal body text goes here.'
+			])?>
 		</div><!--.cs-group-->
 
 	</div><!--.container-->
