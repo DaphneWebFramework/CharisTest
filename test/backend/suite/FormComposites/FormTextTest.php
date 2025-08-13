@@ -24,9 +24,9 @@ class FormTextTest extends TestCase
         );
     }
 
-    function testRenderWithId()
+    function testRenderWithInputId()
     {
-        $component = new FormText([':id' => 'custom-id']);
+        $component = new FormText([':input:id' => 'custom-id']);
         $this->assertSame(
             '<div class="mb-3">'
           .   '<input class="form-control" type="text" id="custom-id"/>'
@@ -35,9 +35,9 @@ class FormTextTest extends TestCase
         );
     }
 
-    function testRenderWithName()
+    function testRenderWithInputName()
     {
-        $component = new FormText([':name' => 'Text1']);
+        $component = new FormText([':input:name' => 'Text1']);
         $this->assertSame(
             '<div class="mb-3">'
           .   '<input class="form-control" type="text" name="Text1"/>'
@@ -46,12 +46,12 @@ class FormTextTest extends TestCase
         );
     }
 
-    function testRenderWithValue()
+    function testRenderWithInputValue()
     {
-        $component = new FormText([':value' => 'Sample Text']);
+        $component = new FormText([':input:value' => 'Input Text']);
         $this->assertSame(
             '<div class="mb-3">'
-          .   '<input class="form-control" type="text" value="Sample Text"/>'
+          .   '<input class="form-control" type="text" value="Input Text"/>'
           . '</div>'
           , $component->Render()
         );
@@ -69,13 +69,13 @@ class FormTextTest extends TestCase
         );
     }
 
-    function testRenderWithIdAndLabel()
+    function testRenderWithInputIdAndLabel()
     {
         $component = new FormText([
-          ':id' => 'custom-id',
-          ':label' => 'Label Text'
+            ':input:id' => 'custom-id',
+            ':label' => 'Label Text'
         ]);
-        $this->assertMatchesWithUID(
+        $this->assertSame(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
           .   '<input class="form-control" type="text" id="custom-id"/>'
@@ -86,11 +86,11 @@ class FormTextTest extends TestCase
 
     function testRenderWithHelp()
     {
-        $component = new FormText([':help' => 'This is a help text.']);
+        $component = new FormText([':help' => 'Help Text']);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<input class="form-control" type="text" aria-describedby="form-help-UID"/>'
-          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
+          .   '<div id="form-help-UID" class="form-text">Help Text</div>'
           . '</div>'
           , $component->Render()
         );
@@ -100,49 +100,49 @@ class FormTextTest extends TestCase
     {
         $component = new FormText([
             ':label' => 'Label Text',
-            ':help' => 'This is a help text.',
+            ':help' => 'Help Text',
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="form-input-UID" class="form-label">Label Text</label>'
           .   '<input class="form-control" type="text" id="form-input-UID" aria-describedby="form-help-UID"/>'
-          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
+          .   '<div id="form-help-UID" class="form-text">Help Text</div>'
           . '</div>'
           , $component->Render()
         );
     }
 
-    function testRenderWithIdAndLabelAndHelp()
+    function testRenderWithInputIdAndLabelAndHelp()
     {
         $component = new FormText([
-            ':id' => 'custom-id',
+            ':input:id' => 'custom-id',
             ':label' => 'Label Text',
-            ':help' => 'This is a help text.',
+            ':help' => 'Help Text',
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
           .   '<input class="form-control" type="text" id="custom-id" aria-describedby="form-help-UID"/>'
-          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
+          .   '<div id="form-help-UID" class="form-text">Help Text</div>'
           . '</div>'
           , $component->Render()
         );
     }
 
-    function testRenderWithPlaceholder()
+    function testRenderWithInputPlaceholder()
     {
-        $component = new FormText([':placeholder' => 'Placeholder text']);
+        $component = new FormText([':input:placeholder' => 'Placeholder Text']);
         $this->assertSame(
             '<div class="mb-3">'
-          .   '<input class="form-control" type="text" placeholder="Placeholder text"/>'
+          .   '<input class="form-control" type="text" placeholder="Placeholder Text"/>'
           . '</div>'
           , $component->Render()
         );
     }
 
-    function testRenderWithAutocomplete()
+    function testRenderWithInputAutocomplete()
     {
-        $component = new FormText([':autocomplete' => 'on']);
+        $component = new FormText([':input:autocomplete' => 'on']);
         $this->assertSame(
             '<div class="mb-3">'
           .   '<input class="form-control" type="text" autocomplete="on"/>'
@@ -151,9 +151,9 @@ class FormTextTest extends TestCase
         );
     }
 
-    function testRenderWithDisabled()
+    function testRenderWithInputDisabled()
     {
-        $component = new FormText([':disabled' => true]);
+        $component = new FormText([':input:disabled' => true]);
         $this->assertSame(
             '<div class="mb-3">'
           .   '<input class="form-control" type="text" disabled/>'
@@ -162,9 +162,9 @@ class FormTextTest extends TestCase
         );
     }
 
-    function testRenderWithRequired()
+    function testRenderWithInputRequired()
     {
-        $component = new FormText([':required' => true]);
+        $component = new FormText([':input:required' => true]);
         $this->assertSame(
             '<div class="mb-3">'
           .   '<input class="form-control" type="text" required/>'
@@ -176,30 +176,30 @@ class FormTextTest extends TestCase
     function testRenderWithAllPseudoAttributes()
     {
         $component = new FormText([
-            ':id' => 'custom-id',
-            ':name' => 'Text1',
-            ':value' => 'Sample Text',
             ':label' => 'Label Text',
-            ':help' => 'This is a help text.',
-            ':placeholder' => 'Placeholder text',
-            ':autocomplete' => 'on',
-            ':disabled' => true,
-            ':required' => true,
+            ':input:id' => 'custom-id',
+            ':input:name' => 'Text1',
+            ':input:value' => 'Input Text',
+            ':input:placeholder' => 'Placeholder Text',
+            ':input:autocomplete' => 'on',
+            ':input:disabled' => true,
+            ':input:required' => true,
+            ':help' => 'Help Text',
         ]);
         $this->assertMatchesWithUID(
             '<div class="mb-3">'
           .   '<label for="custom-id" class="form-label">Label Text</label>'
-          .   '<input class="form-control" '
-                   . 'type="text" '
-                   . 'id="custom-id" '
-                   . 'name="Text1" '
-                   . 'value="Sample Text" '
-                   . 'aria-describedby="form-help-UID" '
-                   . 'placeholder="Placeholder text" '
-                   . 'autocomplete="on" '
-                   . 'disabled '
-                   . 'required/>'
-          .   '<div id="form-help-UID" class="form-text">This is a help text.</div>'
+          .   '<input class="form-control"'
+          .         ' type="text"'
+          .         ' id="custom-id"'
+          .         ' aria-describedby="form-help-UID"'
+          .         ' name="Text1"'
+          .         ' value="Input Text"'
+          .         ' placeholder="Placeholder Text"'
+          .         ' autocomplete="on"'
+          .         ' disabled'
+          .         ' required/>'
+          .   '<div id="form-help-UID" class="form-text">Help Text</div>'
           . '</div>'
           , $component->Render()
         );
