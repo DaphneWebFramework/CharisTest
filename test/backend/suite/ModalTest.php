@@ -88,9 +88,9 @@ class ModalTest extends TestCase
         );
     }
 
-    function testRenderWithFooterSecondaryButtonLabel()
+    function testRenderWithSecondaryButtonLabel()
     {
-        $component = new Modal([':footer-secondary-button-label' => 'Cancel']);
+        $component = new Modal([':secondary-button-label' => 'Cancel']);
         $this->assertMatchesWithUID(
             '<div class="modal" aria-hidden="true" aria-labelledby="modal-title-UID" tabindex="-1">'
           .   '<div class="modal-dialog">'
@@ -112,9 +112,9 @@ class ModalTest extends TestCase
         );
     }
 
-    function testRenderWithFooterPrimaryButtonLabel()
+    function testRenderWithPrimaryButtonLabel()
     {
-        $component = new Modal([':footer-primary-button-label' => 'Upload File']);
+        $component = new Modal([':primary-button-label' => 'Upload File']);
         $this->assertMatchesWithUID(
             '<div class="modal" aria-hidden="true" aria-labelledby="modal-title-UID" tabindex="-1">'
           .   '<div class="modal-dialog">'
