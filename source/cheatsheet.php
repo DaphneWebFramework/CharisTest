@@ -70,13 +70,13 @@ use \Charis\{
 				new Container(null, [
 					new NavbarBrand(null, 'Brand'),
 					new NavbarToggler([
-						'data-bs-target'=>'#navbarCollapse',
-						'aria-controls'=>'navbarCollapse'
+						'data-bs-target' => '#navbarCollapse',
+						'aria-controls' => 'navbarCollapse'
 					]),
-					new NavbarCollapse(['id'=>'navbarCollapse'], [
+					new NavbarCollapse(['id' => 'navbarCollapse'], [
 						new NavbarNav(['class' => 'ms-auto'], [
-							new NavbarItem([':label' => 'Home', ':active'=>true]),
-							new NavbarItem([':label' => 'Tools', ':disabled'=>true]),
+							new NavbarItem([':label' => 'Home', ':active' => true]),
+							new NavbarItem([':label' => 'Tools', ':disabled' => true]),
 							new NavbarItem([':label' => 'Register']),
 							new NavbarItem([':label' => 'Login']),
 							new NavbarDropdown([':label' => 'Settings'], [
@@ -120,12 +120,12 @@ use \Charis\{
 		<h3 class="cs-heading">Collapse</h3>
 		<div class="cs-group">
 			<?=new Button([
-				'data-bs-toggle'=>'collapse',
-				'data-bs-target'=>'#collapseExample',
-				'aria-expanded'=>false,
-				'aria-controls'=>'collapseExample'
+				'data-bs-toggle' => 'collapse',
+				'data-bs-target' => '#collapseExample',
+				'aria-expanded' => false,
+				'aria-controls' => 'collapseExample'
 			], 'Toggle collapse')?>
-			<?=new Collapse(['id'=>'collapseExample'], 'This is a collapse.')?>
+			<?=new Collapse(['id' => 'collapseExample'], 'This is a collapse.')?>
 		</div><!--.cs-group-->
 
 		<!----------------------------------------------------------------------
@@ -135,39 +135,39 @@ use \Charis\{
 		<h5 class="cs-subheading">Variants</h5>
 		<div class="cs-group">
 			<?=new Button(null, 'Primary')?>
-			<?=new Button(['class'=>'btn-secondary'], 'Secondary')?>
-			<?=new Button(['class'=>'btn-success'], 'Success')?>
-			<?=new Button(['class'=>'btn-info'], 'Info')?>
-			<?=new Button(['class'=>'btn-warning'], 'Warning')?>
-			<?=new Button(['class'=>'btn-danger'], 'Danger')?>
-			<?=new Button(['class'=>'btn-light'], 'Light')?>
-			<?=new Button(['class'=>'btn-dark'], 'Dark')?>
-			<?=new Button(['class'=>'btn-link'], 'Link')?>
+			<?=new Button(['class' => 'btn-secondary'], 'Secondary')?>
+			<?=new Button(['class' => 'btn-success'], 'Success')?>
+			<?=new Button(['class' => 'btn-info'], 'Info')?>
+			<?=new Button(['class' => 'btn-warning'], 'Warning')?>
+			<?=new Button(['class' => 'btn-danger'], 'Danger')?>
+			<?=new Button(['class' => 'btn-light'], 'Light')?>
+			<?=new Button(['class' => 'btn-dark'], 'Dark')?>
+			<?=new Button(['class' => 'btn-link'], 'Link')?>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Outline</h5>
 		<div class="cs-group">
-			<?=new Button(['class'=>'btn-outline-primary'], 'Primary')?>
-			<?=new Button(['class'=>'btn-outline-secondary'], 'Secondary')?>
-			<?=new Button(['class'=>'btn-outline-success'], 'Success')?>
-			<?=new Button(['class'=>'btn-outline-info'], 'Info')?>
-			<?=new Button(['class'=>'btn-outline-warning'], 'Warning')?>
-			<?=new Button(['class'=>'btn-outline-danger'], 'Danger')?>
-			<?=new Button(['class'=>'btn-outline-light'], 'Light')?>
-			<?=new Button(['class'=>'btn-outline-dark'], 'Dark')?>
+			<?=new Button(['class' => 'btn-outline-primary'], 'Primary')?>
+			<?=new Button(['class' => 'btn-outline-secondary'], 'Secondary')?>
+			<?=new Button(['class' => 'btn-outline-success'], 'Success')?>
+			<?=new Button(['class' => 'btn-outline-info'], 'Info')?>
+			<?=new Button(['class' => 'btn-outline-warning'], 'Warning')?>
+			<?=new Button(['class' => 'btn-outline-danger'], 'Danger')?>
+			<?=new Button(['class' => 'btn-outline-light'], 'Light')?>
+			<?=new Button(['class' => 'btn-outline-dark'], 'Dark')?>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Sizing</h5>
 		<div class="cs-group">
-			<?=new Button(['class'=>'btn-sm'], 'Small button')?>
+			<?=new Button(['class' => 'btn-sm'], 'Small button')?>
 			<?=new Button(null, 'Standard button')?>
-			<?=new Button(['class'=>'btn-lg'], 'Large button')?>
+			<?=new Button(['class' => 'btn-lg'], 'Large button')?>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Disabled</h5>
 		<div class="cs-group">
-			<?=new Button(['disabled'=>true], 'Primary')?>
-			<?=new Button(['class'=>'btn-secondary', 'disabled'=>true], 'Secondary')?>
-			<?=new Button(['class'=>'btn-outline-primary', 'disabled'=>true], 'Primary')?>
-			<?=new Button(['class'=>'btn-outline-secondary', 'disabled'=>true], 'Secondary')?>
-			<?=new Button(['class'=>'btn-link', 'disabled'=>true], 'Link')?>
+			<?=new Button(['disabled' => true], 'Primary')?>
+			<?=new Button(['class' => 'btn-secondary', 'disabled' => true], 'Secondary')?>
+			<?=new Button(['class' => 'btn-outline-primary', 'disabled' => true], 'Primary')?>
+			<?=new Button(['class' => 'btn-outline-secondary', 'disabled' => true], 'Secondary')?>
+			<?=new Button(['class' => 'btn-link', 'disabled' => true], 'Link')?>
 		</div><!--.cs-group-->
 
 		<!----------------------------------------------------------------------
@@ -185,35 +185,35 @@ use \Charis\{
 		<h5 class="cs-subheading">Mixed</h5>
 		<div class="cs-group">
 			<?=new ButtonGroup([], [
-				new Button(['class'=>'btn-danger'], 'Left'),
-				new Button(['class'=>'btn-warning'], 'Middle'),
-				new Button(['class'=>'btn-success'], 'Right')
+				new Button(['class' => 'btn-danger'], 'Left'),
+				new Button(['class' => 'btn-warning'], 'Middle'),
+				new Button(['class' => 'btn-success'], 'Right')
 			])?>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Outlined</h5>
 		<div class="cs-group">
 			<?=new ButtonGroup([], [
-				new Button(['class'=>'btn-outline-primary'], 'Left'),
-				new Button(['class'=>'btn-outline-primary'], 'Middle'),
-				new Button(['class'=>'btn-outline-primary'], 'Right')
+				new Button(['class' => 'btn-outline-primary'], 'Left'),
+				new Button(['class' => 'btn-outline-primary'], 'Middle'),
+				new Button(['class' => 'btn-outline-primary'], 'Right')
 			])?>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Sizing</h5>
 		<div class="cs-group">
-			<?=new ButtonGroup(['class'=>'btn-group-sm'], [
-				new Button(['class'=>'btn-outline-primary'], 'Left'),
-				new Button(['class'=>'btn-outline-primary'], 'Middle'),
-				new Button(['class'=>'btn-outline-primary'], 'Right')
+			<?=new ButtonGroup(['class' => 'btn-group-sm'], [
+				new Button(['class' => 'btn-outline-primary'], 'Left'),
+				new Button(['class' => 'btn-outline-primary'], 'Middle'),
+				new Button(['class' => 'btn-outline-primary'], 'Right')
 			])?>
-			<?=new ButtonGroup(['class'=>'btn-group-lg'], [
-				new Button(['class'=>'btn-outline-primary'], 'Left'),
-				new Button(['class'=>'btn-outline-primary'], 'Middle'),
-				new Button(['class'=>'btn-outline-primary'], 'Right')
+			<?=new ButtonGroup(['class' => 'btn-group-lg'], [
+				new Button(['class' => 'btn-outline-primary'], 'Left'),
+				new Button(['class' => 'btn-outline-primary'], 'Middle'),
+				new Button(['class' => 'btn-outline-primary'], 'Right')
 			])?>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Vertical</h5>
 		<div class="cs-group">
-			<?=new ButtonGroup(['class'=>'btn-group-vertical'], [
+			<?=new ButtonGroup(['class' => 'btn-group-vertical'], [
 				new Button(null, 'Left'),
 				new Button(null, 'Middle'),
 				new Button(null, 'Right')
@@ -226,19 +226,19 @@ use \Charis\{
 		<h3 class="cs-heading">Button Toolbar</h3>
 		<div class="cs-group">
 			<?=new ButtonToolbar([], [
-				new ButtonGroup(['class'=>'me-2'], [
+				new ButtonGroup(['class' => 'me-2'], [
 					new Button(null, '1'),
 					new Button(null, '2'),
 					new Button(null, '3'),
 					new Button(null, '4')
 				]),
-				new ButtonGroup(['class'=>'me-2'], [
-					new Button(['class'=>'btn-secondary'], '5'),
-					new Button(['class'=>'btn-secondary'], '6'),
-					new Button(['class'=>'btn-secondary'], '7')
+				new ButtonGroup(['class' => 'me-2'], [
+					new Button(['class' => 'btn-secondary'], '5'),
+					new Button(['class' => 'btn-secondary'], '6'),
+					new Button(['class' => 'btn-secondary'], '7')
 				]),
 				new ButtonGroup([], [
-					new Button(['class'=>'btn-info'], '8')
+					new Button(['class' => 'btn-info'], '8')
 				]),
 			])?>
 		</div><!--.cs-group-->
@@ -249,15 +249,28 @@ use \Charis\{
 		<h3 class="cs-heading">Form Check</h3>
 		<div class="cs-group">
 			<div>
-				<?=new FormCheck([':id'=>'check1', ':label'=>'Default checkbox'])?>
-				<?=new FormCheck([':label'=>'Checked checkbox', ':checked'=>true])?>
+				<?=new FormCheck([
+					':label' => 'Default checkbox',
+					':input:id' => 'check1'
+				])?>
+				<?=new FormCheck([
+					':label' => 'Checked checkbox',
+					':input:checked' => true
+				])?>
 			</div>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Disabled</h5>
 		<div class="cs-group">
 			<div>
-				<?=new FormCheck([':label'=>'Disabled checkbox', ':disabled'=>true])?>
-				<?=new FormCheck([':label'=>'Disabled checked checkbox', ':disabled'=>true, ':checked'=>true])?>
+				<?=new FormCheck([
+					':label' => 'Disabled checkbox',
+					':input:disabled' => true
+				])?>
+				<?=new FormCheck([
+					':label' => 'Disabled checked checkbox',
+					':input:disabled' => true,
+					':input:checked' => true
+				])?>
 			</div>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Help Text</h5>
@@ -270,22 +283,32 @@ use \Charis\{
 		<h5 class="cs-subheading">Inline</h5>
 		<div class="cs-group">
 			<div>
-				<?=new FormCheck(['class'=>'form-check-inline', ':label'=>'1'])?>
-				<?=new FormCheck(['class'=>'form-check-inline', ':label'=>'2'])?>
-				<?=new FormCheck(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true])?>
+				<?=new FormCheck([
+					'class' => 'form-check-inline',
+					':label' => '1'
+				])?>
+				<?=new FormCheck([
+					'class' => 'form-check-inline',
+					':label' => '2'
+				])?>
+				<?=new FormCheck([
+					'class' => 'form-check-inline',
+					':label' => '3 (disabled)',
+					':input:disabled' => true
+				])?>
 			</div>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Reverse</h5>
 		<div class="cs-group w-25">
 			<div>
 				<?=new FormCheck([
-					'class'=>'form-check-reverse',
-					':label'=>'Reverse checkbox'
+					'class' => 'form-check-reverse',
+					':label' => 'Reverse checkbox'
 				])?>
 				<?=new FormCheck([
-					'class'=>'form-check-reverse',
-					':label'=>'Disabled reverse checkbox',
-					':disabled'=>true
+					'class' => 'form-check-reverse',
+					':label' => 'Disabled reverse checkbox',
+					':input:disabled' => true
 				])?>
 			</div>
 		</div><!--.cs-group-->
@@ -297,14 +320,14 @@ use \Charis\{
 		<div class="cs-group">
 			<div>
 				<?=new FormRadio([
-					':name'=>'RadioGroup1',
-					':id'=>'radio1',
-					':label'=>'Default radio'
+					':label' => 'Default radio',
+					':input:name' => 'RadioGroup1',
+					':input:id' => 'radio1'
 				])?>
 				<?=new FormRadio([
-					':name'=>'RadioGroup1',
-					':label'=>'Checked radio',
-					':checked'=>true
+					':label' => 'Checked radio',
+					':input:name' => 'RadioGroup1',
+					':input:checked' => true
 				])?>
 			</div>
 		</div><!--.cs-group-->
@@ -312,15 +335,15 @@ use \Charis\{
 		<div class="cs-group">
 			<div>
 				<?=new FormRadio([
-					':name'=>'RadioGroup2',
-					':label'=>'Disabled radio',
-					':disabled'=>true
+					':label' => 'Disabled radio',
+					':input:name' => 'RadioGroup2',
+					':input:disabled' => true
 				])?>
 				<?=new FormRadio([
-					':name'=>'RadioGroup2',
-					':label'=>'Disabled checked radio',
-					':disabled'=>true,
-					':checked'=>true
+					':label' => 'Disabled checked radio',
+					':input:name' => 'RadioGroup2',
+					':input:disabled' => true,
+					':input:checked' => true
 				])?>
 			</div>
 		</div><!--.cs-group-->
@@ -329,17 +352,17 @@ use \Charis\{
 			<div>
 				<?=new FormRadio([
 					':label' => 'Credit Card',
-					':name' => 'payment_method',
+					':input:name' => 'payment_method',
 					':help' => 'Pay securely using your credit card.',
 				])?>
 				<?=new FormRadio([
 					':label' => 'PayPal',
-					':name' => 'payment_method',
+					':input:name' => 'payment_method',
 					':help' => 'Use your PayPal account for a quick and secure payment.',
 				])?>
 				<?=new FormRadio([
 					':label' => 'Bank Transfer',
-					':name' => 'payment_method',
+					':input:name' => 'payment_method',
 					':help' => 'Transfer funds directly from your bank account.',
 				])?>
 			</div>
@@ -348,20 +371,20 @@ use \Charis\{
 		<div class="cs-group">
 			<div>
 				<?=new FormRadio([
-					'class'=>'form-check-inline',
-					':name'=>'RadioGroup3',
-					':label'=>'1'
+					'class' => 'form-check-inline',
+					':label' => '1',
+					':input:name' => 'RadioGroup3'
 				])?>
 				<?=new FormRadio([
-					'class'=>'form-check-inline',
-					':name'=>'RadioGroup3',
-					':label'=>'2'
+					'class' => 'form-check-inline',
+					':label' => '2',
+					':input:name' => 'RadioGroup3'
 				])?>
 				<?=new FormRadio([
-					'class'=>'form-check-inline',
-					':name'=>'RadioGroup3',
-					':label'=>'3 (disabled)',
-					':disabled'=>true
+					'class' => 'form-check-inline',
+					':label' => '3 (disabled)',
+					':input:name' => 'RadioGroup3',
+					':input:disabled' => true
 				])?>
 			</div>
 		</div><!--.cs-group-->
@@ -369,15 +392,15 @@ use \Charis\{
 		<div class="cs-group w-25">
 			<div>
 				<?=new FormRadio([
-					'class'=>'form-check-reverse',
-					':name'=>'RadioGroup4',
-					':label'=>'Reverse radio'
+					'class' => 'form-check-reverse',
+					':label' => 'Reverse radio',
+					':input:name' => 'RadioGroup4'
 				])?>
 				<?=new FormRadio([
-					'class'=>'form-check-reverse',
-					':name'=>'RadioGroup4',
-					':label'=>'Disabled reverse radio',
-					':disabled'=>true
+					'class' => 'form-check-reverse',
+					':label' => 'Disabled reverse radio',
+					':input:name' => 'RadioGroup4',
+					':input:disabled' => true
 				])?>
 			</div>
 		</div><!--.cs-group-->
@@ -388,15 +411,28 @@ use \Charis\{
 		<h3 class="cs-heading">Form Switch</h3>
 		<div class="cs-group">
 			<div>
-				<?=new FormSwitch([':id'=>'switch1', ':label'=>'Default switch'])?>
-				<?=new FormSwitch([':label'=>'Checked switch', ':checked'=>true])?>
+				<?=new FormSwitch([
+					':label' => 'Default switch',
+					':input:id' => 'switch1'
+				])?>
+				<?=new FormSwitch([
+					':label' => 'Checked switch',
+					':input:checked' => true
+				])?>
 			</div>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Disabled</h5>
 		<div class="cs-group">
 			<div>
-				<?=new FormSwitch([':label'=>'Disabled switch', ':disabled'=>true])?>
-				<?=new FormSwitch([':label'=>'Disabled checked switch', ':disabled'=>true, ':checked'=>true])?>
+				<?=new FormSwitch([
+					':label' => 'Disabled switch',
+					':input:disabled' => true
+				])?>
+				<?=new FormSwitch([
+					':label' => 'Disabled checked switch',
+					':input:disabled' => true,
+					':input:checked' => true
+				])?>
 			</div>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Help Text</h5>
@@ -409,22 +445,32 @@ use \Charis\{
 		<h5 class="cs-subheading">Inline</h5>
 		<div class="cs-group">
 			<div>
-				<?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'1'])?>
-				<?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'2'])?>
-				<?=new FormSwitch(['class'=>'form-check-inline', ':label'=>'3 (disabled)', ':disabled'=>true])?>
+				<?=new FormSwitch([
+					'class' => 'form-check-inline',
+					':label' => '1'
+				])?>
+				<?=new FormSwitch([
+					'class' => 'form-check-inline',
+					':label' => '2'
+				])?>
+				<?=new FormSwitch([
+					'class' => 'form-check-inline',
+					':label' => '3 (disabled)',
+					':input:disabled' => true
+				])?>
 			</div>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Reverse</h5>
 		<div class="cs-group w-25">
 			<div>
 				<?=new FormSwitch([
-					'class'=>'form-check-reverse',
-					':label'=>'Reverse switch'
+					'class' => 'form-check-reverse',
+					':label' => 'Reverse switch'
 				])?>
 				<?=new FormSwitch([
-					'class'=>'form-check-reverse',
-					':label'=>'Disabled reverse switch',
-					':disabled'=>true
+					'class' => 'form-check-reverse',
+					':label' => 'Disabled reverse switch',
+					':input:disabled' => true
 				])?>
 			</div>
 		</div><!--.cs-group-->
@@ -435,15 +481,15 @@ use \Charis\{
 		<h3 class="cs-heading">Form Text</h3>
 		<div class="cs-group">
 			<?=new FormText([
-				':label'=>'Username',
-				':help' => 'Your username must be 3–15 characters long.',
-				':placeholder' => 'e.g., JohnDoe'
+				':label' => 'Username',
+				':input:placeholder' => 'e.g., JohnDoe',
+				':help' => 'Your username must be 3–15 characters long.'
 			])?>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Floating Label</h5>
 		<div class="cs-group">
 			<?=new FormTextFL([
-				':label'=>'Username',
+				':label' => 'Username',
 				':help' => 'Your username must be 3–15 characters long.'
 			])?>
 		</div><!--.cs-group-->
@@ -454,15 +500,15 @@ use \Charis\{
 		<h3 class="cs-heading">Form Email</h3>
 		<div class="cs-group">
 			<?=new FormEmail([
-				':label'=>'Email address',
-				':help' => "We'll never share your email with anyone else.",
-				':placeholder' => 'e.g., username@example.com'
+				':label' => 'Email address',
+				':input:placeholder' => 'e.g., username@example.com',
+				':help' => "We'll never share your email with anyone else."
 			])?>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Floating Label</h5>
 		<div class="cs-group">
 			<?=new FormEmailFL([
-				':label'=>'Email address',
+				':label' => 'Email address',
 				':help' => "We'll never share your email with anyone else."
 			])?>
 		</div><!--.cs-group-->
@@ -473,14 +519,14 @@ use \Charis\{
 		<h3 class="cs-heading">Form Password</h3>
 		<div class="cs-group">
 			<?=new FormPassword([
-				':label'=>'Password',
+				':label' => 'Password',
 				':help' => 'Your password must be 8-20 characters long.'
 			])?>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Floating Label</h5>
 		<div class="cs-group">
 			<?=new FormPasswordFL([
-				':label'=>'Password',
+				':label' => 'Password',
 				':help' => 'Your password must be 8-20 characters long.'
 			])?>
 		</div><!--.cs-group-->
