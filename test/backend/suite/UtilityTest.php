@@ -499,7 +499,7 @@ class UtilityTest extends TestCase
         AccessHelper::CallMethod(
             $this->sut,
             'consumePseudoAttribute',
-            [&$attributes, ':pseudo']
+            [&$attributes, 'pseudo']
         );
         $this->assertSame(['other' => 'value2'], $attributes);
     }
@@ -720,13 +720,13 @@ class UtilityTest extends TestCase
             'valid pseudo attribute' => [
                 'value',
                 [':pseudo' => 'value', 'other' => 'value2'],
-                ':pseudo',
+                'pseudo',
                 null
             ],
             'pseudo attribute not found' => [
                 null,
                 ['other' => 'value2'],
-                ':nonexistent',
+                'nonexistent',
                 null
             ],
             'invalid pseudo attribute key' => [
@@ -738,25 +738,25 @@ class UtilityTest extends TestCase
             'default value used' => [
                 'default',
                 ['other' => 'value2'],
-                ':pseudo',
+                'pseudo',
                 'default'
             ],
             'case-sensitive match' => [
                 null,
                 [':Pseudo' => 'value'],
-                ':pseudo',
+                'pseudo',
                 null
             ],
             'empty attributes' => [
                 null,
                 [],
-                ':pseudo',
+                'pseudo',
                 null
             ],
             'null attributes' => [
                 null,
                 null,
-                ':pseudo',
+                'pseudo',
                 null
             ],
         ];
