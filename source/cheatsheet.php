@@ -41,6 +41,8 @@ use \Charis\{
 	FormComposites\FormEmailFL,
 	FormComposites\FormPassword,
 	FormComposites\FormPasswordFL,
+	FormComposites\FormTextArea,
+	FormComposites\FormTextAreaFL,
 	Spinner,
 	Modal
 };
@@ -528,6 +530,27 @@ use \Charis\{
 			<?=new FormPasswordFL([
 				':label' => 'Password',
 				':help' => 'Your password must be 8-20 characters long.'
+			])?>
+		</div><!--.cs-group-->
+
+		<!----------------------------------------------------------------------
+		 ! Form Text Area
+		 !--------------------------------------------------------------------->
+		<h3 class="cs-heading">Form Text Area</h3>
+		<div class="cs-group">
+			<?=new FormTextArea([
+				':label' => 'Comments',
+				':input:placeholder' => 'Enter your comments here...',
+				':input:rows' => 3,
+				':help' => 'Please keep your comments brief and to the point.'
+			])?>
+		</div><!--.cs-group-->
+		<h5 class="cs-subheading">Floating Label</h5>
+		<div class="cs-group">
+			<?=new FormTextAreaFL([
+				':label' => 'Comments',
+				':input:style' => 'height: 98px;', // Instead of `rows`
+				':help' => 'Please keep your comments brief and to the point.'
 			])?>
 		</div><!--.cs-group-->
 
