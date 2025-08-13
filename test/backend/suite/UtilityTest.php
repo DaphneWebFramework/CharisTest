@@ -506,10 +506,10 @@ class UtilityTest extends TestCase
 
     #endregion consumePseudoAttribute
 
-    #region consumeScopedPseudoAttributes --------------------------------------
+    #region consumeScopedAttributes --------------------------------------------
 
-    #[DataProvider('consumeScopedPseudoAttributesDataProvider')]
-    function testConsumeScopedPseudoAttributes(
+    #[DataProvider('consumeScopedAttributesDataProvider')]
+    function testConsumeScopedAttributes(
         ?array $attributes,
         string $scope,
         array $expectedResult,
@@ -517,14 +517,14 @@ class UtilityTest extends TestCase
     ) {
         $result = AccessHelper::CallMethod(
             $this->sut,
-            'consumeScopedPseudoAttributes',
+            'consumeScopedAttributes',
             [&$attributes, $scope]
         );
         $this->assertSame($expectedResult, $result);
         $this->assertSame($expectedRemaining, $attributes);
     }
 
-    #endregion consumeScopedPseudoAttributes
+    #endregion consumeScopedAttributes
 
     #region isResolvableClassAttribute -----------------------------------------
 
@@ -762,7 +762,7 @@ class UtilityTest extends TestCase
         ];
     }
 
-    static function consumeScopedPseudoAttributesDataProvider()
+    static function consumeScopedAttributesDataProvider()
     {
         // attributes
         // scope
