@@ -88,6 +88,30 @@ class ModalTest extends TestCase
         );
     }
 
+    function testRenderWithSecondaryButtonClass()
+    {
+        $component = new Modal([':secondary-button:class' => 'btn-outline-secondary']);
+        $this->assertMatchesWithUID(
+            '<div class="modal" aria-hidden="true" aria-labelledby="modal-title-UID" tabindex="-1">'
+          .   '<div class="modal-dialog">'
+          .     '<div class="modal-content">'
+          .       '<div class="modal-header">'
+          .         '<h5 class="modal-title" id="modal-title-UID"></h5>'
+          .         '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
+          .       '</div>'
+          .       '<div class="modal-body">'
+          .       '</div>'
+          .       '<div class="modal-footer">'
+          .         '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>'
+          .         '<button type="button" class="btn btn-primary">Save changes</button>'
+          .       '</div>'
+          .     '</div>'
+          .   '</div>'
+          . '</div>'
+          , $component->Render()
+        );
+    }
+
     function testRenderWithSecondaryButtonLabel()
     {
         $component = new Modal([':secondary-button-label' => 'Cancel']);
@@ -104,6 +128,30 @@ class ModalTest extends TestCase
           .       '<div class="modal-footer">'
           .         '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>'
           .         '<button type="button" class="btn btn-primary">Save changes</button>'
+          .       '</div>'
+          .     '</div>'
+          .   '</div>'
+          . '</div>'
+          , $component->Render()
+        );
+    }
+
+    function testRenderWithPrimaryButtonClass()
+    {
+        $component = new Modal([':primary-button:class' => 'btn-success']);
+        $this->assertMatchesWithUID(
+            '<div class="modal" aria-hidden="true" aria-labelledby="modal-title-UID" tabindex="-1">'
+          .   '<div class="modal-dialog">'
+          .     '<div class="modal-content">'
+          .       '<div class="modal-header">'
+          .         '<h5 class="modal-title" id="modal-title-UID"></h5>'
+          .         '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
+          .       '</div>'
+          .       '<div class="modal-body">'
+          .       '</div>'
+          .       '<div class="modal-footer">'
+          .         '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>'
+          .         '<button type="button" class="btn btn-success">Save changes</button>'
           .       '</div>'
           .     '</div>'
           .   '</div>'
@@ -163,7 +211,7 @@ class ModalTest extends TestCase
         );
     }
 
-    function testRenderWithDialogClassCentered()
+    function testRenderWithDialogClass()
     {
         $component = new Modal([':dialog:class' => 'modal-dialog-centered']);
         $this->assertMatchesWithUID(
@@ -182,8 +230,8 @@ class ModalTest extends TestCase
           .       '</div>'
           .     '</div>'
           .   '</div>'
-          . '</div>',
-            $component->Render()
+          . '</div>'
+          , $component->Render()
         );
     }
 }
