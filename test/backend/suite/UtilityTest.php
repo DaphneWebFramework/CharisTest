@@ -453,27 +453,6 @@ class UtilityTest extends TestCase
 
     #endregion mergeAttributes
 
-    #region combineClassAttributes ---------------------------------------------
-
-    #[DataProvider('combineClassAttributesDataProvider')]
-    function testCombineClassAttributes(
-        string $expected,
-        string $classes1,
-        string $classes2
-    ) {
-        $result = AccessHelper::CallMethod(
-            $this->sut,
-            'combineClassAttributes',
-            [$classes1, $classes2]
-        );
-        $this->assertSame(
-            $this->sortClasses($expected),
-            $this->sortClasses($result)
-        );
-    }
-
-    #endregion combineClassAttributes
-
     #region consumePseudoAttribute ---------------------------------------------
 
     #[DataProvider('consumePseudoAttributeDataProvider')]
@@ -672,40 +651,6 @@ class UtilityTest extends TestCase
                 ['class' => 'btn-sm', 'id' => 'submitBtn'],
                 ['class' => 'btn btn-lg', 'data-action' => 'submit'],
                 ['btn-sm btn-lg']
-            ],
-        ];
-    }
-
-    static function combineClassAttributesDataProvider()
-    {
-        // expected
-        // classes1
-        // classes2
-        return [
-            'empty strings' => [
-                '',
-                '',
-                ''
-            ],
-            'whitespace-only strings' => [
-                '',
-                '     ',
-                '     '
-            ],
-            'no duplicates' => [
-                'btn btn-primary',
-                'btn',
-                'btn-primary'
-            ],
-            'with duplicates' => [
-                'btn btn-primary',
-                'btn btn-primary',
-                'btn btn-primary'
-            ],
-            'extra spaces' => [
-                'btn btn-primary',
-                '  btn  ',
-                '  btn-primary  '
             ],
         ];
     }

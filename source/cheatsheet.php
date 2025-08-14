@@ -301,7 +301,7 @@ use \Charis\{
 			</div>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Reverse</h5>
-		<div class="cs-group w-25">
+		<div class="cs-group">
 			<div>
 				<?=new FormCheck([
 					'class' => 'form-check-reverse',
@@ -391,7 +391,7 @@ use \Charis\{
 			</div>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Reverse</h5>
-		<div class="cs-group w-25">
+		<div class="cs-group">
 			<div>
 				<?=new FormRadio([
 					'class' => 'form-check-reverse',
@@ -463,7 +463,7 @@ use \Charis\{
 			</div>
 		</div><!--.cs-group-->
 		<h5 class="cs-subheading">Reverse</h5>
-		<div class="cs-group w-25">
+		<div class="cs-group">
 			<div>
 				<?=new FormSwitch([
 					'class' => 'form-check-reverse',

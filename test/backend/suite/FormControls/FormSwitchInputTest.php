@@ -11,7 +11,7 @@ class FormSwitchInputTest extends TestCase
     {
         $component = new FormSwitchInput();
         $this->assertSame(
-            '<input class="form-check-input" type="checkbox" role="switch"/>',
+            '<input class="form-check-input" type="checkbox" role="switch" switch/>',
             $component->Render()
         );
     }
