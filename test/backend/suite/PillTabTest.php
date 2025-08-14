@@ -1,8 +1,11 @@
 <?php declare(strict_types=1);
 use \PHPUnit\Framework\TestCase;
 use \PHPUnit\Framework\Attributes\CoversClass;
+use \PHPUnit\Framework\Attributes\DataProviderExternal;
 
 use \Charis\PillTab;
+
+use \TestToolkit\DataHelper;
 
 #[CoversClass(PillTab::class)]
 class PillTabTest extends TestCase
@@ -15,12 +18,13 @@ class PillTabTest extends TestCase
         $component = new PillTab();
     }
 
-    function testThrowsWhenKeyIsNotAString()
+    #[DataProviderExternal(DataHelper::class, 'NonStringProvider')]
+    function testThrowsWhenKeyIsNotAString($key)
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
             'The ":key" attribute must be a non-empty string.');
-        $component = new PillTab([':key' => 123]);
+        $component = new PillTab([':key' => $key]);
     }
 
     function testThrowsWhenKeyIsEmptyString()
@@ -37,14 +41,14 @@ class PillTabTest extends TestCase
             ':key' => 'settings'
         ]);
         $this->assertSame(
-            '<button id="tab-settings" '
-                  . 'class="nav-link" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-settings" '
-                  . 'aria-controls="pane-settings" '
-                  . 'aria-selected="false">'
+            '<button id="tab-settings"'
+          .        ' class="nav-link"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-settings"'
+          .        ' aria-controls="pane-settings"'
+          .        ' aria-selected="false">'
           . '</button>'
           , $component->Render()
         );
@@ -57,14 +61,14 @@ class PillTabTest extends TestCase
             ':active' => true
         ]);
         $this->assertSame(
-            '<button id="tab-settings" '
-                  . 'class="nav-link active" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-settings" '
-                  . 'aria-controls="pane-settings" '
-                  . 'aria-selected="true">'
+            '<button id="tab-settings"'
+          .        ' class="nav-link active"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-settings"'
+          .        ' aria-controls="pane-settings"'
+          .        ' aria-selected="true">'
           . '</button>'
           , $component->Render()
         );
@@ -77,14 +81,14 @@ class PillTabTest extends TestCase
             ':active' => false
         ]);
         $this->assertSame(
-            '<button id="tab-settings" '
-                  . 'class="nav-link" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-settings" '
-                  . 'aria-controls="pane-settings" '
-                  . 'aria-selected="false">'
+            '<button id="tab-settings"'
+          .        ' class="nav-link"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-settings"'
+          .        ' aria-controls="pane-settings"'
+          .        ' aria-selected="false">'
           . '</button>'
           , $component->Render()
         );
@@ -97,15 +101,15 @@ class PillTabTest extends TestCase
             'disabled' => true
         ]);
         $this->assertSame(
-            '<button id="tab-settings" '
-                  . 'class="nav-link" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-settings" '
-                  . 'aria-controls="pane-settings" '
-                  . 'aria-selected="false" '
-                  . 'disabled>'
+            '<button id="tab-settings"'
+          .        ' class="nav-link"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-settings"'
+          .        ' aria-controls="pane-settings"'
+          .        ' aria-selected="false"'
+          .        ' disabled>'
           . '</button>'
           , $component->Render()
         );
@@ -118,14 +122,14 @@ class PillTabTest extends TestCase
             'disabled' => false
         ]);
         $this->assertSame(
-            '<button id="tab-settings" '
-                  . 'class="nav-link" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-settings" '
-                  . 'aria-controls="pane-settings" '
-                  . 'aria-selected="false">'
+            '<button id="tab-settings"'
+          .        ' class="nav-link"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-settings"'
+          .        ' aria-controls="pane-settings"'
+          .        ' aria-selected="false">'
           . '</button>'
           , $component->Render()
         );
@@ -139,14 +143,14 @@ class PillTabTest extends TestCase
             'disabled' => false
         ]);
         $this->assertSame(
-            '<button id="tab-settings" '
-                  . 'class="nav-link active" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-settings" '
-                  . 'aria-controls="pane-settings" '
-                  . 'aria-selected="true">'
+            '<button id="tab-settings"'
+          .        ' class="nav-link active"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-settings"'
+          .        ' aria-controls="pane-settings"'
+          .        ' aria-selected="true">'
           . '</button>'
           , $component->Render()
         );
@@ -160,15 +164,15 @@ class PillTabTest extends TestCase
             'disabled' => true
         ]);
         $this->assertSame(
-            '<button id="tab-settings" '
-                  . 'class="nav-link" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-settings" '
-                  . 'aria-controls="pane-settings" '
-                  . 'aria-selected="false" '
-                  . 'disabled>'
+            '<button id="tab-settings"'
+          .        ' class="nav-link"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-settings"'
+          .        ' aria-controls="pane-settings"'
+          .        ' aria-selected="false"'
+          .        ' disabled>'
           . '</button>'
           , $component->Render()
         );
@@ -182,14 +186,14 @@ class PillTabTest extends TestCase
             'class' => 'text-uppercase'
         ]);
         $this->assertSame(
-            '<button id="tab-settings" '
-                  . 'class="nav-link text-uppercase active" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-settings" '
-                  . 'aria-controls="pane-settings" '
-                  . 'aria-selected="true">'
+            '<button id="tab-settings"'
+          .        ' class="nav-link active text-uppercase"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-settings"'
+          .        ' aria-controls="pane-settings"'
+          .        ' aria-selected="true">'
           . '</button>'
           , $component->Render()
         );
@@ -204,14 +208,14 @@ class PillTabTest extends TestCase
             'aria-controls' => 'custom-pane-id'
         ]);
         $this->assertSame(
-            '<button id="custom-tab-id" '
-                  . 'class="nav-link" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#custom-pane-id" '
-                  . 'aria-controls="custom-pane-id" '
-                  . 'aria-selected="false">'
+            '<button id="custom-tab-id"'
+          .        ' class="nav-link"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#custom-pane-id"'
+          .        ' aria-controls="custom-pane-id"'
+          .        ' aria-selected="false">'
           . '</button>'
           , $component->Render()
         );
@@ -223,15 +227,15 @@ class PillTabTest extends TestCase
             ':key' => 'settings'
         ], 'Settings');
         $this->assertSame(
-            '<button id="tab-settings" '
-                  . 'class="nav-link" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-settings" '
-                  . 'aria-controls="pane-settings" '
-                  . 'aria-selected="false">'
-              . 'Settings'
+            '<button id="tab-settings"'
+          .        ' class="nav-link"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-settings"'
+          .        ' aria-controls="pane-settings"'
+          .        ' aria-selected="false">'
+          .     'Settings'
           . '</button>'
           , $component->Render()
         );
@@ -246,16 +250,16 @@ class PillTabTest extends TestCase
             '<span class="label">Preferences</span>'
         ]);
         $this->assertSame(
-            '<button id="tab-preferences" '
-                  . 'class="nav-link" '
-                  . 'type="button" '
-                  . 'role="tab" '
-                  . 'data-bs-toggle="pill" '
-                  . 'data-bs-target="#pane-preferences" '
-                  . 'aria-controls="pane-preferences" '
-                  . 'aria-selected="false">'
-              . '<i class="bi bi-sliders"></i>'
-              . '<span class="label">Preferences</span>'
+            '<button id="tab-preferences"'
+          .        ' class="nav-link"'
+          .        ' type="button"'
+          .        ' role="tab"'
+          .        ' data-bs-toggle="pill"'
+          .        ' data-bs-target="#pane-preferences"'
+          .        ' aria-controls="pane-preferences"'
+          .        ' aria-selected="false">'
+          .     '<i class="bi bi-sliders"></i>'
+          .     '<span class="label">Preferences</span>'
           . '</button>'
           , $component->Render()
         );
