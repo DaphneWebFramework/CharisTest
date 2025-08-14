@@ -109,15 +109,15 @@ class SpinnerTest extends TestCase
                 [':type' => 'grow']
             ],
             'type:grow size:sm' => [
-                'spinner-grow-sm spinner-grow',
+                'spinner-grow spinner-grow-sm',
                 [':type' => 'grow', ':size' => 'sm']
             ],
             'type:grow size:sm class:grow' => [
-                'spinner-grow-sm spinner-grow',
+                'spinner-grow spinner-grow-sm',
                 [':type' => 'grow', ':size' => 'sm', 'class' => 'spinner-grow']
             ],
             'type:grow size:sm class:grow-sm' => [
-                'spinner-grow-sm spinner-grow',
+                'spinner-grow spinner-grow-sm',
                 [':type' => 'grow', ':size' => 'sm', 'class' => 'spinner-grow-sm']
             ],
             'type:grow size:sm class:border' => [
@@ -133,7 +133,7 @@ class SpinnerTest extends TestCase
                 [':type' => 'grow', 'class' => 'spinner-grow']
             ],
             'type:grow class:grow-sm' => [
-                'spinner-grow-sm spinner-grow',
+                'spinner-grow spinner-grow-sm',
                 [':type' => 'grow', 'class' => 'spinner-grow-sm']
             ],
             'type:grow class:border' => [
