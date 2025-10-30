@@ -11,7 +11,7 @@ class NavbarBrandTest extends TestCase
     {
         $component = new NavbarBrand();
         $this->assertSame(
-            '<a class="navbar-brand" href="#">'
+            '<a class="navbar-brand" translate="no" href="#">'
           . '</a>'
           , $component->Render()
         );
