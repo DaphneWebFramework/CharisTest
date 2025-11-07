@@ -13,38 +13,41 @@
 require 'autoload.php';
 
 use \Charis\{
-	Container,
-	Navbar,
-	NavbarBrand,
-	NavbarToggler,
-	NavbarCollapse,
-	NavbarNav,
-	NavbarItem,
-	NavbarDropdown,
-	NavbarDropdownItem,
-	NavbarDropdownDivider,
-	VerticalPillTabNavigation,
-	VerticalPillTabs,
-	PillTab,
-	TabPanes,
-	TabPane,
-	Collapse,
 	Button,
 	ButtonGroup,
 	ButtonToolbar,
+	Collapse,
+	Container,
+	Modal,
+	Navbar,
+	NavbarBrand,
+	NavbarCollapse,
+	NavbarDropdown,
+	NavbarDropdownDivider,
+	NavbarDropdownItem,
+	NavbarItem,
+	NavbarNav,
+	NavbarToggler,
+	Option,
+	PillTab,
+	Spinner,
+	TabPane,
+	TabPanes,
+	VerticalPillTabNavigation,
+	VerticalPillTabs,
 	FormComposites\FormCheck,
-	FormComposites\FormRadio,
-	FormComposites\FormSwitch,
-	FormComposites\FormText,
-	FormComposites\FormTextFL,
 	FormComposites\FormEmail,
 	FormComposites\FormEmailFL,
 	FormComposites\FormPassword,
 	FormComposites\FormPasswordFL,
+	FormComposites\FormRadio,
+	FormComposites\FormSelect,
+	FormComposites\FormSelectFL,
+	FormComposites\FormSwitch,
+	FormComposites\FormText,
 	FormComposites\FormTextArea,
 	FormComposites\FormTextAreaFL,
-	Spinner,
-	Modal
+	FormComposites\FormTextFL,
 };
 ?>
 <!DOCTYPE html>
@@ -551,6 +554,32 @@ use \Charis\{
 				':label' => 'Comments',
 				':input:style' => 'height: 98px;', // Instead of `rows`
 				':help' => 'Please keep your comments brief and to the point.'
+			])?>
+		</div><!--.cs-group-->
+
+		<!----------------------------------------------------------------------
+		 ! Form Select
+		 !--------------------------------------------------------------------->
+		<h3 class="cs-heading">Form Select</h3>
+		<div class="cs-group">
+			<?=new FormSelect([
+				':label' => 'Theme',
+				':help' => 'The theme you select will be applied to all pages.',
+			], [
+				new Option(['selected' => true]),
+				new Option(['value' => 'dark'], 'Dark'),
+				new Option(['value' => 'light'], 'Light')
+			])?>
+		</div><!--.cs-group-->
+		<h5 class="cs-subheading">Floating Label</h5>
+		<div class="cs-group">
+			<?=new FormSelectFL([
+				':label' => 'Theme',
+				':help' => 'The theme you select will be applied to all pages.',
+			], [
+				new Option(['selected' => true]),
+				new Option(['value' => 'dark'], 'Dark'),
+				new Option(['value' => 'light'], 'Light')
 			])?>
 		</div><!--.cs-group-->
 
