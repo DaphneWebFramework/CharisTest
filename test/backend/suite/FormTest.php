@@ -11,7 +11,7 @@ class FormTest extends TestCase
     {
         $component = new Form();
         $this->assertSame(
-            '<form spellcheck="false">'
+            '<form spellcheck="false" autocorrect="off">'
           . '</form>'
           , $component->Render()
         );
